@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/jquery.mobile-1.0.min.css" />
+    <link rel="stylesheet" href="/css/reset.css" type="text/css" />
+    <link rel="stylesheet" href="/css/fonts.css" type="text/css" />
+    <link rel="stylesheet" href="/css/animations.css" type="text/css" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css" />
+  </head>
+  <body>
+
+    <div id='content'>
+      &nbsp;
+    </div>
+
+    <canvas id="cursor" width="100" height="100">
+      <div id='hand'></div>
+    </canvas>
+
+    <!-- js at the bottom to load the page faster -->
+    <script src="/js/jquery-1.6.4.min.js"></script>
+    <script src="/js/jquery.mobile-1.0.min.js"></script>
+    <script src="/js/jquery.mousewheel.min.js"></script>
+    <script src="/js/constants.js"></script>
+    <script src="/js/gesture-listener.js"></script>
+    <script src="/js/kinesis.js"></script>
+    <script src="/js/kinect.js"></script>
+    <script src="/js/main.js"></script>
+    
+    <script type="text/javascript">
+    function test(gesture) {
+      alert("hello world" + gesture);
+    }
+    </script>
+    
+    <script>
+      $("#cursor").bind("test", function() {
+        console.info("scroll left on me me me ");
+      });
+      
+      kinesis = new Kinesis;
+      gesture = new SwipeGestureListener("myswipeLeftR");
+      gesture.directions = [GestureDirections.GestureDirectionLeft];
+      gesture.toFire = test;
+      Kinesis.gestures.push(gesture);
+      
+      gesture = new SwipeGestureListener("myswipeRightR");
+      gesture.directions = [GestureDirections.GestureDirectionRight];
+      gesture.toFire = test;
+      Kinesis.gestures.push(gesture);
+      
+      gesture = new SwipeGestureListener("myswipeUpR");
+      gesture.directions = [GestureDirections.GestureDirectionUp];
+      gesture.toFire = test;
+      Kinesis.gestures.push(gesture);
+      
+      gesture = new SwipeGestureListener("myswipeDownR");
+      gesture.directions = [GestureDirections.GestureDirectionDown];
+      gesture.toFire = test;
+      Kinesis.gestures.push(gesture);
+      
+    </script>
+  </body>
+</html>
