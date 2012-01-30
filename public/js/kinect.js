@@ -1,5 +1,5 @@
-var Kinect = {
-  init : function(){
+var Kinect = function() {
+  Kinect.prototype.init = function(){
     var support = "MozWebSocket" in window ? 'MozWebSocket' : ("WebSocket" in window ? 'WebSocket' : null);
 
     if (support == null) {
@@ -13,8 +13,10 @@ var Kinect = {
     // when data is comming from the server, this metod is called
     ws.onmessage = function (evt) {
       try {
-        var _data = $.parseJSON(evt.data);
-        //var kinesis = new Kinesis("kinesis event");
+        var _data = JSON.parse(evt.data);
+        if (_data.cursor != "undefined") {
+          GestureListener.mouseMove({ x: Layout.pageSize.width * _data.cursor.x / 100, y: Layout.pageSize.height * _data.cursor.y / 100 });
+        }
         kinesis.initialize(_data);
         
       } catch (error){
@@ -34,4 +36,6 @@ var Kinect = {
       console.info("Connection Closed");
     }
   }
-}
+};
+
+window.onload = init;

@@ -16,21 +16,20 @@ Function.prototype.inheritsFrom = function( parentClassOrObject ){
 	return this;
 };
 
-GestureListener = {
-	init : function() {
-
-	},
+function GestureListener() {
 	    
-	poll : function(){
+	GestureListener.poll = function(){
     if (InteractionModel != InteractionModelTypes.InteractionModelTypeKinect){
       return;
     }
-  },
+  };
 	
-	mouseMove : function(position){
-    $('#cursor').css({ left: position.x - 45, top: position.y - 45 });
-  }
-}
+	GestureListener.mouseMove = function(position){
+	  cursor = document.getElementById('cursor');
+	  cursor.style.left = position.x - 45 + "px";
+	  cursor.style.top = position.y - 45 + "px";
+  };
+};
 
 function SwipeGestureListener() {
 	SwipeGestureListener.prototype.gestureType  = GestureTypes.GestureTypeSwipe,
@@ -44,4 +43,3 @@ function SwipeGestureListener() {
 };
 
 SwipeGestureListener.inheritsFrom(GestureListener);
-

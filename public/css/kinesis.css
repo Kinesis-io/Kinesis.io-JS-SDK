@@ -1,0 +1,10 @@
+#cursor{
+  position: absolute;
+  left: -200px;
+  top: -200px;
+  width: 90px;
+  height: 90px;
+  pointer-events:none;
+  background:url(/images/hand.png) no-repeat center center;
+  z-index: 2;
+}

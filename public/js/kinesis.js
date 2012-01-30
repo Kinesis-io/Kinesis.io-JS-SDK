@@ -8,7 +8,7 @@ function Kinesis() {
   Kinesis.prototype.canvas        = "#kinesis";
 	
 	this.initialize = function(data) {
-		
+		console.info("kinesis ready");
 		if( data )
       this.matchGestures(data);
 	};
@@ -119,3 +119,15 @@ Array.prototype.unique =
     }
     return a;
   };
+  
+function Layout() {
+  Layout.pageSize = { width: window.innerWidth, height: window.innerHeight };
+};
+
+function init() {
+  setTimeout(function(){
+    myLayout = new Layout();
+    kinect = Kinect();
+    Kinect.prototype.init();
+  }, 10);
+};
