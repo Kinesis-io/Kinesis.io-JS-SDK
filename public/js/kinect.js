@@ -14,7 +14,6 @@ var Kinect = {
     ws.onmessage = function (evt) {
       try {
         var _data = $.parseJSON(evt.data);
-        InteractionModel  = InteractionModelTypes.InteractionModelTypeKinect;
         //var kinesis = new Kinesis("kinesis event");
         kinesis.initialize(_data);
         
