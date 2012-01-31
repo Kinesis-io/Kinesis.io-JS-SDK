@@ -1,22 +1,33 @@
+// **Kinesis.js**   
+// *Version 0.1*    
+//    
+// Kinesis.js is the base class which is managing all the added gestures and handling the events recieved from Kinect.js    
+// Depends on the Kinect class
 function Kinesis() {
-	
-	Kinesis.gestures = [];	  
+
+  // Where all the gestures added will be stored
+  Kinesis.gestures = [];	  
   Kinesis.prototype.keyword       = "KINESIS WINDOW ONE";
-  Kinesis.prototype.is_multiple   = false;
+  // When multiple gestures can work in a predefined order
+  Kinesis.prototype.is_series     = false;
+  // When multiple gestures can work simultaneously to fire an event
   Kinesis.prototype.is_parallel   = true;
   Kinesis.prototype.streamCounter = 0;
   Kinesis.prototype.canvas        = "#kinesis";
 	
+	//This is called whenever a new instance of the class is created    
+	//*Parameter is the parsed JSON String which comes from the Kinect Class*
 	this.initialize = function(data) {
-		console.info("kinesis ready");
 		if( data )
       this.matchGestures(data);
 	};
 	
+	//Responsible for binding gestures to be matched when events are recieved from Kinect.js    
+	//*Parameter is an object of the Gesture Class*
 	Kinesis.prototype.addGesture	= function(gesture) {
 	
 	};
-	
+
 	Kinesis.prototype.setStream		= function() {
 	
 	};
@@ -24,9 +35,10 @@ function Kinesis() {
 	Kinesis.prototype.resetStream	= function() {
 	
 	};
-	
+
+	//Responsible for matching the recieved event from Kinect class with the already binded gestures    
+	//*Parameter contains the parsed JSON event from the Kinect Class*
 	Kinesis.prototype.matchGestures= function(data) {
-	  console.info("here");
 	  if (data.gestures[0] != undefined) {
       eventType  = data.gestures[0].type;
       joints     = data.gestures[0].joints;
@@ -43,7 +55,7 @@ function Kinesis() {
     for(index in Kinesis.gestures) {
       gesture = Kinesis.gestures[index]; 
       
-      //matching begins
+      //Gesture Matching conditions
   	  if ((gesture.bounds == null) || (gesture.bounds.x <= positionX && gesture.bounds.y <= positionY && gesture.bounds.z <= positionZ)) {
   	    console.info("in bounds");
   	    if (gesture.gestureType == eventType) {
@@ -74,12 +86,15 @@ function Kinesis() {
   	    console.info("out of bounds");
   	    continue;
   	  }
-  	  //matching ends
+      //Gesture matching ends
     }
 	};
 }
 
-// Compute the intersection of n arrays
+
+//Compute the intersection of n arrays
+//*Parameter is an Array of N Arrays being sent to it*   
+//*Returns back a single array which is an intersection of all arrays*    
 Array.prototype.intersect =
   function() {
     if (!arguments.length)
@@ -104,14 +119,16 @@ Array.prototype.intersect =
     return a.unique();
   };
 
-// Return new array with duplicate values removed
+
+//Return a new array with duplicate values removed    
+//*Parameter is an array from which the duplicates are to be removed*   
+//*Returns a single array with duplicates removed*    
 Array.prototype.unique =
   function() {
     var a = [];
     var l = this.length;
     for(var i=0; i<l; i++) {
       for(var j=i+1; j<l; j++) {
-        // If this[i] is found later in the array
         if (this[i] === this[j])
           j = ++i;
       }
@@ -120,10 +137,13 @@ Array.prototype.unique =
     return a;
   };
   
+//*Layout Class*    
+//Responsible for setting the layout of the page correctly. This can easily be overridden to incorporate the views
 function Layout() {
   Layout.pageSize = { width: window.innerWidth, height: window.innerHeight };
 };
 
+//Initialize the Layout and Kinect Classes
 function init() {
   setTimeout(function(){
     myLayout = new Layout();
