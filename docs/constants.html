@@ -1,0 +1,56 @@
+<!DOCTYPE html>  <html> <head>   <title>constants.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="constants.html">                 constants.js               </a>                                           <a class="source" href="gesture-listener.html">                 gesture-listener.js               </a>                                           <a class="source" href="jquery-1.6.4.min.html">                 jquery-1.6.4.min.js               </a>                                           <a class="source" href="kinect.html">                 kinect.js               </a>                                           <a class="source" href="kinesis.html">                 kinesis.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               constants.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p><em>Version 0.1</em> <br />
+Defines all the constants which can be used   </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">InteractionEventTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;InteractionEventTypeGesture&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s1">&#39;InteractionEventTypeSpeech&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s1">&#39;InteractionEventTypeCursor&#39;</span><span class="o">:</span> <span class="mi">2</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p><strong>Gesture Types</strong> <br />
+Used to determine what type of gesture was sent from the Kinesis Server</p>
+
+<ol>
+<li>Swipe 
+<ul><li>To detect swipes with any joint in any direction    </li></ul></li>
+<li>Body <br />
+<ul><li>Tells the direction and if it was a TypeLean (lean left, lean front etc) or a turn (turn left, turn right)    </li></ul></li>
+<li>Hold <br />
+<ul><li>Direction and joint. Essentially only a few joints and be held out. Like wrist, etc.    </li></ul></li>
+<li>JointIntersection <br />
+<ul><li>Allows the 3rd party developer to select joints which when touch each other trigger a function    </li></ul></li>
+<li>SpeechGestureListener <br />
+<ul><li>Command will be sent along with the control word. the control word needs to be set.   </li></ul></li>
+</ol>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">GestureTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;GestureTypeSwipe&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s1">&#39;GestureTypeBody&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s1">&#39;GestureTypeHold&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s1">&#39;GestureTypeJointIntersection&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s1">&#39;GestureTypeSpeech&#39;</span> <span class="o">:</span> <span class="mi">4</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p><strong>Gesture Directions</strong> <br />
+Used to determine what direction the gesture happened. Not all directions are supported by all gestures.    </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">GestureDirections</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;GestureDirectionLeft&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s1">&#39;GestureDirectionRight&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p><em>Jump incase of lean gesture</em></p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="s1">&#39;GestureDirectionUp&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> 
+  <span class="s1">&#39;GestureDirectionDown&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>     </pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p><em>Crouch incase of lean gesture</em></p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="s1">&#39;GestureDirectionFront&#39;</span><span class="o">:</span> <span class="mi">4</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p><strong>JointTypes</strong>
+The 20 joints whose data will be sent out from the Kinesis Server. The developer can pick which joint to bind a gesture to</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">JointTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;JointTypeHandRight&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeWristRight&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeElbowRight&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeShoulderRight&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeShoulderCenter&#39;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeShoulderLeft&#39;</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeElbowLeft&#39;</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeWristLeft&#39;</span><span class="o">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeHandLeft&#39;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeHead&#39;</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeSpine&#39;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeHipCenter&#39;</span><span class="o">:</span> <span class="mi">11</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeFootRight&#39;</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeAnkelRight&#39;</span><span class="o">:</span> <span class="mi">13</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeKneeRight&#39;</span><span class="o">:</span> <span class="mi">14</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeFootRight&#39;</span><span class="o">:</span> <span class="mi">15</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeHipRight&#39;</span><span class="o">:</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeHipLeft&#39;</span><span class="o">:</span> <span class="mi">17</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeKneeLeft&#39;</span><span class="o">:</span> <span class="mi">18</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeAnkleLeft&#39;</span><span class="o">:</span> <span class="mi">19</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeFootLeft&#39;</span><span class="o">:</span> <span class="mi">20</span>
+<span class="p">};</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

@@ -1,3 +1,5 @@
+//*Version 0.1*   
+// Enabling Class Inheritance in Javascript   
 Function.prototype.inheritsFrom = function( parentClassOrObject ){ 
 	if ( parentClassOrObject.constructor == Function ) 
 	{ 
@@ -16,6 +18,10 @@ Function.prototype.inheritsFrom = function( parentClassOrObject ){
 	return this;
 };
 
+// **Gesture Listener Class**
+// This class is used to define what all events should Kinesis JS SDK listen to in order to fire custom events    
+// This acts as the base class of all gesture listener classes.   
+// Developers can easily make instance variables, customize the gesture and then start listening to them
 function GestureListener() {
 	    
 	GestureListener.poll = function(){
@@ -59,6 +65,7 @@ function GestureListener() {
   };
 };
 
+//
 function SwipeGestureListener() {
 	SwipeGestureListener.prototype.gestureType  = GestureTypes.GestureTypeSwipe,
 	SwipeGestureListener.prototype.joints       = [JointTypes.JointTypeHandRight, JointTypes.JointTypeHandLeft],

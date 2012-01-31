@@ -1,14 +1,13 @@
-// **Kinesis.js**   
 // *Version 0.1*    
 //    
 // Kinesis.js is the base class which is managing all the added gestures and handling the events recieved from Kinect.js    
 // Depends on the Kinect class
 function Kinesis() {
-  // Where all the gestures added will be stored
+  // Where all the gestures added will be stored    
   Kinesis.gestures = [];
-	Kinesis.lastElement = [];
-	Kinesis.holdEventDelay = 4000;	
-	Kinesis.clickEventTimer = null;
+  Kinesis.lastElement = [];
+  Kinesis.holdEventDelay = 4000;	
+  Kinesis.clickEventTimer = null;
   Kinesis.prototype.keyword       = "KINESIS WINDOW ONE";
   // When multiple gestures can work in a predefined order
   Kinesis.prototype.is_series     = false;
@@ -17,31 +16,31 @@ function Kinesis() {
   Kinesis.prototype.streamCounter = 0;
   Kinesis.prototype.canvas        = "#kinesis";
 
-	//This is called whenever a new instance of the class is created    
-	//*Parameter is the parsed JSON String which comes from the Kinect Class*
-	this.initialize = function(data) {
-		if( data )
+	// This is called whenever a new instance of the class is created     
+	// *Parameter is the parsed JSON String which comes from the Kinect Class*    
+  this.initialize = function(data) {
+    if( data )
       this.matchGestures(data);
-	};
+  };
 	
-	//Responsible for binding gestures to be matched when events are recieved from Kinect.js    
-	//*Parameter is an object of the Gesture Class*
-	Kinesis.prototype.addGesture	= function(gesture) {
-	
-	};
-
-	Kinesis.prototype.setStream		= function() {
-	
-	};
-	
-	Kinesis.prototype.resetStream	= function() {
+	// Responsible for binding gestures to be matched when events are recieved from Kinect.js    
+	// *Parameter is an object of the Gesture Class*    
+  Kinesis.prototype.addGesture	= function(gesture) {
 	
 	};
 
-	//Responsible for matching the recieved event from Kinect class with the already binded gestures    
-	//*Parameter contains the parsed JSON event from the Kinect Class*
-	Kinesis.prototype.matchGestures= function(data) {
-	  if (data.gestures[0] != undefined) {
+  Kinesis.prototype.setStream		= function() {
+    
+  };
+
+  Kinesis.prototype.resetStream	= function() {
+    
+  };
+
+  // Responsible for matching the recieved event from Kinect class with the already binded gestures    
+  // *Parameter contains the parsed JSON event from the Kinect Class*
+  Kinesis.prototype.matchGestures= function(data) {
+    if (data.gestures[0] != undefined) {
       eventType  = data.gestures[0].type;
       joints     = data.gestures[0].joints;
       direction  = [data.gestures[0].direction];
@@ -57,46 +56,46 @@ function Kinesis() {
     for(index in Kinesis.gestures) {
       gesture = Kinesis.gestures[index]; 
       
-      //Gesture Matching conditions
-  	  if ((gesture.bounds == null) || (gesture.bounds.x <= positionX && gesture.bounds.y <= positionY && gesture.bounds.z <= positionZ)) {
-  	    console.info("in bounds");
-  	    if (gesture.gestureType == eventType) {
-  	      console.info("gesture found");
-  	      if ((joints.intersect(gesture.joints)).length > 0) {
-  	        console.info("allowable joint");
-  	        if ((direction.intersect(gesture.directions)).length > 0) {
-  	          console.info("allowable direction");
-  	          gesture.toFire(gesture);
-  	          break;
-  	        }
-  	        else {
-  	          console.info("direction did not match");
-  	          continue;
-  	        }
-  	      }
-  	      else {
-  	        console.info("joints did not match");
-  	        continue;
-  	      }
-  	    }
-  	    else {
-  	      console.info("gesture type did not match");
-  	      continue;
-  	    }
-  	  }
-  	  else {
-  	    console.info("out of bounds");
-  	    continue;
-  	  }
-      //Gesture matching ends
+      // Gesture Matching conditions
+      if ((gesture.bounds == null) || (gesture.bounds.x <= positionX && gesture.bounds.y <= positionY && gesture.bounds.z <= positionZ)) {
+        console.info("in bounds");
+        if (gesture.gestureType == eventType) {
+          console.info("gesture found");
+          if ((joints.intersect(gesture.joints)).length > 0) {
+            console.info("allowable joint");
+            if ((direction.intersect(gesture.directions)).length > 0) {
+              console.info("allowable direction");
+              gesture.toFire(gesture);
+              break;
+            }
+            else {
+              console.info("direction did not match");
+              continue;
+            }
+          }
+          else {
+            console.info("joints did not match");
+            continue;
+          }
+        }
+        else {
+          console.info("gesture type did not match");
+          continue;
+        }
+      }
+      else {
+        console.info("out of bounds");
+        continue;
+      }
+      // Gesture matching ends
     }
-	};
+  };
 }
 
 
-//Compute the intersection of n arrays
-//*Parameter is an Array of N Arrays being sent to it*   
-//*Returns back a single array which is an intersection of all arrays*    
+// Compute the intersection of n arrays
+// *Parameter is an Array of N Arrays being sent to it*   
+// *Returns back a single array which is an intersection of all arrays*    
 Array.prototype.intersect =
   function() {
     if (!arguments.length)
@@ -122,9 +121,9 @@ Array.prototype.intersect =
   };
 
 
-//Return a new array with duplicate values removed    
-//*Parameter is an array from which the duplicates are to be removed*   
-//*Returns a single array with duplicates removed*    
+// Return a new array with duplicate values removed    
+// *Parameter is an array from which the duplicates are to be removed*   
+// *Returns a single array with duplicates removed*    
 Array.prototype.unique =
   function() {
     var a = [];
@@ -139,12 +138,17 @@ Array.prototype.unique =
     return a;
   };
 
+// Used to keep track of the cursor hold position. Note that cursor is essentially the hand position being sent from the Kinesis Server
 var cursorTimer = null;
 
+// Activates the cursor timer which happens only when the hand pointer stops over a DOM element with class "interactive". Animation is also added to give feedback to the user.   
+// *Parameter is the canvas element "cursor"*    
+// *Returns back the canvas element.*   
 function activateCursorTimer(me){
   var canvas = me;
   var centerX = canvas.width / 2;
   var centerY = canvas.height / 2;
+
   var radius = 30;
   var startingAngle = -0.5 * Math.PI;
   var incrementAngle = startingAngle;
@@ -170,6 +174,7 @@ function activateCursorTimer(me){
     {
       incrementAngle = incrementAngle + (0.05 * Math.PI)
     }
+// Draw loading around the canvas element
     context.beginPath();
     context.arc(centerX, centerY, radius, startingAngle, incrementAngle, counterclockwise);
     context.lineWidth = 8;
@@ -181,6 +186,9 @@ function activateCursorTimer(me){
   return me;
 }
 
+// Deactivates the cursor timer when either the hand pointer was moved out of the "interactive" DOM element, or the event is fired.   
+// *Parameter is the canvas element
+// *Returns back the canvas element
 function deactivateCursorTimer(me){
   if(cursorTimer){
     clearInterval(cursorTimer);
@@ -188,17 +196,16 @@ function deactivateCursorTimer(me){
   var canvas = me;
   var context = canvas.getContext("2d");
   context.clearRect(0, 0, 100, 100);
-
   return me;
 }  
   
-//*Layout Class*    
-//Responsible for setting the layout of the page correctly. This can easily be overridden to incorporate the views
+// *Layout Class*    
+// Responsible for setting the layout of the page correctly. This can easily be overridden to incorporate the views
 function Layout() {
   Layout.pageSize = { width: window.innerWidth, height: window.innerHeight };
 };
 
-//Initialize the Layout and Kinect Classes
+// Initialize the Layout and Kinect Classes
 function init() {
   setTimeout(function(){
     myLayout = new Layout();

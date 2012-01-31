@@ -1,16 +1,21 @@
+// *Version 0.1*    
+//    
+// Kinect.js is the class responsible for connecting to the Kinesis Windows service which interacts directly with the Kinect
 var Kinect = function() {
+  //
   Kinect.prototype.init = function(){
     var support = "MozWebSocket" in window ? 'MozWebSocket' : ("WebSocket" in window ? 'WebSocket' : null);
-
+    
+    // Only if the browser being used does not support WebSockets
     if (support == null) {
         alert("Your browser cannot support WebSocket!");
         return;
     }
 
-    // create a new websocket and connect
+    // Create a new websocket and connect
     var ws = new window[support]('ws://127.0.0.1:2011/sample');
 
-    // when data is comming from the server, this metod is called
+    // Called only when any data comes from 
     ws.onmessage = function (evt) {
       try {
         var _data = JSON.parse(evt.data);
@@ -20,22 +25,23 @@ var Kinect = function() {
         kinesis.initialize(_data);
         
       } catch (error){
-        // console.info(evt.data);
-        // parsing exception
+        /* console.info(evt.data);
+         parsing exception*/
       }
 
     };
 
-    // when the connection is established, this method is called
+    // After the connection is established, the method is called
     ws.onopen = function () {
       console.info("Connection Opened");
     };
 
-    // when the connection is closed, this method is called
+    // After the connection is closed, the method is called
     ws.onclose = function () {
       console.info("Connection Closed");
     }
   }
 };
 
+// Window Onload event to initialize everything. This method is defined in the Kinesis.js file.
 window.onload = init;
