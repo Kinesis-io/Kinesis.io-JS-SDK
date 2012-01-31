@@ -6,16 +6,18 @@ var InteractionEventTypes = {
 
 var GestureTypes = {
   'GestureTypeSwipe': 0,
-  'GestureTypeIntersection': 1,
-  'GestureTypeLean': 2,
-  'GestureTypeTurn': 3
+  'GestureTypeBody': 1,
+  'GestureTypeHold': 2,
+  'GestureTypeJointIntersection': 3,
+  'GestureTypeSpeech' : 4
 };
 
 var GestureDirections = {
   'GestureDirectionLeft': 0,
   'GestureDirectionRight': 1,
   'GestureDirectionUp': 2,      // Jump incase of lean gesture
-  'GestureDirectionDown': 3     // Crouch incase of lean gesture
+  'GestureDirectionDown': 3,     // Crouch incase of lean gesture
+  'GestureDirectionFront': 4
 };
 
 var JointTypes = {

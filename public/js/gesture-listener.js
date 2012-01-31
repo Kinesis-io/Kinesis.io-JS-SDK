@@ -28,6 +28,34 @@ function GestureListener() {
 	  cursor = document.getElementById('cursor');
 	  cursor.style.left = position.x - 45 + "px";
 	  cursor.style.top = position.y - 45 + "px";
+    var _element = document.elementFromPoint(position.x, position.y);
+    if (_element.className.search('interactive') != -1){
+      var _currentElement = _element;
+      if ((Kinesis.lastElement.length == 0) || (Kinesis.lastElement[0] != _currentElement)){
+        if (Kinesis.lastElement.length != 0){
+          Kinesis.lastElement[0].className = Kinesis.lastElement[0].className.replace( /(?:^|\s)active(?!\S)/ , '' );
+          cursor.deactivateCursorTimer();
+        }
+        if (_currentElement.className.search('active') == -1)
+          _currentElement.className += " active";
+        activateCursorTimer(cursor);
+        Kinesis.lastElement.push(_currentElement);
+
+        if (Kinesis.clickEventTimer){
+          clearTimeout(Kinesis.clickEventTimer);
+        }
+        Kinesis.clickEventTimer = setTimeout(function(){
+          _currentElement.className = _currentElement.className.replace( /(?:^|\s)active(?!\S)/ , '' );
+          deactivateCursorTimer(cursor);
+          setTimeout(function() {
+            _currentElement.onclick();
+          }, 10 );
+          setTimeout(function() {
+            Kinesis.lastElement.pop(_currentElement);
+          }, Kinesis.holdEventDelay );
+        }, 2000);
+      }
+    }
   };
 };
 
@@ -43,3 +71,17 @@ function SwipeGestureListener() {
 };
 
 SwipeGestureListener.inheritsFrom(GestureListener);
+
+function HoldGestureListener() {
+	HoldGestureListener.prototype.gestureType  = GestureTypes.GestureTypeHold,
+	HoldGestureListener.prototype.joints       = [JointTypes.JointTypeHandRight, JointTypes.JointTypeHandLeft],
+	HoldGestureListener.prototype.directions   = [GestureDirections.GestureDirectionLeft, GestureDirections.GestureDirectionRight, GestureDirections.GestureDirectionUp, GestureDirections.GestureDirectionDown];
+  HoldGestureListener.prototype.eventDelay   = 500;
+  HoldGestureListener.prototype.pollInterval = 200;
+  HoldGestureListener.prototype.accuracy     = null;
+  HoldGestureListener.prototype.bounds       = null;
+  HoldGestureListener.prototype.toFire       = null;
+  HoldGestureListener.prototype.selector     = null;
+};
+
+HoldGestureListener.inheritsFrom(GestureListener);

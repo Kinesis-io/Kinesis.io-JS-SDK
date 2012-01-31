@@ -8,7 +8,14 @@
   <body>
 
     <div id='content'>
-      &nbsp;
+      <div id="test" class="interactive" onclick="alert('this was held')">
+        CSS has never been more exciting than it is right now. I’m even prepared to say CSS is “cool” again, both for the more experienced front-end developers as for the new designers discovering CSS every day now.
+But… Remember when Javascript became popular? Remember when Flash became popular? Every time we’re been given new toys, some people aren’t ashamed to use it in a way you can barely call constructive. I’m thinking of Geocities websites, loaded with glowing blocks of text, moving images, bad color usage… In the wise words of Stan Lee: "With great power there must also come great responsibility!" A sprinkle of CSS animations is better than a bucket load. Apply with care.
+      </div>
+      <div>
+        CSS has never been more exciting than it is right now. I’m even prepared to say CSS is “cool” again, both for the more experienced front-end developers as for the new designers discovering CSS every day now.
+But… Remember when Javascript became popular? Remember when Flash became popular? Every time we’re been given new toys, some people aren’t ashamed to use it in a way you can barely call constructive. I’m thinking of Geocities websites, loaded with glowing blocks of text, moving images, bad color usage… In the wise words of Stan Lee: "With great power there must also come great responsibility!" A sprinkle of CSS animations is better than a bucket load. Apply with care.
+      </div>
     </div>
 
     <canvas id="cursor" width="100" height="100">
@@ -35,13 +42,8 @@
       gesture.toFire = test;
       Kinesis.gestures.push(gesture);
       
-      gesture = new SwipeGestureListener("myswipeRightR");
-      gesture.directions = [GestureDirections.GestureDirectionRight];
-      gesture.toFire = test;
-      Kinesis.gestures.push(gesture);
-      
-      gesture = new SwipeGestureListener("myswipeUpR");
-      gesture.directions = [GestureDirections.GestureDirectionUp];
+      gesture = new HoldGestureListener("myHold");
+      gesture.directions = [GestureDirections.GestureDirectionLeft];
       gesture.toFire = test;
       Kinesis.gestures.push(gesture);
     </script>

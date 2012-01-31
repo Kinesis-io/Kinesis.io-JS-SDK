@@ -1,14 +1,16 @@
 function Kinesis() {
 	
-	Kinesis.gestures = [];	  
+	Kinesis.gestures = [];
+	Kinesis.lastElement = [];
+	Kinesis.holdEventDelay = 4000;	
+	Kinesis.clickEventTimer = null;	  
   Kinesis.prototype.keyword       = "KINESIS WINDOW ONE";
   Kinesis.prototype.is_multiple   = false;
   Kinesis.prototype.is_parallel   = true;
   Kinesis.prototype.streamCounter = 0;
   Kinesis.prototype.canvas        = "#kinesis";
-	
+  
 	this.initialize = function(data) {
-		console.info("kinesis ready");
 		if( data )
       this.matchGestures(data);
 	};
@@ -26,7 +28,6 @@ function Kinesis() {
 	};
 	
 	Kinesis.prototype.matchGestures= function(data) {
-	  console.info("here");
 	  if (data.gestures[0] != undefined) {
       eventType  = data.gestures[0].type;
       joints     = data.gestures[0].joints;
@@ -119,6 +120,59 @@ Array.prototype.unique =
     }
     return a;
   };
+
+var cursorTimer = null;
+
+function activateCursorTimer(me){
+  var canvas = me;
+  var centerX = canvas.width / 2;
+  var centerY = canvas.height / 2;
+  var radius = 30;
+  var startingAngle = -0.5 * Math.PI;
+  var incrementAngle = startingAngle;
+  var endingAngle = 1.5 * Math.PI;
+  var counterclockwise = false;
+
+  var context = canvas.getContext("2d");
+  context.shadowOffsetX = 3;
+  context.shadowOffsetY = 3;
+  context.shadowBlur    = 8;
+  context.shadowColor   = 'rgba(0, 0, 0, 0.5)';
+
+  if(cursorTimer){
+    clearInterval(cursorTimer);
+  }
+
+  cursorTimer=setInterval(function(){
+    context.clearRect(0, 0, 100, 100);
+    if (incrementAngle > endingAngle){
+      incrementAngle = startingAngle;
+    }
+    else
+    {
+      incrementAngle = incrementAngle + (0.05 * Math.PI)
+    }
+    context.beginPath();
+    context.arc(centerX, centerY, radius, startingAngle, incrementAngle, counterclockwise);
+    context.lineWidth = 8;
+    context.strokeStyle = 'E5F3F9';
+    context.stroke();
+    context.closePath();
+  }, 50);
+
+  return me;
+}
+
+function deactivateCursorTimer(me){
+  if(cursorTimer){
+    clearInterval(cursorTimer);
+  }
+  var canvas = me;
+  var context = canvas.getContext("2d");
+  context.clearRect(0, 0, 100, 100);
+
+  return me;
+}  
   
 function Layout() {
   Layout.pageSize = { width: window.innerWidth, height: window.innerHeight };
