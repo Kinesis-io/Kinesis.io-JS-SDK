@@ -31,6 +31,9 @@ function GestureListener() {
   };
 	
 	GestureListener.mouseMove = function(position){
+		if(Kinesis.cursor != null)
+			Kinesis.cursor(position);
+			
 	  cursor = document.getElementById('cursor');
 	  cursor.style.left = position.x - 45 + "px";
 	  cursor.style.top = position.y - 45 + "px";

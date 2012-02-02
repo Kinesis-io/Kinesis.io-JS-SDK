@@ -43,8 +43,8 @@ var touchPoints = [];
 var touchCount = 0;
 
 /* initial settings */
-var physicsMode = PHYSICS_MODE_GRAVITY_WELL;
-var tetherMode = TETHER_MODE_OFF;
+var physicsMode = PHYSICS_MODE_REPULSION;
+var tetherMode = TETHER_MODE_ON;
 var drawMode = DRAW_MODE_RAINBOWS;
 var blurMode = BLUR_MODE_ON;
 

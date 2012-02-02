@@ -5,6 +5,7 @@
 function Kinesis() {
   // Where all the gestures added will be stored    
   Kinesis.gestures = [];
+  Kinesis.cursor   = null;
   Kinesis.lastElement = [];
   Kinesis.holdEventDelay = 4000;	
   Kinesis.clickEventTimer = null;
@@ -205,11 +206,15 @@ function Layout() {
   Layout.pageSize = { width: window.innerWidth, height: window.innerHeight };
 };
 
+var originalInit = window.onload;
+
 // Initialize the Layout and Kinect Classes
 function init() {
   setTimeout(function(){
     myLayout = new Layout();
     kinect = Kinect();
     Kinect.prototype.init();
+    if(originalInit)
+    	originalInit();
   }, 10);
 };

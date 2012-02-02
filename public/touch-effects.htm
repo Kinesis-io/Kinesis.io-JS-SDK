@@ -78,5 +78,18 @@ supports multitouch on Windows 8.
     
     <script type="text/javascript" src="/js/touch-effects/TestDriveCommon.js"></script>
     <script type="text/javascript" src="/js/touch-effects/ReturnAndShareControls.js"></script>
-
+    
+    <link rel="stylesheet" type="text/css" href="/css/kinesis.css">
+    <script type="text/javascript" src="/js/constants.js"></script>
+	<script type="text/javascript" src="/js/gesture-listener.js"></script>
+	<script type="text/javascript" src="/js/kinesis.js"></script>
+	<script type="text/javascript" src="/js/kinect.js"></script>
+	<script type="text/javascript">
+		function movement(position)
+		{
+			touchPoints[0] = {x : position.x, y : position.y};
+		}
+		kinesis = new Kinesis;
+		Kinesis.cursor = movement;
+	</script>
 </body></html>
