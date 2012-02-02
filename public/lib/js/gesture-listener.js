@@ -35,8 +35,8 @@ function GestureListener() {
 			Kinesis.cursor(position);
 			
 	  cursor = document.getElementById('cursor');
-	  cursor.style.left = position.x + "px";
-	  cursor.style.top = position.y + "px";
+	  cursor.style.left = position.x - 45 + "px";
+	  cursor.style.top = position.y - 45 + "px";
     var _element = document.elementFromPoint(position.x, position.y);
     if (_element.className.search('interactive') != -1){
       var _currentElement = _element;
