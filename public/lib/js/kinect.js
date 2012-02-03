@@ -18,7 +18,6 @@ var Kinect = function() {
     // Called only when any data comes from 
     ws.onmessage = function (evt) {
       try {
-      	console.info(evt.data);
         var _data = JSON.parse(evt.data);
         if (_data.cursor != "undefined") {
           GestureListener.mouseMove({ x: Layout.pageSize.width * _data.cursor.x / 100, y: Layout.pageSize.height * _data.cursor.y *1.5/ 100 });
