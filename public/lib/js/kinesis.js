@@ -27,7 +27,7 @@ function Kinesis() {
 	// Responsible for binding gestures to be matched when events are recieved from Kinect.js    
 	// *Parameter is an object of the Gesture Class*    
   Kinesis.prototype.addGesture	= function(gesture) {
-	
+	  Kinesis.gestures.push(gesture);
 	};
 
   Kinesis.prototype.setStream		= function() {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>.</title>
-    <link rel="stylesheet" href="/css/kinesis.css" type="text/css" />
+    <link rel="stylesheet" href="/lib/css/kinesis.css" type="text/css" />
   </head>
   <body>
 
@@ -24,10 +24,10 @@ But… Remember when Javascript became popular? Remember when Flash became popular
 
     <!-- js at the bottom to load the page faster -->
     <!-- <script src="/js/jquery-1.6.4.min.js"></script> -->
-    <script src="/js/constants.js"></script>
-    <script src="/js/gesture-listener.js"></script>
-    <script src="/js/kinesis.js"></script>
-    <script src="/js/kinect.js"></script>
+    <script src="/lib/js/constants.js"></script>
+    <script src="/lib/js/gesture-listener.js"></script>
+    <script src="/lib/js/kinesis.js"></script>
+    <script src="/lib/js/kinect.js"></script>
     
     <script type="text/javascript">
       function test(gesture) {
@@ -37,15 +37,16 @@ But… Remember when Javascript became popular? Remember when Flash became popular
     
     <script>
       kinesis = new Kinesis;
+      
       gesture = new SwipeGestureListener("myswipeLeftR");
       gesture.directions = [GestureDirections.GestureDirectionLeft];
       gesture.toFire = test;
-      Kinesis.gestures.push(gesture);
+      kinesis.addGesture(gesture);
       
       gesture = new HoldGestureListener("myHold");
       gesture.directions = [GestureDirections.GestureDirectionLeft];
       gesture.toFire = test;
-      Kinesis.gestures.push(gesture);
+      kinesis.addGesture(gesture);
     </script>
   </body>
 </html>
