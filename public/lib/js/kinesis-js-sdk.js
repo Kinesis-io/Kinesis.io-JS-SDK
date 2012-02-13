@@ -95,6 +95,27 @@ Function.prototype.inheritsFrom = function( parentClassOrObject ){
 };
 
 // **Gesture Listener Class**
+//*Version 0.1*   
+// Enabling Class Inheritance in Javascript   
+Function.prototype.inheritsFrom = function( parentClassOrObject ){ 
+	if ( parentClassOrObject.constructor == Function ) 
+	{ 
+		//Normal Inheritance 
+		this.prototype = new parentClassOrObject;
+		this.prototype.constructor = this;
+		this.prototype.parent = parentClassOrObject.prototype;
+	} 
+	else 
+	{ 
+		//Pure Virtual Inheritance 
+		this.prototype = parentClassOrObject;
+		this.prototype.constructor = this;
+		this.prototype.parent = parentClassOrObject;
+	} 
+	return this;
+};
+
+// **Gesture Listener Class**
 // This class is used to define what all events should Kinesis JS SDK listen to in order to fire custom events    
 // This acts as the base class of all gesture listener classes.   
 // Developers can easily make instance variables, customize the gesture and then start listening to them
@@ -115,7 +136,7 @@ function GestureListener() {
 	  cursor.style.top = position.y - 45 + "px";
     var _element = document.elementFromPoint(position.x, position.y);
     if (_element.className.search('interactive') != -1){
-      var _currentElement = _element;
+      var _currentElement = _element.parentNode;
       if ((Kinesis.lastElement.length == 0) || (Kinesis.lastElement[0] != _currentElement)){
         if (Kinesis.lastElement.length != 0){
           Kinesis.lastElement[0].className = Kinesis.lastElement[0].className.replace( /(?:^|\s)active(?!\S)/ , '' );
@@ -133,7 +154,7 @@ function GestureListener() {
           _currentElement.className = _currentElement.className.replace( /(?:^|\s)active(?!\S)/ , '' );
           deactivateCursorTimer(cursor);
           setTimeout(function() {
-            _currentElement.onclick();
+            _currentElement.click();
           }, 10 );
           setTimeout(function() {
             Kinesis.lastElement.pop(_currentElement);
@@ -171,6 +192,7 @@ function HoldGestureListener() {
 };
 
 HoldGestureListener.inheritsFrom(GestureListener);
+
 
 // GESTURE LISTENER JS ENDS
 

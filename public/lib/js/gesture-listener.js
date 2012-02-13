@@ -39,7 +39,7 @@ function GestureListener() {
 	  cursor.style.top = position.y - 45 + "px";
     var _element = document.elementFromPoint(position.x, position.y);
     if (_element.className.search('interactive') != -1){
-      var _currentElement = _element;
+      var _currentElement = _element.parentNode;
       if ((Kinesis.lastElement.length == 0) || (Kinesis.lastElement[0] != _currentElement)){
         if (Kinesis.lastElement.length != 0){
           Kinesis.lastElement[0].className = Kinesis.lastElement[0].className.replace( /(?:^|\s)active(?!\S)/ , '' );
@@ -57,7 +57,7 @@ function GestureListener() {
           _currentElement.className = _currentElement.className.replace( /(?:^|\s)active(?!\S)/ , '' );
           deactivateCursorTimer(cursor);
           setTimeout(function() {
-            _currentElement.onclick();
+            _currentElement.click();
           }, 10 );
           setTimeout(function() {
             Kinesis.lastElement.pop(_currentElement);
