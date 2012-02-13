@@ -7,6 +7,7 @@ function Kinesis() {
   Kinesis.gestures = [];
   Kinesis.cursor   = null;
   Kinesis.lastElement = [];
+  Kinesis.holdEventTimer = null;
   Kinesis.holdEventDelay = 4000;	
   Kinesis.clickEventTimer = null;
   Kinesis.prototype.keyword       = "KINESIS WINDOW ONE";

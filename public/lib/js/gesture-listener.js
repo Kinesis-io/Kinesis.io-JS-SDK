@@ -35,6 +35,7 @@ function GestureListener() {
 			Kinesis.cursor(position);
 			
 	  cursor = document.getElementById('cursor');
+	  
 	  cursor.style.left = position.x - 45 + "px";
 	  cursor.style.top = position.y - 45 + "px";
     var _element = document.elementFromPoint(position.x, position.y);
@@ -46,25 +47,32 @@ function GestureListener() {
           cursor.deactivateCursorTimer();
         }
         if (_currentElement.className.search('active') == -1)
-          _currentElement.className += " active";
+          _currentElement.className += " active";      
         activateCursorTimer(cursor);
         Kinesis.lastElement.push(_currentElement);
 
-        if (Kinesis.clickEventTimer){
+        if (Kinesis.clickEventTimer){          
           clearTimeout(Kinesis.clickEventTimer);
-        }
+        };
+
         Kinesis.clickEventTimer = setTimeout(function(){
           _currentElement.className = _currentElement.className.replace( /(?:^|\s)active(?!\S)/ , '' );
           deactivateCursorTimer(cursor);
-          setTimeout(function() {
-            _currentElement.click();
-          }, 10 );
+          _currentElement.click();
           setTimeout(function() {
             Kinesis.lastElement.pop(_currentElement);
           }, Kinesis.holdEventDelay );
         }, 2000);
       }
     }
+    else {
+      if (Kinesis.clickEventTimer){
+        Kinesis.lastElement.pop(_currentElement);
+        clearTimeout(Kinesis.clickEventTimer);
+        deactivateCursorTimer(cursor);
+      }
+    }
+    
   };
 };
 
