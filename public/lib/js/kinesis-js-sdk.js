@@ -162,6 +162,13 @@ function GestureListener() {
         }, 2000);
       }
     }
+    else {
+      if (Kinesis.clickEventTimer){
+        Kinesis.lastElement.pop(_currentElement);
+        clearTimeout(Kinesis.clickEventTimer);
+        deactivateCursorTimer(cursor);
+      }
+    }
   };
 };
 
