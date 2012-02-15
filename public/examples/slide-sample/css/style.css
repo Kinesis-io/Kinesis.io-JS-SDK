@@ -1,0 +1,56 @@
+body {
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#gridHolder { 
+  -webkit-transition: all 0.5s ease-in; 
+  -moz-transition: all 0.5s ease-in; 
+  -o-transition: all 0.5s ease-in; 
+  -ms-transition: all 0.5s ease-in;
+}
+
+#gridHolder div.holder {
+  overflow: hidden;
+}
+
+.kinesis {
+  float: left;
+  width: 450px;
+  display: block;
+  margin-right: 5px;
+  padding: 20px;
+  list-style-type: none;
+  height: 400px;
+  opacity: 0.8;
+}
+
+#gridHolder li {
+  background-color: #F8F8F8;
+  border: 1px solid #333333;
+  display: block;
+  float: left;
+  list-style-type: none;
+  margin: 100px;
+  min-height: 400px;
+  opacity: 0.7;
+  padding: 20px;
+  width: 500px;
+  font-size: 36px;
+  line-height: 400px;
+  text-align: center;
+}
+
+#gridHolder li.tileItem {
+  font-size: 200px;
+  text-align: center;
+  line-height: 400px;
+}
+
+#gridHolder td.active li {
+  background-color: #fff;
+  opacity: 1;
+}

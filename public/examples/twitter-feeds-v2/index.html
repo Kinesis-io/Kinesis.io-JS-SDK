@@ -61,10 +61,12 @@
       var leftGesture = new SwipeGestureListener("myswipeLeftR");
       leftGesture.directions = [GestureDirections.GestureDirectionLeft];
       leftGesture.toFire = swipeControl;
+      leftGesture.joints = [JointTypes.JointTypeHandRight];
 
       var rightGesture = new SwipeGestureListener("myswipeRightR");
       rightGesture.directions = [GestureDirections.GestureDirectionRight];
       rightGesture.toFire = swipeControl;
+      rightGesture.joints = [JointTypes.JointTypeHandLeft];
 
       kinesis.addGesture(leftGesture);
       kinesis.addGesture(rightGesture);
