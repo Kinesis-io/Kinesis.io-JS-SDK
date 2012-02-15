@@ -1,5 +1,5 @@
 body {
-  background: url('../images/bg.png') no-repeat fixed left top;
+  background: url('../images/bg.png') no-repeat fixed center center;
 }
 
 @font-face {
@@ -33,10 +33,10 @@ body {
 }
 
 #twitter_update_list {  
-  -webkit-transition: all 1s ease-in; 
-  -moz-transition: all 1s ease-in; 
-  -o-transition: all 1s ease-in; 
-  -ms-transition: all 1s ease-in;
+  -webkit-transition: all 0.5s ease-in; 
+  -moz-transition: all 0.5s ease-in; 
+  -o-transition: all 0.5s ease-in; 
+  -ms-transition: all 0.5s ease-in;
 }
 
 #twitter_update_list {
@@ -45,6 +45,7 @@ body {
 
 #twitter_update_list td {
   width: 550px;
+  overflow: hidden;
 }
 
 .kinesis {
@@ -58,6 +59,8 @@ body {
   -moz-border-radius: 15px;
   border-radius: 15px;
   opacity: 0.8;
+  margin-top: 30px;
+  background:#efefef url('../images/logo.png') no-repeat center center;
 }
 
 #twitter_update_list li {
@@ -67,11 +70,12 @@ body {
   margin-right: 5px;
   padding: 20px;
   list-style-type: none;
-  height: 600px;
+  min-height: 600px;
   -moz-border-radius: 15px;
   border-radius: 15px;
-  opacity: 0.8;
+  opacity: 0.7;
   border: 1px solid #333;
+  background-color: #f8f8f8;
 }
 
 #twitter_update_list li .tweet, #twitter_update_list li .intro {
