@@ -154,7 +154,7 @@ function GestureListener() {
           _currentElement.className = _currentElement.className.replace( /(?:^|\s)active(?!\S)/ , '' );
           deactivateCursorTimer(cursor);
           setTimeout(function() {
-            _currentElement.click();
+            $(_currentElement).trigger('click');
           }, 10 );
           setTimeout(function() {
             Kinesis.lastElement.pop(_currentElement);

@@ -58,7 +58,7 @@ function GestureListener() {
         Kinesis.clickEventTimer = setTimeout(function(){
           _currentElement.className = _currentElement.className.replace( /(?:^|\s)active(?!\S)/ , '' );
           deactivateCursorTimer(cursor);
-          _currentElement.click();
+          $(_currentElement).trigger('click');
           setTimeout(function() {
             Kinesis.lastElement.pop(_currentElement);
           }, Kinesis.holdEventDelay );
