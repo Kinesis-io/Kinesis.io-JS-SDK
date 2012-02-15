@@ -1,5 +1,5 @@
 body {
-  background: url('../images/bg.png') repeat fixed left top;
+  background: url('../images/bg.png') no-repeat fixed left top;
 }
 
 @font-face {
