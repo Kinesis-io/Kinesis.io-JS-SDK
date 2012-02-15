@@ -47,7 +47,7 @@ body {
   width: 550px;
 }
 
-#twitter_update_list li, .kinesis {
+.kinesis {
   float: left;
   width: 450px;
   display: block;
@@ -55,10 +55,23 @@ body {
   padding: 20px;
   list-style-type: none;
   height: 600px;
-  background-color: #fff; 
   -moz-border-radius: 15px;
   border-radius: 15px;
   opacity: 0.8;
+}
+
+#twitter_update_list li {
+  float: left;
+  width: 450px;
+  display: block;
+  margin-right: 5px;
+  padding: 20px;
+  list-style-type: none;
+  height: 600px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  opacity: 0.8;
+  border: 1px solid #333;
 }
 
 #twitter_update_list li .tweet, #twitter_update_list li .intro {
@@ -72,8 +85,13 @@ body {
   font-family : AllerLightRegular;
 }
 
-#twitter_update_list li .tweet {
+#twitter_update_list li .tweet span {
+  color: #333;
   line-height: 36px;
+}
+
+#twitter_update_list td.active li .tweet span {
+  color: #000;
 }
 
 #twitter_update_list li .tweet .time {
