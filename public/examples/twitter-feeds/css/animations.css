@@ -1,5 +1,5 @@
 body {
-  background-color: #ccc;
+  background: url('../images/bg.png') repeat fixed left top;
 }
 
 * {
@@ -30,9 +30,10 @@ body {
   padding: 20px;
   list-style-type: none;
   height: 600px;
-  background-color: #eee; 
+  background-color: #fff; 
   -moz-border-radius: 15px;
   border-radius: 15px;
+  opacity: 0.8;
 }
 
 #twitter_update_list li .tweet, #twitter_update_list li .intro {
@@ -70,6 +71,7 @@ body {
 
 #twitter_update_list td.active li {
   background-color: #fff;
+  opacity: 1;
 }
 
 #twitter_update_list span {
