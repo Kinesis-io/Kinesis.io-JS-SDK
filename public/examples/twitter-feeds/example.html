@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      
+      #twitter_update_list td {
+        width: 750px;
+      }
+      
+      #twitter_update_list li {
+        height: 700px;
+        float: left;
+        width: 750px;
+        display: block;
+        border-right: 2px dashed #bca;
+        margin-right: 5px;
+        padding: 5px;
+        list-style-type: none;
+      }
+      
+      #twitter_update_list td.active li {
+        border-right: 2px dashed #ff0000;
+      }
+      
+      #twitter_update_list span {
+        font-size: 32px;
+        width: 750px;
+        float: left;
+        color: #ec0000;
+        background: #bca;
+      }
+      #twitter_update_list a {
+        font-size: 16px;
+        color: #555;
+      }
+      #twitter_update_list span a {
+        font-size: 16px;
+        width: 750px;
+        float: left;
+        color: #000000;
+      }
+      #twitter_update_list span a:hover {
+        text-decoration: underline;
+        color: #666666;
+      }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  	<script src="js/jquery.mousewheel.js"></script>
+  	<link rel="stylesheet" href="css/animations.css" type="text/css" />
+  	<script>
+  	  $.fn.activate = function() {
+  	    var me = $(this);
+  	    if(me)
+  	      me.addClass('active');
+  	  };
+  	  
+      $.fn.slideLeft = function() {
+        var tiles = $(this);
+        var _index = tiles.find('td').index(tiles.find('.active')[0]);
+        var _left = tiles.find('td').width() * (_index + 1);
+        if(_index < tiles.find('td').length - 1) {
+          $(this).css("-webkit-transform", "translate(-" + _left + "px, 0)");
+          $(this).css("-moz-transform", "translate(-" + _left + "px, 0)");
+          tiles.find('.active').removeClass('active').next().activate();
+        };
+      };
+      
+      $.fn.slideRight = function() {
+        var tiles = $(this);
+        var _index = tiles.find('td').index(tiles.find('.active')[0]);
+        var _left = tiles.find('td').width() * (_index - 1);
+        if(_index > 0) {
+          $(this).css("-webkit-transform", "translate(-" + _left + "px, 0)");
+          $(this).css("-moz-transform", "translate(-" + _left + "px, 0)");
+          tiles.find('.active').removeClass('active').prev().activate();
+        };
+      };
+  	
+    	$(function(){
+    		$("#twitter_update_list").wrapInner("<table cellspacing='30'><tr>");
+    		$("li").wrap("<td></td>");
+    		$("body").mousewheel(function(event, delta) {
+    			this.scrollLeft -= (delta * 30);
+    			event.preventDefault();
+    		}); 
+    		var _first = $("#twitter_update_list table tr td")[0];
+    		$(_first).addClass('active');
+    	});
+  	</script>
+  </head>
+  <body>
+    <div id="twitter_update_list">
+    </div>
+    <canvas id="cursor" width="100" height="100">
+      <div id='hand'></div>
+    </canvas>
+    <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js">
+    </script>
+    <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/payal99.json?callback=twitterCallback2&count=10">
+    </script>
+    <link rel="stylesheet" type="text/css" href="/lib/css/kinesis.css">
+    <!-- js at the bottom to load the page faster -->
+    <script src="/lib/js/kinesis-js-sdk.min.js"></script>
+    
+    <script type="text/javascript">
+      function test(gesture) {
+        alert("hello world" + gesture);
+      }
+    </script>
+    <script>
+      function swipeControl(gesture) {
+        switch(gesture){
+          case leftGesture:
+            $('#twitter_update_list').slideLeft();
+            break;
+          case rightGesture:
+             $('#twitter_update_list').slideRight();
+             break;
+        }
+      }
+    
+      var kinesis = new Kinesis;
+      
+      var leftGesture = new SwipeGestureListener("myswipeLeftR");
+      leftGesture.directions = [GestureDirections.GestureDirectionLeft];
+      leftGesture.toFire = swipeControl;
+
+      var rightGesture = new SwipeGestureListener("myswipeRightR");
+      rightGesture.directions = [GestureDirections.GestureDirectionRight];
+      rightGesture.toFire = swipeControl;
+
+      kinesis.addGesture(leftGesture);
+      kinesis.addGesture(rightGesture);
+    </script>
+  </body>
+</html>

@@ -1,3 +1,38 @@
+$.fn.activate = function() {
+  var me = $(this);
+  if(me)
+    setTimeout(function() {
+	    me.addClass('active');
+	  }, 200 );
+};
+
+$.fn.slideLeft = function() {
+  var tiles = $(this);
+  var _index = tiles.find('td.tweetTD').index(tiles.find('.active')[0]);
+  var _left = tiles.find('td.tweetTD').width() * (_index + 1);
+  if(_index < tiles.find('td.tweetTD').length - 1) {
+    $(this).css("-webkit-transform", "translate(-" + _left + "px, 0)");
+    $(this).css("-moz-transform", "translate(-" + _left + "px, 0)");
+    setTimeout(function() {
+	    tiles.find('.active').removeClass('active').next().activate();
+	  }, 200 );
+  };
+};
+
+$.fn.slideRight = function() {
+  var tiles = $(this);
+  var _index = tiles.find('td.tweetTD').index(tiles.find('.active')[0]);
+  var _left = tiles.find('td.tweetTD').width() * (_index - 1);
+  if(_index > 0) {
+    $(this).css("-webkit-transform", "translate(-" + _left + "px, 0)");
+    $(this).css("-moz-transform", "translate(-" + _left + "px, 0)");
+    setTimeout(function() {
+	    tiles.find('.active').removeClass('active').prev().activate();
+	  }, 200 );
+  };
+};
+
+
 function twitterCallback2(twitters) {
   var statusHTML = [];
   for (var i=0; i<twitters.length; i++){
@@ -14,7 +49,7 @@ function twitterCallback2(twitters) {
     }).replace(/\B@([_a-z0-9]+)/ig, function(reply) {
       return  reply.charAt(0)+'<a href="http://twitter.com/'+reply.substring(1)+'">'+reply.substring(1)+'</a>';
     });
-    statusHTML.push('<li class="tweetBlock>'+ '<div class="intro"><img src="'+imageurl+'"/><span class="name">' + uname + '</span><span class="sname">@' + username + '</span></div><div class="tweet"><span>' + status+'</span> <a class="time" href="http://twitter.com/'+username+'/statuses/'+twitters[i].id_str+'">'+relative_time(twitters[i].created_at)+'</a></div>');
+    statusHTML.push('<li class="tweetBlock">'+ '<div class="intro"><img src="'+imageurl+'"/><span class="name">' + uname + '</span><span class="sname">@' + username + '</span></div><div class="tweet"><span>' + status+'</span> <a class="time" href="http://twitter.com/'+username+'/statuses/'+twitters[i].id_str+'">'+relative_time(twitters[i].created_at)+'</a></div>');
     if (pic)
       statusHTML.push('<div class="pic"><img src="'+pic+'"/>' + '</div></li>');
     else

@@ -4,6 +4,8 @@
     <script src="js/jquery-1.6.4.min.js"></script>
   	<script src="js/jquery.mousewheel.js"></script>
   	<script src="js/index.js"></script>
+  	<script type="text/javascript" src="js/jquery.fancybox-1.3.4.js"></script>
+  	<link rel="stylesheet" href="css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
   	<link rel="stylesheet" href="css/style.css" type="text/css" />
   	<script>
     	$(function(){
@@ -16,6 +18,17 @@
     		}); 
     		var _first = $("#twitter_update_list table tr td.tweetTD")[0];
     		$(_first).addClass('active');
+    		
+    		$("a.pic").fancybox({
+      		'transitionIn'	:	'elastic',
+      		'transitionOut'	:	'elastic',
+      		'speedIn'		:	600, 
+      		'speedOut'		:	200, 
+      		'overlayShow'	:	false,
+      		'onComplete' : function() {
+      		  $('#fancybox-close').append('<label class="interactive">Close FancyBox</label>');
+      		}
+      	});
     	});
   	</script>
   </head>
