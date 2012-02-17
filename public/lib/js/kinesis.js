@@ -41,6 +41,7 @@ function Kinesis() {
   // Responsible for matching the recieved event from Kinect class with the already binded gestures    
   // *Parameter contains the parsed JSON event from the Kinect Class*
   Kinesis.prototype.matchGestures= function(data) {
+    
     if (data.gestures[0] != undefined) {
       eventType  = data.gestures[0].type;
       joints     = data.gestures[0].joints;
@@ -62,6 +63,7 @@ function Kinesis() {
         console.info("in bounds");
         if (gesture.gestureType == eventType) {
           console.info("gesture found");
+          
           if ((joints.intersect(gesture.joints)).length > 0) {
             console.info("allowable joint");
             if ((direction.intersect(gesture.directions)).length > 0) {

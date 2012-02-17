@@ -26,6 +26,8 @@
 		  kinesis = new Kinesis;
 		  Kinesis.cursor = makeDrawing;  
     
+		  lineThickness = 5;  
+		  
       canvas = document.getElementById('canvas');
       context = canvas.getContext("2d");
       $('#canvas').mousedown(function(e){
@@ -52,6 +54,7 @@
       
       function makeDrawing(position) {
         if(position.z < -0.4) {
+          lineThickness = Math.abs(100 * position.z);
           addClick(position.x - canvas.offsetLeft, position.y - canvas.offsetTop, true);
           redraw();
         }
@@ -86,7 +89,7 @@
 
         context.strokeStyle = "#df4b26";
         context.lineJoin = "round";
-        context.lineWidth = 5;
+        context.lineWidth = lineThickness;
 
         for(var i=0; i < clickX.length; i++)
         {		
