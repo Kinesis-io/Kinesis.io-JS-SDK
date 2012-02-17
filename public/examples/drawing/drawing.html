@@ -18,7 +18,10 @@
     </script>
     <!-- js at the bottom to load the page faster -->
     <link rel="stylesheet" type="text/css" href="/lib/css/kinesis.css">
-    <script src="/lib/js/kinesis-js-sdk.min.js"></script>
+    <script src="/lib/js/constants.js"></script>
+    <script src="/lib/js/gesture-listener.js"></script>
+    <script src="/lib/js/kinesis.js"></script>
+    <script src="/lib/js/kinect.js"></script>
     <script>
 		  kinesis = new Kinesis;
 		  Kinesis.cursor = makeDrawing;  
@@ -48,7 +51,7 @@
       };
       
       function makeDrawing(position) {
-        if(paint){
+        if(position.z < -0.4) {
           addClick(position.x - canvas.offsetLeft, position.y - canvas.offsetTop, true);
           redraw();
         }
