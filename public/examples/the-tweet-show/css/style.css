@@ -59,8 +59,7 @@ body {
   -moz-border-radius: 15px;
   border-radius: 15px;
   opacity: 0.8;
-  /*margin-top: 30px;*/
-  background:#efefef url('../images/logo.png') no-repeat center center;
+  background:#efefef url('../images/logo.png') no-repeat center center !important;
 }
 
 #twitter_update_list li {
