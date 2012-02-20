@@ -1,5 +1,5 @@
 #cursor{
-  position: absolute;
+  position: fixed;
   left: -200px;
   top: -200px;
   width: 90px;

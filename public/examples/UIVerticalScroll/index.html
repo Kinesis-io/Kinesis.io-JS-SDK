@@ -133,19 +133,16 @@
     <script src="/lib/js/gesture-listener.js"></script>
     <script src="/lib/js/kinesis.js"></script>
     <script src="/lib/js/kinect.js"></script>
-    
-    <script>
-      kinesis = new Kinesis;
-      
-      gesture = new SwipeGestureListener("myswipeLeftU");
-      gesture.directions = [GestureDirections.GestureDirectionUp];
-      gesture.toFire = scrollUp;
-      kinesis.addGesture(gesture);
-      
-      gesture = new SwipeGestureListener("myswipeLeftD");
-      gesture.directions = [GestureDirections.GestureDirectionDown];
-      gesture.toFire = scrollDown;
-      kinesis.addGesture(gesture);
-    </script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript">
+		  function movement(position)
+		  {
+			  if(position.y < Layout.pageSize.height * 0.2) scrollUp((Layout.pageSize.height * 0.2) - position.y);
+			  
+			  if(position.y > Layout.pageSize.height * 0.8) scrollDown(position.y - (Layout.pageSize.height * 0.8));
+		  }
+		  kinesis = new Kinesis;
+		  Kinesis.cursor = movement;
+	  </script>
   </body>
 </html>
