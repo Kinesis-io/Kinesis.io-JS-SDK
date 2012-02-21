@@ -38,9 +38,9 @@ function currentYPosition() {
 
 
 function scrollUp(value) {
-  smoothScroll(value * -1);
+  smoothScroll((value/3) * -1);
 }
 
 function scrollDown(value) {
-  smoothScroll(value);
+  smoothScroll(value/3);
 }
