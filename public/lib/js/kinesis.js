@@ -4,6 +4,7 @@
 // Depends on the Kinect class
 function Kinesis() {
   // Where all the gestures added will be stored  
+  Kinesis.kinectStatus = false;
   Kinesis.gestureDetection = true;  
   Kinesis.pollInterval = 200;
   Kinesis.gestures = [];
@@ -25,6 +26,10 @@ function Kinesis() {
     console.info(Kinesis.gestureDetection);
     if( Kinesis.gestureDetection == true && data )
       this.matchGestures(data);
+  };
+  
+  Kinesis.onStatusChange = function(message) {
+    console.info(message);
   };
 	
 	// Responsible for binding gestures to be matched when events are recieved from Kinect.js    
