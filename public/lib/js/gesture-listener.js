@@ -82,7 +82,6 @@ function SwipeGestureListener() {
 	SwipeGestureListener.prototype.joints       = [JointTypes.JointTypeHandRight, JointTypes.JointTypeHandLeft],
 	SwipeGestureListener.prototype.directions   = [GestureDirections.GestureDirectionLeft, GestureDirections.GestureDirectionRight, GestureDirections.GestureDirectionUp, GestureDirections.GestureDirectionDown];
   SwipeGestureListener.prototype.eventDelay   = 500;
-  SwipeGestureListener.prototype.pollInterval = 200;
   SwipeGestureListener.prototype.accuracy     = null;
   SwipeGestureListener.prototype.bounds       = {min: null, max: null};
   SwipeGestureListener.prototype.toFire       = null;
@@ -95,7 +94,6 @@ function HoldGestureListener() {
 	HoldGestureListener.prototype.joints       = [JointTypes.JointTypeHandRight, JointTypes.JointTypeHandLeft],
 	HoldGestureListener.prototype.directions   = [GestureDirections.GestureDirectionLeft, GestureDirections.GestureDirectionRight, GestureDirections.GestureDirectionUp, GestureDirections.GestureDirectionDown];
   HoldGestureListener.prototype.eventDelay   = 500;
-  HoldGestureListener.prototype.pollInterval = 200;
   HoldGestureListener.prototype.accuracy     = null;
   HoldGestureListener.prototype.bounds       = {min: null, max: null};;
   HoldGestureListener.prototype.toFire       = null;

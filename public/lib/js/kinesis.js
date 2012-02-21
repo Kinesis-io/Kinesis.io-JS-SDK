@@ -3,7 +3,9 @@
 // Kinesis.js is the base class which is managing all the added gestures and handling the events recieved from Kinect.js    
 // Depends on the Kinect class
 function Kinesis() {
-  // Where all the gestures added will be stored    
+  // Where all the gestures added will be stored  
+  Kinesis.gestureDetection = true;  
+  Kinesis.pollInterval = 200;
   Kinesis.gestures = [];
   Kinesis.cursor   = null;
   Kinesis.lastElement = [];
@@ -20,7 +22,8 @@ function Kinesis() {
 	// This is called whenever a new instance of the class is created     
 	// *Parameter is the parsed JSON String which comes from the Kinect Class*    
   this.initialize = function(data) {
-    if( data )
+    console.info(Kinesis.gestureDetection);
+    if( Kinesis.gestureDetection == true && data )
       this.matchGestures(data);
   };
 	
@@ -97,6 +100,7 @@ function Kinesis() {
       }
       // Gesture matching ends
     }
+    setKinesisTimer();
   };
 }
 
@@ -119,6 +123,17 @@ function checkBounds(origin, bounds) {
     }
   }
   return matched;
+};
+
+function setKinesisTimer() {
+  console.info("timer off");
+  Kinesis.gestureDetection = false;
+  setTimeout("resetKinesisTimer()", Kinesis.pollInterval);
+};
+
+function resetKinesisTimer() {
+  console.info("timer on");
+  Kinesis.gestureDetection = true;
 };
 
 // Compute the intersection of n arrays
