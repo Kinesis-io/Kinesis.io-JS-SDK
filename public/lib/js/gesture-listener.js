@@ -84,7 +84,7 @@ function SwipeGestureListener() {
   SwipeGestureListener.prototype.eventDelay   = 500;
   SwipeGestureListener.prototype.pollInterval = 200;
   SwipeGestureListener.prototype.accuracy     = null;
-  SwipeGestureListener.prototype.bounds       = null;
+  SwipeGestureListener.prototype.bounds       = {min: null, max: null};
   SwipeGestureListener.prototype.toFire       = null;
 };
 
@@ -97,7 +97,7 @@ function HoldGestureListener() {
   HoldGestureListener.prototype.eventDelay   = 500;
   HoldGestureListener.prototype.pollInterval = 200;
   HoldGestureListener.prototype.accuracy     = null;
-  HoldGestureListener.prototype.bounds       = null;
+  HoldGestureListener.prototype.bounds       = {min: null, max: null};;
   HoldGestureListener.prototype.toFire       = null;
   HoldGestureListener.prototype.selector     = null;
 };

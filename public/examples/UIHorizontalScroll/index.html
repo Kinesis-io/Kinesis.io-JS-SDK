@@ -36,7 +36,10 @@
     </script>
     <!-- js at the bottom to load the page faster -->
     <link rel="stylesheet" type="text/css" href="/lib/css/kinesis.css">
-    <script src="/lib/js/kinesis-js-sdk.min.js"></script>
+    <script src="/lib/js/constants.js"></script>
+    <script src="/lib/js/gesture-listener.js"></script>
+    <script src="/lib/js/kinesis.js"></script>
+    <script src="/lib/js/kinect.js"></script>
     <script>
       function swipeControl(gesture) {
         switch(gesture){
@@ -55,11 +58,13 @@
       leftGesture.directions = [GestureDirections.GestureDirectionLeft];
       leftGesture.toFire = swipeControl;
       leftGesture.joints = [JointTypes.JointTypeHandRight];
+      leftGesture.bounds = {min: {x: 960, y: 0, z: 0}};
 
       var rightGesture = new SwipeGestureListener("myswipeRightR");
       rightGesture.directions = [GestureDirections.GestureDirectionRight];
       rightGesture.toFire = swipeControl;
       rightGesture.joints = [JointTypes.JointTypeHandLeft];
+      rightGesture.bounds = {max: {x: 160, y: 0, z: 0}};
 
       kinesis.addGesture(leftGesture);
       kinesis.addGesture(rightGesture);

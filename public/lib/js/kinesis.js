@@ -47,6 +47,12 @@ function Kinesis() {
       joints     = data.gestures[0].joints;
       direction  = [data.gestures[0].direction];
       accuracy   = data.gestures[0].accuracy;
+      if (data.gestures[0].origin != undefined) {
+        origin  = {};
+        origin.x = data.gestures[0].origin.x;
+        origin.y = data.gestures[0].origin.y;
+        origin.z = data.gestures[0].origin.z; 
+      }
     }
     
     if (data.cursor != undefined) {
@@ -56,10 +62,9 @@ function Kinesis() {
     }
     
     for(index in Kinesis.gestures) {
-      gesture = Kinesis.gestures[index]; 
-      
+      gesture = Kinesis.gestures[index];
       // Gesture Matching conditions
-      if ((gesture.bounds == null) || (gesture.bounds.x <= positionX && gesture.bounds.y <= positionY && gesture.bounds.z <= positionZ)) {
+      if (checkBounds(origin, gesture.bounds)) {
         console.info("in bounds");
         if (gesture.gestureType == eventType) {
           console.info("gesture found");
@@ -95,6 +100,26 @@ function Kinesis() {
   };
 }
 
+function checkBounds(origin, bounds) {
+  var matched = true;
+  if ((bounds.min == null && bounds.max == null))
+    console.info("in bounds as no bounds specified");
+  else {
+    if (bounds.min ==  null || (bounds.min.x <= origin.x && bounds.min.y <= origin.y && bounds.min.z <= origin.z))
+      console.info("in min bounds");
+    else {
+      console.info("outside min bounds");
+      matched = false;
+    }
+    if (bounds.max ==  null || (bounds.max.x >= origin.x && bounds.max.y >= origin.y && bounds.max.z >= origin.z))
+      console.info("in max bounds");
+    else {
+      console.info("outside max bounds");
+      matched = false;
+    }
+  }
+  return matched;
+};
 
 // Compute the intersection of n arrays
 // *Parameter is an Array of N Arrays being sent to it*   
