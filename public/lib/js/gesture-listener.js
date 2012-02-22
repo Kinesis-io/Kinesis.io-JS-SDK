@@ -95,7 +95,7 @@ function HoldGestureListener() {
 	HoldGestureListener.prototype.directions   = [GestureDirections.GestureDirectionLeft, GestureDirections.GestureDirectionRight, GestureDirections.GestureDirectionUp, GestureDirections.GestureDirectionDown];
   HoldGestureListener.prototype.eventDelay   = 500;
   HoldGestureListener.prototype.accuracy     = null;
-  HoldGestureListener.prototype.bounds       = {min: null, max: null};;
+  HoldGestureListener.prototype.bounds       = {min: null, max: null};
   HoldGestureListener.prototype.toFire       = null;
   HoldGestureListener.prototype.selector     = null;
 };

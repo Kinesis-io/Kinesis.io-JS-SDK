@@ -19,7 +19,7 @@ var Kinect = function() {
     ws.onmessage = function (evt) {
       try {
         var _data = JSON.parse(evt.data);
-        if(_data.Kinect != "undefined") {
+        if(_data.Kinect != undefined) {
           if(_data.Kinect == "Connected")
             Kinesis.kinectStatus = true;
           else
@@ -27,7 +27,7 @@ var Kinect = function() {
           Kinesis.onStatusChange(_data.Kinect);
         };
         
-        if (_data.cursor != "undefined") {
+        if (_data.cursor != undefined) {
           GestureListener.mouseMove({ x: Layout.pageSize.width * _data.cursor.x / 100, y: Layout.pageSize.height * _data.cursor.y *1.5/ 100, z:_data.cursor.z });
         }
         kinesis.initialize(_data);

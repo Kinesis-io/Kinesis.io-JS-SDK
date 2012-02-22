@@ -6,7 +6,7 @@ function Kinesis() {
   // Where all the gestures added will be stored  
   Kinesis.kinectStatus = false;
   Kinesis.gestureDetection = true;  
-  Kinesis.pollInterval = 200;
+  Kinesis.pollInterval = 2000;
   Kinesis.gestures = [];
   Kinesis.cursor   = null;
   Kinesis.lastElement = [];
@@ -23,7 +23,6 @@ function Kinesis() {
 	// This is called whenever a new instance of the class is created     
 	// *Parameter is the parsed JSON String which comes from the Kinect Class*    
   this.initialize = function(data) {
-    console.info(Kinesis.gestureDetection);
     if( Kinesis.gestureDetection == true && data )
       this.matchGestures(data);
   };
