@@ -1,0 +1,15 @@
+#cursor{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 90px;
+  height: 90px;
+  pointer-events:none;
+  background:url(/lib/images/hand.png) no-repeat center center;
+  z-index: 1140;
+  font-size: 20px;
+  text-align: center;
+  font-family: arial, Helvetica;
+  color: #ff9200;
+  font-weight: bold;
+}
