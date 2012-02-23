@@ -1,5 +1,5 @@
 /*!
-  * kinesis.io Custom Stylesheet
+  * kinesis.io Custom Stylesheet - Hello World
   * http://kinesis.io/
   *
   * Copyright 2012, Kinesis.io
@@ -36,6 +36,7 @@ body {
 #cursor{
   top: 250px;
   left: 660px;
+  width: 110px;
   color: #999999;
   font-size: 27px;
   text-align: center;
