@@ -1,11 +1,25 @@
+/*!
+  * kinesis.io Kinesis Stylesheet
+  * http://kinesis.io/
+  *
+  * Copyright 2012, Kinesis.io
+  * http://kinesis.io/license
+  *
+  * Copyright 2012, NotionQ LLP
+  *
+  * Date: Thu Feb 23 15:53:00 2012 +0530
+*/
+
+/* cursor styles starts */
 #cursor{
-  position: fixed;
-  left: -200px;
   top: -200px;
   width: 90px;
   height: 90px;
-  pointer-events:none;
-  background:url(/lib/images/hand.png) no-repeat center center;
+  left: -200px;
   z-index: 1140;
+  position: fixed;  
+  pointer-events:none;
+  background:url(../../lib/images/hand.png) no-repeat center center;
 }
+/* cursor styles ends */
 
