@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="js/jquery-1.6.4.min.js"></script>
-  	<script src="js/index.js"></script>
-  	<link rel="stylesheet" type="text/css" href="/lib/css/kinesis.css">
+    <!-- kinesis stylesheet -->
+    <link rel="stylesheet" type="text/css" href="/lib/css/kinesis.css">
   	<link rel="stylesheet" href="css/style.css" type="text/css" />
-  	<script>
-    	$(function(){
-
-    	});
-  	</script>
   </head>
   <body>
-    <div id="cursor" width="100" height="100">
-      <div id='hand'>HELLO</div>
-    </div>
-    </script>
-    <!-- js at the bottom to load the page faster -->
-    <script src="/lib/js/constants.js"></script>
-    <script src="/lib/js/gesture-listener.js"></script>
-    <script src="/lib/js/kinesis.js"></script>
-    <script src="/lib/js/kinect.js"></script>
+    <div id="kinesis"><a href="http://kinesis.io/">KINESIS.IO</a></div>
+    <!-- kinesis cursor -->
+    <div id="cursor">Bazinga</div>
+    <!-- kinesis js sdk -->
+    <script src="/lib/js/kinesis-js-sdk.min.js"></script>
     <script>    
-      var kinesis = new Kinesis;
+      var kinesis = new Kinesis; // initialize kinesis
+      // start adding gestures from here //
     </script>
   </body>
 </html>
