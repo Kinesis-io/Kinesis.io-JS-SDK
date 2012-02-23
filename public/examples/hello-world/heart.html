@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <!-- kinesis stylesheet -->
+    <link rel="stylesheet" type="text/css" href="../../lib/css/kinesis.css">
+    <script type="text/javascript">
+      function onload() {
+        redraw(8);
+      }
+      
+      function redraw(lineWidth){
+        var drawingCanvas = document.getElementById('drawing');
+        // Check the element is in the DOM and the browser supports canvas
+        if (drawingCanvas.getContext) {
+          context = drawingCanvas.getContext('2d');
+          context.beginPath();
+          context.lineCap = "round";
+          context.lineWidth = lineWidth;
+          context.strokeStyle = "red";
+          context.fillStyle = "red";
+          context.moveTo(100, 90);
+          context.quadraticCurveTo(65, 150,200, 240);
+          context.quadraticCurveTo(340, 150,300, 90);
+          context.quadraticCurveTo(250, 30, 200, 90);
+          context.quadraticCurveTo(150, 30, 100, 90);
+          context.stroke();
+          context.fill();
+        }
+      }
+    </script>
+  </head>
+  <body onload="onload()">
+    <div style="text-align: center;">
+      <canvas style="margin:10px;padding: 150px;" id="drawing" width="500" height="500"></canvas>
+    </div>
+    <!-- kinesis cursor -->
+    <div id="cursor"></div>
+    <!-- kinesis js sdk -->
+    <script src="/lib/js/constants.js"></script>
+    <script src="/lib/js/gesture-listener.js"></script>
+    <script src="/lib/js/kinesis.js"></script>
+    <script src="/lib/js/kinect.js"></script>
+    <script>
+    function movement(position) {
+      var z = 100*Math.abs(position.z);
+      redraw(z);
+    }
+    
+      var kinesis = new Kinesis; // initialize kinesis
+      // start adding gestures from here //
+      Kinesis.cursor = movement;
+    </script>
+  </body>
+</html>
