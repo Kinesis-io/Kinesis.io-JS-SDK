@@ -256,34 +256,34 @@ function Kinesis() {
       gesture = Kinesis.gestures[index];
       // Gesture Matching conditions
       if (checkBounds(origin, gesture.bounds)) {
-        console.info("in bounds");
+        //console.info("in bounds");
         if (gesture.gestureType == eventType) {
-          console.info("gesture found");
+          //console.info("gesture found");
           
           if ((joints.intersect(gesture.joints)).length > 0) {
-            console.info("allowable joint");
+            //console.info("allowable joint");
             if ((direction.intersect(gesture.directions)).length > 0) {
-              console.info("allowable direction");
+              //console.info("allowable direction");
               gesture.toFire(gesture);
               break;
             }
             else {
-              console.info("direction did not match");
+              //console.info("direction did not match");
               continue;
             }
           }
           else {
-            console.info("joints did not match");
+            //console.info("joints did not match");
             continue;
           }
         }
         else {
-          console.info("gesture type did not match");
+          //console.info("gesture type did not match");
           continue;
         }
       }
       else {
-        console.info("out of bounds");
+        //console.info("out of bounds");
         continue;
       }
       // Gesture matching ends
@@ -294,19 +294,22 @@ function Kinesis() {
 
 function checkBounds(origin, bounds) {
   var matched = true;
-  if ((bounds.min == null && bounds.max == null))
-    console.info("in bounds as no bounds specified");
+  if ((bounds.min == null && bounds.max == null)) {
+    //console.info("in bounds as no bounds specified");
+  }
   else {
-    if (bounds.min ==  null || (bounds.min.x <= origin.x && bounds.min.y <= origin.y && bounds.min.z <= origin.z))
-      console.info("in min bounds");
+    if (bounds.min ==  null || (bounds.min.x <= origin.x && bounds.min.y <= origin.y && bounds.min.z <= origin.z)) {
+      //console.info("in min bounds");
+    }
     else {
-      console.info("outside min bounds");
+      //console.info("outside min bounds");
       matched = false;
     }
-    if (bounds.max ==  null || (bounds.max.x >= origin.x && bounds.max.y >= origin.y && bounds.max.z >= origin.z))
-      console.info("in max bounds");
+    if (bounds.max ==  null || (bounds.max.x >= origin.x && bounds.max.y >= origin.y && bounds.max.z >= origin.z)){
+      //console.info("in max bounds");
+    }
     else {
-      console.info("outside max bounds");
+      //console.info("outside max bounds");
       matched = false;
     }
   }
@@ -314,13 +317,13 @@ function checkBounds(origin, bounds) {
 };
 
 function setKinesisTimer() {
-  console.info("timer off");
+  //console.info("timer off");
   Kinesis.gestureDetection = false;
   setTimeout("resetKinesisTimer()", Kinesis.pollInterval);
 };
 
 function resetKinesisTimer() {
-  console.info("timer on");
+  //console.info("timer on");
   Kinesis.gestureDetection = true;
 };
 
