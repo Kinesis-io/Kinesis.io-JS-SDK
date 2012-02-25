@@ -255,7 +255,7 @@ function Layout() {
 function insertCursor() {
   var _cursor       = document.createElement('div');
   _cursor.id        = 'cursor';
-  _cursor.innerHTML = '&nbsp;'
+  _cursor.innerHTML = '&nbsp;';
   document.body.appendChild(_cursor);
 };
 

@@ -95,27 +95,6 @@ Function.prototype.inheritsFrom = function( parentClassOrObject ){
 };
 
 // **Gesture Listener Class**
-//*Version 0.1*   
-// Enabling Class Inheritance in Javascript   
-Function.prototype.inheritsFrom = function( parentClassOrObject ){ 
-	if ( parentClassOrObject.constructor == Function ) 
-	{ 
-		//Normal Inheritance 
-		this.prototype = new parentClassOrObject;
-		this.prototype.constructor = this;
-		this.prototype.parent = parentClassOrObject.prototype;
-	} 
-	else 
-	{ 
-		//Pure Virtual Inheritance 
-		this.prototype = parentClassOrObject;
-		this.prototype.constructor = this;
-		this.prototype.parent = parentClassOrObject;
-	} 
-	return this;
-};
-
-// **Gesture Listener Class**
 // This class is used to define what all events should Kinesis JS SDK listen to in order to fire custom events    
 // This acts as the base class of all gesture listener classes.   
 // Developers can easily make instance variables, customize the gesture and then start listening to them
@@ -132,6 +111,7 @@ function GestureListener() {
 			Kinesis.cursor(position);
 			
 	  cursor = document.getElementById('cursor');
+	  
 	  cursor.style.left = position.x - 45 + "px";
 	  cursor.style.top = position.y - 45 + "px";
     var _element = document.elementFromPoint(position.x, position.y);
@@ -143,19 +123,18 @@ function GestureListener() {
           cursor.deactivateCursorTimer();
         }
         if (_currentElement.className.search('active') == -1)
-          _currentElement.className += " active";
+          _currentElement.className += " active";      
         activateCursorTimer(cursor);
         Kinesis.lastElement.push(_currentElement);
 
-        if (Kinesis.clickEventTimer){
+        if (Kinesis.clickEventTimer){          
           clearTimeout(Kinesis.clickEventTimer);
-        }
+        };
+
         Kinesis.clickEventTimer = setTimeout(function(){
           _currentElement.className = _currentElement.className.replace( /(?:^|\s)active(?!\S)/ , '' );
           deactivateCursorTimer(cursor);
-          setTimeout(function() {
-            $(_currentElement).trigger('click');
-          }, 10 );
+          $(_currentElement).trigger('click');
           setTimeout(function() {
             Kinesis.lastElement.pop(_currentElement);
           }, Kinesis.holdEventDelay );
@@ -169,6 +148,7 @@ function GestureListener() {
         deactivateCursorTimer(cursor);
       }
     }
+    
   };
 };
 
@@ -178,9 +158,8 @@ function SwipeGestureListener() {
 	SwipeGestureListener.prototype.joints       = [JointTypes.JointTypeHandRight, JointTypes.JointTypeHandLeft],
 	SwipeGestureListener.prototype.directions   = [GestureDirections.GestureDirectionLeft, GestureDirections.GestureDirectionRight, GestureDirections.GestureDirectionUp, GestureDirections.GestureDirectionDown];
   SwipeGestureListener.prototype.eventDelay   = 500;
-  SwipeGestureListener.prototype.pollInterval = 200;
   SwipeGestureListener.prototype.accuracy     = null;
-  SwipeGestureListener.prototype.bounds       = null;
+  SwipeGestureListener.prototype.bounds       = {min: null, max: null};
   SwipeGestureListener.prototype.toFire       = null;
 };
 
@@ -191,15 +170,13 @@ function HoldGestureListener() {
 	HoldGestureListener.prototype.joints       = [JointTypes.JointTypeHandRight, JointTypes.JointTypeHandLeft],
 	HoldGestureListener.prototype.directions   = [GestureDirections.GestureDirectionLeft, GestureDirections.GestureDirectionRight, GestureDirections.GestureDirectionUp, GestureDirections.GestureDirectionDown];
   HoldGestureListener.prototype.eventDelay   = 500;
-  HoldGestureListener.prototype.pollInterval = 200;
   HoldGestureListener.prototype.accuracy     = null;
-  HoldGestureListener.prototype.bounds       = null;
+  HoldGestureListener.prototype.bounds       = {min: null, max: null};
   HoldGestureListener.prototype.toFire       = null;
   HoldGestureListener.prototype.selector     = null;
 };
 
 HoldGestureListener.inheritsFrom(GestureListener);
-
 
 // GESTURE LISTENER JS ENDS
 
@@ -210,7 +187,10 @@ HoldGestureListener.inheritsFrom(GestureListener);
 // Kinesis.js is the base class which is managing all the added gestures and handling the events recieved from Kinect.js    
 // Depends on the Kinect class
 function Kinesis() {
-  // Where all the gestures added will be stored    
+  // Where all the gestures added will be stored  
+  Kinesis.kinectStatus = false;
+  Kinesis.gestureDetection = true;  
+  Kinesis.pollInterval = 2000;
   Kinesis.gestures = [];
   Kinesis.cursor   = null;
   Kinesis.lastElement = [];
@@ -227,8 +207,12 @@ function Kinesis() {
 	// This is called whenever a new instance of the class is created     
 	// *Parameter is the parsed JSON String which comes from the Kinect Class*    
   this.initialize = function(data) {
-    if( data )
+    if( Kinesis.gestureDetection == true && data )
       this.matchGestures(data);
+  };
+  
+  Kinesis.onStatusChange = function(message) {
+    console.info(message);
   };
 	
 	// Responsible for binding gestures to be matched when events are recieved from Kinect.js    
@@ -248,11 +232,18 @@ function Kinesis() {
   // Responsible for matching the recieved event from Kinect class with the already binded gestures    
   // *Parameter contains the parsed JSON event from the Kinect Class*
   Kinesis.prototype.matchGestures= function(data) {
+    
     if (data.gestures[0] != undefined) {
       eventType  = data.gestures[0].type;
       joints     = data.gestures[0].joints;
       direction  = [data.gestures[0].direction];
       accuracy   = data.gestures[0].accuracy;
+      if (data.gestures[0].origin != undefined) {
+        origin  = {};
+        origin.x = data.gestures[0].origin.x;
+        origin.y = data.gestures[0].origin.y;
+        origin.z = data.gestures[0].origin.z; 
+      }
     }
     
     if (data.cursor != undefined) {
@@ -262,44 +253,76 @@ function Kinesis() {
     }
     
     for(index in Kinesis.gestures) {
-      gesture = Kinesis.gestures[index]; 
-      
+      gesture = Kinesis.gestures[index];
       // Gesture Matching conditions
-      if ((gesture.bounds == null) || (gesture.bounds.x <= positionX && gesture.bounds.y <= positionY && gesture.bounds.z <= positionZ)) {
-        //console.info("in bounds");
+      if (checkBounds(origin, gesture.bounds)) {
+        console.info("in bounds");
         if (gesture.gestureType == eventType) {
-          //console.info("gesture found");
+          console.info("gesture found");
+          
           if ((joints.intersect(gesture.joints)).length > 0) {
-            //console.info("allowable joint");
+            console.info("allowable joint");
             if ((direction.intersect(gesture.directions)).length > 0) {
-              //console.info("allowable direction");
+              console.info("allowable direction");
               gesture.toFire(gesture);
               break;
             }
             else {
-              //console.info("direction did not match");
+              console.info("direction did not match");
               continue;
             }
           }
           else {
-            //console.info("joints did not match");
+            console.info("joints did not match");
             continue;
           }
         }
         else {
-          //console.info("gesture type did not match");
+          console.info("gesture type did not match");
           continue;
         }
       }
       else {
-        //console.info("out of bounds");
+        console.info("out of bounds");
         continue;
       }
       // Gesture matching ends
     }
+    setKinesisTimer();
   };
 }
 
+function checkBounds(origin, bounds) {
+  var matched = true;
+  if ((bounds.min == null && bounds.max == null))
+    console.info("in bounds as no bounds specified");
+  else {
+    if (bounds.min ==  null || (bounds.min.x <= origin.x && bounds.min.y <= origin.y && bounds.min.z <= origin.z))
+      console.info("in min bounds");
+    else {
+      console.info("outside min bounds");
+      matched = false;
+    }
+    if (bounds.max ==  null || (bounds.max.x >= origin.x && bounds.max.y >= origin.y && bounds.max.z >= origin.z))
+      console.info("in max bounds");
+    else {
+      console.info("outside max bounds");
+      matched = false;
+    }
+  }
+  return matched;
+};
+
+function setKinesisTimer() {
+  console.info("timer off");
+  Kinesis.gestureDetection = false;
+  setTimeout("resetKinesisTimer()", Kinesis.pollInterval);
+};
+
+function resetKinesisTimer() {
+  console.info("timer on");
+  Kinesis.gestureDetection = true;
+};
 
 // Compute the intersection of n arrays
 // *Parameter is an Array of N Arrays being sent to it*   
@@ -413,11 +436,19 @@ function Layout() {
   Layout.pageSize = { width: window.innerWidth, height: window.innerHeight };
 };
 
+function insertCursor() {
+  var _cursor       = document.createElement('div');
+  _cursor.id        = 'cursor';
+  _cursor.innerHTML = '&nbsp;';
+  document.body.appendChild(_cursor);
+};
+
 var originalInit = window.onload;
 
 // Initialize the Layout and Kinect Classes
 function init() {
   setTimeout(function(){
+    insertCursor();
     myLayout = new Layout();
     kinect = Kinect();
     Kinect.prototype.init();
@@ -451,8 +482,16 @@ var Kinect = function() {
     ws.onmessage = function (evt) {
       try {
         var _data = JSON.parse(evt.data);
-        if (_data.cursor != "undefined") {
-          GestureListener.mouseMove({ x: Layout.pageSize.width * _data.cursor.x / 100, y: Layout.pageSize.height * _data.cursor.y *1.5/ 100 });
+        if(_data.Kinect != undefined) {
+          if(_data.Kinect == "Connected")
+            Kinesis.kinectStatus = true;
+          else
+            Kinesis.kinectStatus = false;
+          Kinesis.onStatusChange(_data.Kinect);
+        };
+        
+        if (_data.cursor != undefined) {
+          GestureListener.mouseMove({ x: Layout.pageSize.width * _data.cursor.x / 100, y: Layout.pageSize.height * _data.cursor.y *1.5/ 100, z:_data.cursor.z });
         }
         kinesis.initialize(_data);
         
