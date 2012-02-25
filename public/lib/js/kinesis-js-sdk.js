@@ -476,7 +476,7 @@ var Kinect = function() {
     }
 
     // Create a new websocket and connect
-    var ws = new window[support]('ws://127.0.0.1:2011/sample');
+    var ws = new window[support]('ws://127.0.0.1:2011/');
 
     // Called only when any data comes from 
     ws.onmessage = function (evt) {
