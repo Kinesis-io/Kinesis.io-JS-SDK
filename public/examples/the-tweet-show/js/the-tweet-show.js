@@ -9,33 +9,43 @@
   *
   * Date: Thu Feb 23 15:53:00 2012 +0530
 */
+
+// twitter callback; iterates over feched tweets and creates tweet elements dynamically and injects them as tile-items in the grid holder.
 function twitterCallback2(twitters) {
   var statusHTML = [];
-  for (var i=0; i<twitters.length; i++){
-    var username = twitters[i].user.screen_name;
-    var uname    = twitters[i].user.name;
-    var imageurl = twitters[i].user.profile_image_url;
-    var location = location;
-    var entities = twitters[i].entities;
-    var pic = "";
-    if (entities.media != undefined)
-      var pic = entities.media[0].media_url;
+  for (var i=0; i<twitters.length; i++) {
+    // fetch tweet information
+    var tweet = {
+                  username: twitters[i].user.screen_name,
+                  uname   : twitters[i].user.name,
+                  imageurl: twitters[i].user.profile_image_url,
+                  location: twitters[i].location,
+                  entities: twitters[i].entities,
+                  pic     : getTweetPic(twitters[i].entities)
+                };
     var status = twitters[i].text.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g, function(url) {
       return '<a href="'+url+'">'+url+'</a>';
     }).replace(/\B@([_a-z0-9]+)/ig, function(reply) {
       return  reply.charAt(0)+'<a href="http://twitter.com/'+reply.substring(1)+'">'+reply.substring(1)+'</a>';
     });
-    statusHTML.push('<div class="tileItem tweetBlock">'+ '<div class="intro"><img src="'+imageurl+'"/><span class="name">' + uname + '</span><span class="sname">@' + username + '</span></div><div class="tweet"><span>' + status+'</span> <a class="time" href="http://twitter.com/'+username+'/statuses/'+twitters[i].id_str+'">'+relative_time(twitters[i].created_at)+'</a></div>');
-    if (pic)
-      statusHTML.push('<a href="' + pic + '"' + 'class="pic"><img class="interactive" src="'+pic+'"/>' + '</a></div>');
+    statusHTML.push('<div class="tileItem tweetBlock">'+ '<div class="intro"><img src="'+tweet.imageurl+'"/><span class="name">' + tweet.uname + '</span><span class="sname">@' + tweet.username + '</span></div><div class="tweet"><span>' + status+'</span> <a class="time" href="http://twitter.com/'+tweet.username+'/statuses/'+twitters[i].id_str+'">'+relative_time(twitters[i].created_at)+'</a></div>');
+    if (tweet.pic)
+      statusHTML.push('<a href="' + tweet.pic + '"' + 'class="pic"><img class="interactive" src="'+tweet.pic+'"/>' + '</a></div>');
     else
       statusHTML.push('</div>');
-  }
-  var lhtml = document.getElementById('gridHolder').innerHTML;
-  document.getElementById('gridHolder').innerHTML = lhtml + statusHTML.join('');
-  document.getElementById('spinner').style.display = 'none';
+  };
+  var oldHtml = document.getElementById('gridHolder').innerHTML;
+  document.getElementById('gridHolder').innerHTML   = oldHtml + statusHTML.join('');
+  document.getElementById('spinner').style.display  = 'none';
 }
 
+// get tweet pic url from tweet entities
+function getTweetPic(entities) {
+  if (entities.media != undefined)
+  return entities.media[0].media_url;
+}
+
+// get relative time from date time format
 function relative_time(time_value) {
   var values = time_value.split(" ");
   time_value = values[1] + " " + values[2] + ", " + values[5] + " " + values[3];
@@ -68,8 +78,10 @@ api_url     = 'https://api.twitter.com/1/statuses/user_timeline.json';
 callback    = 'twitterCallback2'
 entities    = 'true'
 
+// create twitter api url
 request_url = api_url + '?callback=' + callback +'&include_entities=' + entities + '&screen_name=' + twhandle + '&count=' + twcount;
 
+// insert request to twitter api for fetching tweets
 document.write('<script type="text\/javascript" src=');
 document.write(request_url);
 document.write('><\/script>');
