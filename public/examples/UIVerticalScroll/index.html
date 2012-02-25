@@ -1,62 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html>
   <head>
-      <title>Website Vertical Scrolling with jQuery</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-      <meta name="description" content="Website Vertical Scrolling with jQuery" />
-      <meta name="keywords" content="jquery, vertical, scrolling, scroll, smooth"/>
-      <link rel="stylesheet" href="/lib/css/kinesis.css" type="text/css" />
+    <title>Kinesis.io UIVerticalScroll</title>
+    <!-- kinesis stylesheet -->
+    <link rel="stylesheet" type="text/css" href="../../lib/css/kinesis.css">
+  	<link rel="stylesheet" href="css/vertical-scroll.css" type="text/css" />
   </head>
-  <style>
-      *{
-      	margin:0;
-      	padding:0;
-      }
-      body{
-      	font-family:Georgia;
-      	font-size: 34px;
-      	font-style: italic;
-      	letter-spacing:-1px;
-      }
-      #gridHolder{
-        margin: 0 auto;
-        overflow: hidden;
-      }
-      .tile, .kinesis {
-        background-color: #F8F8F8;
-        border: 1px solid #333333;
-        display: block;
-        list-style-type: none;
-        margin: 100px;
-        min-height: 400px;
-        opacity: 0.7;
-        padding: 20px;
-        font-size: 200px;
-        line-height: 400px;
-        text-align: center;
-      }
-      
-      .kinesis {
-        font-size: 36px;
-      }
-      
-      #nav {
-        background: none repeat scroll 0 0 #000000;
-        color: #FFFFFF;
-        margin: 10px;
-        position: fixed;
-        z-index: 2;
-      }
-      
-      #nav li {
-        border: 1px solid #FFFFFF;
-        display: inline;
-        list-style: none outside none;
-        margin: 1px;
-        padding: 0 10px;
-        z-index: 2;
-      }
-  </style>
   <body>
     <ul id="nav">
       <li data-id='#a'><span class="interactive">A</span></li>
@@ -64,85 +13,17 @@
       <li data-id='#c'><span class="interactive">C</span></li>
       <li data-id='#d'><span class="interactive">D</span></li>
       <li data-id='#e'><span class="interactive">E</span></li>
-      <li data-id='#f'>F</li>
-      <li data-id='#g'>G</li>
-      <li data-id='#h'>H</li>
-      <li data-id='#i'>I</li>
-      <li>J</li>
-      <li>K</li>
-      <li>L</li>
-      <li>M</li>
-      <li>N</li>
-      <li>O</li>
-      <li>P</li>
-      <li>Q</li>
-      <li>R</li>
-      <li>S</li>
-      <li>T</li>
-      <li>U</li>
-      <li>V</li>
-      <li>W</li>
-      <li>X</li>
-      <li>Y</li>
-      <li>Z</li>
     </ul>
-    <ul id="gridHolder">
-      <li class="kinesis">UIVerticalScroll</li>
-      <li class="tile" id="a">A</li>
-      <li class="tile" id="b" >B</li>
-      <li class="tile" id="c">C</li>
-      <li class="tile" id="d">D</li>
-      <li class="tile" id="e">E</li>
-    </ul>
-    <canvas id="cursor" width="100" height="100">
-      <div id='hand'></div>
-    </canvas>
-    <!-- The JavaScript -->
-    <script src="js/jquery-1.6.4.min.js"></script>		
-    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript">
-      function scrollUp() {
-        var offset = 100;
-        var height = $('.tile').height() + offset;
-        $('html, body').stop().animate({
-          scrollTop: $(window).scrollTop() + height
-        }, 1000);
-      };
-      function scrollDown() {
-        var offset = 100;
-        var height = $('.tile').height() + offset;
-        $('html, body').stop().animate({
-          scrollTop: $(window).scrollTop() - height
-        }, 1000);
-      };
-      
-      $('#nav li').click(function() {
-        var offset = -100;
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-          scrollTop: $($anchor.attr('data-id')).offset().top + offset
-        }, 1000);
-      });
-    </script>
-    <canvas id="cursor" width="100" height="100">
-      <div id='hand'></div>
-    </canvas>
-
-    <!-- js at the bottom to load the page faster -->
-    <script src="/lib/js/constants.js"></script>
-    <script src="/lib/js/gesture-listener.js"></script>
-    <script src="/lib/js/kinesis.js"></script>
-    <script src="/lib/js/kinect.js"></script>
-    <script src="js/main.js"></script>
-    <script type="text/javascript">
-		  function movement(position)
-		  {
-			  if(position.y < Layout.pageSize.height * 0.2) scrollUp((Layout.pageSize.height * 0.2) - position.y);
-			  
-			  if(position.y > Layout.pageSize.height * 0.8) scrollDown(position.y - (Layout.pageSize.height * 0.8));
-		  }
-		  kinesis = new Kinesis;
-		  Kinesis.cursor = movement;
-	  </script>
+    <div id="gridHolder" class="clear">
+      <div class="banner">UIVerticalScroll</div>
+      <div class="tile" id="a">A</div>
+      <div class="tile" id="b">B</div>
+      <div class="tile" id="c">C</div>
+      <div class="tile" id="d">D</div>
+      <div class="tile" id="e">E</div>
+    </div>
+    <script src="js/jquery-1.6.4.min.js"></script>
+    <script src="/lib/js/kinesis-js-sdk.min.js"></script>
+    <script src="js/vertical-scroll.js"></script>
   </body>
 </html>
