@@ -1,3 +1,14 @@
+/*!
+  * kinesis.io Custom JavaScript - TweetShow
+  * http://kinesis.io/
+  *
+  * Copyright 2012, Kinesis.io
+  * http://kinesis.io/license
+  *
+  * Copyright 2012, NotionQ LLP
+  *
+  * Date: Thu Feb 23 15:53:00 2012 +0530
+*/
 $.fn.activate = function() {
   var me = $(this);
   if(me)
@@ -55,8 +66,8 @@ function twitterCallback2(twitters) {
     else
       statusHTML.push('</li>');
   }
-  var lhtml = document.getElementById('twitter_update_list').innerHTML;
-  document.getElementById('twitter_update_list').innerHTML = lhtml + statusHTML.join('');
+  var lhtml = document.getElementById('gridHolder').innerHTML;
+  document.getElementById('gridHolder').innerHTML = lhtml + statusHTML.join('');
   document.getElementById('spinner').style.display = 'none';
 }
 

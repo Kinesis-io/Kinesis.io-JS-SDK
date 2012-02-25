@@ -32,23 +32,19 @@ body {
   padding: 0;
 }
 
-#twitter_update_list {  
+#gridHolder {  
   -webkit-transition: all 0.5s ease-in; 
   -moz-transition: all 0.5s ease-in; 
   -o-transition: all 0.5s ease-in; 
   -ms-transition: all 0.5s ease-in;
 }
 
-#twitter_update_list {
-
-}
-
-#twitter_update_list td {
+#gridHolder td {
   width: 550px;
   overflow: hidden;
 }
 
-.kinesis {
+.banner {
   float: left;
   width: 450px;
   display: block;
@@ -62,7 +58,7 @@ body {
   background:#efefef url('../images/logo.png') no-repeat center center !important;
 }
 
-#twitter_update_list li {
+#gridHolder .tileItem {
   float: left;
   width: 450px;
   display: block;
@@ -77,27 +73,27 @@ body {
   background-color: #f8f8f8;
 }
 
-#twitter_update_list li .tweet, #twitter_update_list li .intro {
+#gridHolder .tileItem .tweet, #gridHolder .tileItem .intro {
   float: left;
   padding-bottom: 10px;
   margin-bottom: 20px;
   border-bottom: 1px dashed #ddd;
 }
 
-#twitter_update_list .intro span {
+#gridHolder .intro span {
   font-family : AllerLightRegular;
 }
 
-#twitter_update_list li .tweet span {
+#gridHolder .tileItem .tweet span {
   color: #333;
   line-height: 36px;
 }
 
-#twitter_update_list td.active li .tweet span {
+#gridHolder td.active .tileItem .tweet span {
   color: #000;
 }
 
-#twitter_update_list li .tweet .time {
+#gridHolder .tileItem .tweet .time {
   float: right;
   color: #555;
   font-size: 17px;
@@ -105,39 +101,39 @@ body {
   font-family : AllerLightRegular;
 }
 
-#twitter_update_list li .intro img {
+#gridHolder .tileItem .intro img {
   float: left;
 }
 
-#twitter_update_list li .intro span {
+#gridHolder .tileItem .intro span {
   font-size: 18px;
   display: inline;
   width: 300px;
   margin: 0 15px;
 }
 
-#twitter_update_list li .intro .name {
+#gridHolder .tileItem .intro .name {
   font-size: 22px;
 }
 
-#twitter_update_list td.active li {
+#gridHolder td.active .tileItem {
   background-color: #fff;
   opacity: 1;
 }
 
-#twitter_update_list span {
+#gridHolder span {
   width: 450px;
   font-size: 32px;
   float: left;
   color: #000;
   font-family: GoudyStM;
 }
-#twitter_update_list .tweet a {
+#gridHolder .tweet a {
   font-size: 32px;
   color: #0084B4;
 }
 
-#twitter_update_list .pic {
+#gridHolder .pic {
   height: 340px;
   overflow: hidden;
   width: 455px;
@@ -145,11 +141,11 @@ body {
   box-shadow: 0 2px 4px #333333;
 }
 
-#twitter_update_list .pic img {
+#gridHolder .pic img {
   width: 455px;
 }
 
-#twitter_update_list span a:hover {
+#gridHolder span a:hover {
   text-decoration: underline;
   color: #666666;
 }

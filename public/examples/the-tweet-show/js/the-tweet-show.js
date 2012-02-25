@@ -1,3 +1,14 @@
+/*!
+  * kinesis.io Custom JavaScript - TweetShow
+  * http://kinesis.io/
+  *
+  * Copyright 2012, Kinesis.io
+  * http://kinesis.io/license
+  *
+  * Copyright 2012, NotionQ LLP
+  *
+  * Date: Thu Feb 23 15:53:00 2012 +0530
+*/
 function twitterCallback2(twitters) {
   var statusHTML = [];
   for (var i=0; i<twitters.length; i++){
@@ -14,14 +25,14 @@ function twitterCallback2(twitters) {
     }).replace(/\B@([_a-z0-9]+)/ig, function(reply) {
       return  reply.charAt(0)+'<a href="http://twitter.com/'+reply.substring(1)+'">'+reply.substring(1)+'</a>';
     });
-    statusHTML.push('<li class="tweetBlock>'+ '<div class="intro"><img src="'+imageurl+'"/><span class="name">' + uname + '</span><span class="sname">@' + username + '</span></div><div class="tweet"><span>' + status+'</span> <a class="time" href="http://twitter.com/'+username+'/statuses/'+twitters[i].id_str+'">'+relative_time(twitters[i].created_at)+'</a></div>');
+    statusHTML.push('<div class="tileItem tweetBlock">'+ '<div class="intro"><img src="'+imageurl+'"/><span class="name">' + uname + '</span><span class="sname">@' + username + '</span></div><div class="tweet"><span>' + status+'</span> <a class="time" href="http://twitter.com/'+username+'/statuses/'+twitters[i].id_str+'">'+relative_time(twitters[i].created_at)+'</a></div>');
     if (pic)
-      statusHTML.push('<div class="pic"><img src="'+pic+'"/>' + '</div></li>');
+      statusHTML.push('<a href="' + pic + '"' + 'class="pic"><img class="interactive" src="'+pic+'"/>' + '</a></div>');
     else
-      statusHTML.push('</li>');
+      statusHTML.push('</div>');
   }
-  var lhtml = document.getElementById('twitter_update_list').innerHTML;
-  document.getElementById('twitter_update_list').innerHTML = lhtml + statusHTML.join('');
+  var lhtml = document.getElementById('gridHolder').innerHTML;
+  document.getElementById('gridHolder').innerHTML = lhtml + statusHTML.join('');
   document.getElementById('spinner').style.display = 'none';
 }
 
@@ -49,3 +60,16 @@ function relative_time(time_value) {
     return (parseInt(delta / 86400)).toString() + ' days ago';
   }
 }
+
+// twitter information setup
+twhandle    = 'blue angels';
+twcount     = 10;
+api_url     = 'https://api.twitter.com/1/statuses/user_timeline.json';
+callback    = 'twitterCallback2'
+entities    = 'true'
+
+request_url = api_url + '?callback=' + callback +'&include_entities=' + entities + '&screen_name=' + twhandle + '&count=' + twcount;
+
+document.write('<script type="text\/javascript" src=');
+document.write(request_url);
+document.write('><\/script>');

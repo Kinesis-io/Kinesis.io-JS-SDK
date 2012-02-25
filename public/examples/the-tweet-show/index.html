@@ -1,89 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="js/jquery-1.6.4.min.js"></script>
-  	<script src="js/jquery.mousewheel.js"></script>
-  	<script src="js/index.js"></script>
-  	<script type="text/javascript" src="js/jquery.fancybox-1.3.4.js"></script>
   	<link rel="stylesheet" type="text/css" href="/lib/css/kinesis.css">
   	<link rel="stylesheet" href="css/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
   	<link rel="stylesheet" href="css/style.css" type="text/css" />
-  	<script>
-    	$(function(){
-    		$("#twitter_update_list").wrapInner("<table cellspacing='5'><tr>");
-    		$("li.kinesis").wrap("<td></td>");
-    		$("li.tweetBlock").wrap("<td class='tweetTD' align='top'></td>");
-    		$("body").mousewheel(function(event, delta) {
-    			this.scrollLeft -= (delta * 30);
-    			event.preventDefault();
-    		}); 
-    		var _first = $("#twitter_update_list table tr td.tweetTD")[0];
-    		$(_first).addClass('active');
-    		
-    		$("a.pic").fancybox({
-      		'transitionIn'	:	'elastic',
-      		'transitionOut'	:	'elastic',
-      		'speedIn'		:	600, 
-      		'speedOut'		:	200, 
-      		'overlayShow'	:	false,
-      		'onComplete' : function() {
-      		  $('#fancybox-close').append('<label class="interactive">Close FancyBox</label>');
-      		}
-      	});
-    	});
-  	</script>
   </head>
   <body>
-    <div id="twitter_update_list">
-      <li class="kinesis"></li>
-      <span id="spinner">&nbsp;</span>
+    <div id="gridHolder">
+      <div class="banner"></div>
     </div>
-    <canvas id="cursor" width="100" height="100">
-      <div id='hand'></div>
-    </canvas>
-    </script>
-    <!-- js at the bottom to load the page faster -->
-    <script src="/lib/js/kinesis-js-sdk.min.js"></script>
-    <script>
-      function swipeControl(gesture) {
-        switch(gesture){
-          case leftGesture:
-            $('#twitter_update_list').slideLeft();
-            break;
-          case rightGesture:
-             $('#twitter_update_list').slideRight();
-             break;
-        }
-      }
-    
-      var kinesis = new Kinesis;
-      
-      var leftGesture = new SwipeGestureListener("myswipeLeftR");
-      leftGesture.directions = [GestureDirections.GestureDirectionLeft];
-      leftGesture.toFire = swipeControl;
-      leftGesture.joints = [JointTypes.JointTypeHandRight];
-
-      var rightGesture = new SwipeGestureListener("myswipeRightR");
-      rightGesture.directions = [GestureDirections.GestureDirectionRight];
-      rightGesture.toFire = swipeControl;
-      rightGesture.joints = [JointTypes.JointTypeHandLeft];
-
-      kinesis.addGesture(leftGesture);
-      kinesis.addGesture(rightGesture);
-      
-      // twitter information setup
-      
-      twhandle    = 'bbcdoctorwho';
-      twcount     = 10;
-      api_url     = 'https://api.twitter.com/1/statuses/user_timeline.json';
-      callback    = 'twitterCallback2'
-      entities    = 'true'
-
-      request_url = api_url + '?callback=' + callback +'&include_entities=' + entities + '&screen_name=' + twhandle + '&count=' + twcount;
-      
-      document.write('<script type="text\/javascript" src=');
-      document.write(request_url);
-      document.write('><\/script>');
-    </script>
+    <span id="spinner">&nbsp;</span>
+  	<script src="js/jquery-1.6.4.min.js"></script>
+  	<script src="js/jquery.fancybox-1.3.4.js"></script>
+  	<script src="js/jquery.mousewheel.js"></script>
+  	<script src="/lib/js/kinesis-js-sdk.min.js"></script>
+  	<script src="js/horizontal-scroll.js"></script>
+  	<script src="js/the-tweet-show.js"></script>
   </body>
 </html>
