@@ -23,3 +23,9 @@
 }
 /* cursor styles ends */
 
+/* background styles starts */
+body{
+  background:url(../../lib/images/bg.png) repeat left top;
+}
+/* background styles ends */
+

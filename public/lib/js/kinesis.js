@@ -252,11 +252,19 @@ function Layout() {
   Layout.pageSize = { width: window.innerWidth, height: window.innerHeight };
 };
 
+function insertCursor() {
+  var _cursor       = document.createElement('div');
+  _cursor.id        = 'cursor';
+  _cursor.innerHTML = '&nbsp;'
+  document.body.appendChild(_cursor);
+};
+
 var originalInit = window.onload;
 
 // Initialize the Layout and Kinect Classes
 function init() {
   setTimeout(function(){
+    insertCursor();
     myLayout = new Layout();
     kinect = Kinect();
     Kinect.prototype.init();
