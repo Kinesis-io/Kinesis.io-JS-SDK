@@ -70,6 +70,7 @@ var JointTypes = {
   'JointTypeFootLeft': 20
 };
 
+
 // CONSTANTS JS ENDS
   
 // GESTURE LISTENER JS STARTS
@@ -196,6 +197,7 @@ function Kinesis() {
   Kinesis.lastElement = [];
   Kinesis.holdEventDelay = 4000;	
   Kinesis.clickEventTimer = null;
+  Kinesis.debug = false;
   Kinesis.prototype.keyword       = "KINESIS WINDOW ONE";
   // When multiple gestures can work in a predefined order
   Kinesis.prototype.is_series     = false;
@@ -256,34 +258,31 @@ function Kinesis() {
       gesture = Kinesis.gestures[index];
       // Gesture Matching conditions
       if (checkBounds(origin, gesture.bounds)) {
-        //console.info("in bounds");
         if (gesture.gestureType == eventType) {
-          //console.info("gesture found");
-          
+          log("Gesture Detected");
           if ((joints.intersect(gesture.joints)).length > 0) {
-            //console.info("allowable joint");
+            log("Allowed Joint Detected");
             if ((direction.intersect(gesture.directions)).length > 0) {
-              //console.info("allowable direction");
+              log("Allowed Direction Detected");
               gesture.toFire(gesture);
               break;
             }
             else {
-              //console.info("direction did not match");
+              log("Direction did not match");
               continue;
             }
           }
           else {
-            //console.info("joints did not match");
+            log("Joint did not match");
             continue;
           }
         }
         else {
-          //console.info("gesture type did not match");
+          log("Gesture not found");
           continue;
         }
       }
       else {
-        //console.info("out of bounds");
         continue;
       }
       // Gesture matching ends
@@ -294,22 +293,19 @@ function Kinesis() {
 
 function checkBounds(origin, bounds) {
   var matched = true;
-  if ((bounds.min == null && bounds.max == null)) {
-    //console.info("in bounds as no bounds specified");
-  }
+  if ((bounds.min == null && bounds.max == null))
+    log("No bounds specified for gesture");
   else {
-    if (bounds.min ==  null || (bounds.min.x <= origin.x && bounds.min.y <= origin.y && bounds.min.z <= origin.z)) {
-      //console.info("in min bounds");
-    }
+    if (bounds.min ==  null || (bounds.min.x <= origin.x && bounds.min.y <= origin.y && bounds.min.z <= origin.z))
+      log("Minimum bounds satisfied");
     else {
-      //console.info("outside min bounds");
+      log("Minimum bounds not satisfied");
       matched = false;
     }
-    if (bounds.max ==  null || (bounds.max.x >= origin.x && bounds.max.y >= origin.y && bounds.max.z >= origin.z)){
-      //console.info("in max bounds");
-    }
+    if (bounds.max ==  null || (bounds.max.x >= origin.x && bounds.max.y >= origin.y && bounds.max.z >= origin.z))
+      log("Max bounds satisfied");
     else {
-      //console.info("outside max bounds");
+      log("Max bounds not satisfied");
       matched = false;
     }
   }
@@ -317,13 +313,13 @@ function checkBounds(origin, bounds) {
 };
 
 function setKinesisTimer() {
-  //console.info("timer off");
+  log("Gesture Listener Timeout");
   Kinesis.gestureDetection = false;
   setTimeout("resetKinesisTimer()", Kinesis.pollInterval);
 };
 
 function resetKinesisTimer() {
-  //console.info("timer on");
+  log("Gesture Listener Timer Started");
   Kinesis.gestureDetection = true;
 };
 
@@ -460,6 +456,11 @@ function init() {
   }, 10);
 };
 
+function log(obj){
+  if(Kinesis.debug)
+    console.info(obj);
+}
+
 // KINESIS JS ENDS
 
 // KINECT JS STARTS
@@ -474,7 +475,7 @@ var Kinect = function() {
     
     // Only if the browser being used does not support WebSockets
     if (support == null) {
-        alert("Your browser cannot support WebSocket!");
+        alert("Your browser cannot support WebSockets!");
         return;
     }
 
@@ -507,12 +508,12 @@ var Kinect = function() {
 
     // After the connection is established, the method is called
     ws.onopen = function () {
-      console.info("Connection Opened");
+      log("Connection Opened");
     };
 
     // After the connection is closed, the method is called
     ws.onclose = function () {
-      console.info("Connection Closed");
+      log("Connection Closed");
     }
   }
 };
