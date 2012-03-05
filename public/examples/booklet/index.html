@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/turn.min.js"></script>
+    <style type="text/css">
+      #magazine{
+      	width:800px;
+      	height:400px;
+      }
+      #magazine .turn-page{
+      	width:400px;
+      	height:400px;
+      	background-color:#ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='magazine'>
+    	<div> Page 1 </div>
+    	<div> Page 2 </div>
+    	<div> Page 3 </div>
+    	<div> Page 4 </div>
+    	<div> Page 5 </div>
+    	<div> Page 6 </div>
+    </div>
+
+    <script type="text/javascript">
+      $('#magazine').turn();
+      
+      function slideLeft() {
+        $('#magazine').turn('next');
+      }
+      
+      function slideRight() {
+        $('#magazine').turn('previous');
+      }
+    </script>
+  </body>
+</html>

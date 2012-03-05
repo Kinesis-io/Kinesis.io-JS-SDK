@@ -8,7 +8,7 @@ var Kinect = function() {
     
     // Only if the browser being used does not support WebSockets
     if (support == null) {
-        alert("Your browser cannot support WebSocket!");
+        alert("Your browser cannot support WebSockets!");
         return;
     }
 
@@ -41,12 +41,12 @@ var Kinect = function() {
 
     // After the connection is established, the method is called
     ws.onopen = function () {
-      console.info("Connection Opened");
+      log("Connection Opened");
     };
 
     // After the connection is closed, the method is called
     ws.onclose = function () {
-      console.info("Connection Closed");
+      log("Connection Closed");
     }
   }
 };

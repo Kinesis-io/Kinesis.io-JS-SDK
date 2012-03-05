@@ -10,7 +10,7 @@
   * Date: Thu Feb 23 15:53:00 2012 +0530
 */
 
-// twitter callback; iterates over feched tweets and creates tweet elements dynamically and injects them as tile-items in the grid holder.
+// twitter callback; iterates over fetched tweets and creates tweet elements dynamically and injects them as tile-items in the grid holder.
 function twitterCallback2(twitters) {
   var statusHTML = [];
   for (var i=0; i<twitters.length; i++) {
@@ -72,7 +72,7 @@ function relative_time(time_value) {
 }
 
 // twitter information setup
-twhandle    = 'blue angels';
+twhandle    = 'kinesisio';
 twcount     = 10;
 api_url     = 'https://api.twitter.com/1/statuses/user_timeline.json';
 callback    = 'twitterCallback2'
