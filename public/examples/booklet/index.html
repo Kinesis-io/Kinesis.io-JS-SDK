@@ -1,33 +1,55 @@
 <!doctype html>
 <html>
   <head>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <title>Kinesis.io Booklet</title>
+    <!-- kinesis stylesheet -->
+    <link rel="stylesheet" type="text/css" href="/lib/css/kinesis.css">
+    <script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
     <script type="text/javascript" src="js/turn.min.js"></script>
     <script type="text/javascript" src="js/booklet.js"></script>
     <style type="text/css">
+      #controller {
+        width:1100px;
+      	height:700px;
+      	left: -150px;
+      	position: relative; 
+      }
       #magazine{
-      	width:800px;
-      	height:400px;
+      	width:1100px;
+      	height:700px;
       }
       #magazine .turn-page{
-      	width:400px;
-      	height:400px;
+      	width:480px;
+      	height:700px;
       	background-color:#ccc;
       }
     </style>
   </head>
   <body>
-    <div id='magazine'>
-    	<div> Page 1 </div>
-    	<div> Page 2 </div>
-    	<div> Page 3 </div>
-    	<div> Page 4 </div>
-    	<div> Page 5 </div>
-    	<div> Page 6 </div>
+    <div id="controller">
+      <div id='magazine'>
+      	<div> Page 1 </div>
+      	<div> Page 2 </div>
+      	<div> Page 3 </div>
+      	<div> Page 4 </div>
+      	<div> Page 5 </div>
+      	<div> Page 6 </div>
+      </div>
     </div>
-
+    <script src="/lib/js/kinesis-js-sdk.min.js"></script>
     <script type="text/javascript">
-      $('#magazine').turn();
+      $('#magazine').turn({shadows: true});
+      $('#magazine').bind('end', function(e) {
+        var currentView = $('#magazine').turn('view');
+        if(currentView[0] == 0)
+          $('#controller').animate({"left":"-150px"}, 1000);
+        else {
+          if(currentView[1] == 0)
+            $('#controller').animate({"left":"450px"}, 1000);
+          else
+            $('#controller').animate({"left":"150px"}, 1000);
+        } 
+      });
       
       function slideLeft() {
         $('#magazine').turn('next');
@@ -36,6 +58,35 @@
       function slideRight() {
         $('#magazine').turn('previous');
       }
+      
+      var kinesis = new Kinesis; // initialize kinesis
+
+      // start adding gestures from here //
+      
+      // create swipe left gesture
+      var leftGesture         = new SwipeGestureListener("myswipeLeft");
+      // call to action for swipe left
+      leftGesture.toFire      = slideLeft;
+      // area within which the swipe left will be recognized; values in percentage(%)
+      //leftGesture.bounds      = {min: {x: 80, y: 0, z: 0}};
+      // allowed joints for gesture
+      leftGesture.joints      = [JointTypes.JointTypeHandRight]; // right hand
+      // allowed direction for gesture
+      leftGesture.directions  = [GestureDirections.GestureDirectionLeft]; // left
+      
+      // create swipe right gesture
+      var rightGesture        = new SwipeGestureListener("myswipeRight");
+      // call to action for swipe left
+      rightGesture.toFire     = slideRight;
+      // area within which the swipe left will be recognized; values in percentage(%)
+      rightGesture.joints     = [JointTypes.JointTypeHandLeft];
+      // allowed joints for gesture
+      //rightGesture.bounds     = {max: {x: 20, y: 100, z: 100}};
+      // allowed direction for gesture
+      rightGesture.directions = [GestureDirections.GestureDirectionRight];
+      
+      kinesis.addGesture(leftGesture);  // insert leftGesture to kinesis
+      kinesis.addGesture(rightGesture); // insert rightGesture to kinesis
     </script>
   </body>
 </html>
