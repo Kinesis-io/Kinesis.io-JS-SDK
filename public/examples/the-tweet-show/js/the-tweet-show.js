@@ -72,7 +72,7 @@ function relative_time(time_value) {
 }
 
 // twitter information setup
-twhandle    = 'blue angels';
+twhandle    = 'kinesisio';
 twcount     = 10;
 api_url     = 'https://api.twitter.com/1/statuses/user_timeline.json';
 callback    = 'twitterCallback2'
