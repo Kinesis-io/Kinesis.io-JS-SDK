@@ -4,7 +4,12 @@
 var Kinect = function() {
   retryCount = 0;
   connectionOpened = false;
-  this.onConnectionError = null;
+  Kinect.onConnectionError = function() {
+    var msgNode = document.createElement("div");
+    msgNode.setAttribute('class', 'message');
+    msgNode.innerHTML = "Sorry, there was some problem! Make sure you server is running.";
+    document.body.appendChild(msgNode);
+  };
   
   Kinect.prototype.init = function(){
     var support = "MozWebSocket" in window ? 'MozWebSocket' : ("WebSocket" in window ? 'WebSocket' : null);
