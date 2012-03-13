@@ -72,5 +72,8 @@ var JointTypes = {
 // List of messages used in the application.
 
 var KinesisMessages = {
-  'ServerNotConnected': 'Oops! some issue occured. Please make sure that the kinesis sdk is installed.'
+  'ServerNotConnected': 'Oops! some issue occured. Please make sure that the kinesis sdk is installed.',
+  'ServerConnected': 'Kinesis running fine.',
+  'KinectNotConnected': 'Please make sure that the Microsoft Kinect Sensor is connected and turned on.',
+  'KinectConnected': 'Kinect connected.'
 };

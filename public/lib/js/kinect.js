@@ -3,20 +3,15 @@
 // Kinect.js is the class responsible for connecting to the Kinesis Windows service which interacts directly with the Kinect
 var Kinect = function() {
   retryCount = 0;
+  addMessageBar();
   connectionOpened = false;
-  Kinect.onConnectionError = function() {
-    var msgNode          = document.createElement("div");
-    msgNode.setAttribute('class', 'message');
-    msgNode.setAttribute('id', 'kmessage');
-    msgNode.innerHTML    = KinesisMessages.ServerNotConnected;
-    
-    closeNode            = document.createElement('span');
-    closeNode.setAttribute('onclick', "document.body.removeChild(document.getElementById('kmessage'));");
-    closeNode.innerHTML  = "close";
-    closeNode.setAttribute('class', 'closeBtn');
-    msgNode.appendChild(closeNode);
-    
-    document.body.appendChild(msgNode);
+  
+  Kinect.onConnectionError   = function() {
+    updateMessageBar(KinesisMessages.ServerNotConnected, true);
+  };
+  Kinect.onConnectionSuccess = function() {
+    updateMessageBar(KinesisMessages.ServerConnected, false);
+    updateMessageBar(KinesisMessages.KinectNotConnected, true);
   };
   
   Kinect.prototype.init = function(){
@@ -36,10 +31,14 @@ var Kinect = function() {
       try {
         var _data = JSON.parse(evt.data);
         if(_data.Kinect != undefined) {
-          if(_data.Kinect == "Connected")
+          if(_data.Kinect == "Connected") {
+            updateMessageBar(KinesisMessages.KinectConnected, false);
             Kinesis.kinectStatus = true;
-          else
+          }
+          else {
+            updateMessageBar(KinesisMessages.KinectNotConnected, true);
             Kinesis.kinectStatus = false;
+          }
           Kinesis.onStatusChange(_data.Kinect);
         };
         
@@ -59,6 +58,7 @@ var Kinect = function() {
     ws.onopen = function () {
       retryCount = 0;
       connectionOpened = true;
+      Kinect.onConnectionSuccess();
       log("Connection Opened");
     };
 
@@ -76,7 +76,7 @@ var Kinect = function() {
     window.onbeforeunload = function() {
       ws.close();
     };
-  }
+  };
   
   var retryOpeningWebSocket = function() {
     retryCount++;
@@ -84,7 +84,7 @@ var Kinect = function() {
       Kinect.prototype.init();
     else {
       if (retryCount == 10)
-        alert("Please make sure server is running!");
+        updateMessageBar(KinesisMessages.ServerNotConnected, true);
     }
   };
 };
