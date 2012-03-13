@@ -5,9 +5,17 @@ var Kinect = function() {
   retryCount = 0;
   connectionOpened = false;
   Kinect.onConnectionError = function() {
-    var msgNode = document.createElement("div");
+    var msgNode          = document.createElement("div");
     msgNode.setAttribute('class', 'message');
-    msgNode.innerHTML = "Sorry, there was some problem! Make sure you server is running.";
+    msgNode.setAttribute('id', 'kmessage');
+    msgNode.innerHTML    = KinesisMessages.ServerNotConnected;
+    
+    closeNode            = document.createElement('span');
+    closeNode.setAttribute('onclick', "document.body.removeChild(document.getElementById('kmessage'));");
+    closeNode.innerHTML  = "close";
+    closeNode.setAttribute('class', 'closeBtn');
+    msgNode.appendChild(closeNode);
+    
     document.body.appendChild(msgNode);
   };
   

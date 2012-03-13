@@ -38,13 +38,24 @@ body{
   top: 0;
   width: 100%;
   padding: 10px;
-  color: #fff;
+  color: #555555;
   font-size: 14px;
   position: fixed;
   font-weight: bold;
   font-family: arial;  
-  background-color: #D41111;
+  background-color: #fff389;
   text-transform: capitalize;
-  text-shadow: 0 2px 3px #444444;
+  box-shadow: 0 1px 2px #000000;
+  text-shadow: 0 2px 3px #ffffff;
+}
+
+.message .closeBtn {
+  width: 32px;
+  float: right;
+  height: 32px;
+  cursor: pointer;
+  margin: -8px 10px;
+  text-indent: -9999px;
+  background: url("../../lib/images/closeBtn.png") no-repeat scroll right top transparent;
 }
 
