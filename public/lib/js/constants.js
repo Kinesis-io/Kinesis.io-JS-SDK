@@ -67,3 +67,13 @@ var JointTypes = {
   'JointTypeAnkleLeft': 19,
   'JointTypeFootLeft': 20
 };
+
+// **KinesisMessages**
+// List of messages used in the application.
+
+var KinesisMessages = {
+  'ServerNotConnected': 'Oops! some issue occured. Please make sure that the kinesis sdk is installed.',
+  'ServerConnected': 'Kinesis running fine.',
+  'KinectNotConnected': 'Please make sure that the Microsoft Kinect Sensor is connected and turned on.',
+  'KinectConnected': 'Kinect connected.'
+};

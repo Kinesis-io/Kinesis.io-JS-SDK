@@ -10,6 +10,11 @@
   * Date: Thu Feb 23 15:53:00 2012 +0530
 */
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 /* cursor styles starts */
 #cursor{
   top: -200px;
@@ -28,4 +33,29 @@ body{
   background:url(../../lib/images/bg.png) repeat left top;
 }
 /* background styles ends */
+
+.message {
+  top: 0;
+  width: 100%;
+  padding: 10px;
+  color: #555555;
+  font-size: 14px;
+  position: fixed;
+  font-weight: bold;
+  font-family: arial;  
+  background-color: #fff389;
+  text-transform: capitalize;
+  box-shadow: 0 1px 2px #000000;
+  text-shadow: 0 2px 3px #ffffff;
+}
+
+.message .closeBtn {
+  width: 32px;
+  float: right;
+  height: 32px;
+  cursor: pointer;
+  margin: -8px 10px;
+  text-indent: -9999px;
+  background: url("../../lib/images/closeBtn.png") no-repeat scroll right top transparent;
+}
 

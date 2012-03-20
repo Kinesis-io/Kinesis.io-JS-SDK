@@ -18,13 +18,10 @@ But… Remember when Javascript became popular? Remember when Flash became popular
       </div>
     </div>
 
-    <canvas id="cursor" width="100" height="100">
-      <div id='hand'></div>
-    </canvas>
-
     <!-- js at the bottom to load the page faster -->
     <!-- <script src="/js/jquery-1.6.4.min.js"></script> -->
     <script src="../../lib/js/constants.js"></script>
+    <script src="../../lib/js/utils.js"></script>
     <script src="../../lib/js/gesture-listener.js"></script>
     <script src="../../lib/js/kinesis.js"></script>
     <script src="../../lib/js/kinect.js"></script>
@@ -37,6 +34,7 @@ But… Remember when Javascript became popular? Remember when Flash became popular
     
     <script>
       kinesis = new Kinesis;
+      Kinesis.debug = true;
       
       gesture = new SwipeGestureListener("myswipeLeftR");
       gesture.directions = [GestureDirections.GestureDirectionLeft];
