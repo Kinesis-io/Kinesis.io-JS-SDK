@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Kinesis.io Booklet</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/turn.min.js"></script>
+    <script src="js/kuigridview.js"></script>
+    <script src="js/kloader.js"></script>
+    <script src="js/storify.js"></script>
+    <link rel="stylesheet" href="css/kuigridview.css" type="text/css" />
+    <link rel="stylesheet" href="css/storifylarge.css" type="text/css" />
+    <link rel="stylesheet" href="css/storifymagazine.css" type="text/css" />
+  </head>
+  <body>
+    <div id="controller">
+      <div id='kui-grid-view' class="gridHolder">
+      </div>
+    </div>
+    <script>
+      $(document).ready(function() {	
+        request_url = "http://api.storify.com/v1/stories/browse/popular" + '?callback=' + 'storifyCallback2Magazine';
+
+      	newPageLoad     = false;
+      	needAutoScroll 	= false;
+      	noOfPagesLoaded = 0
+      	noOfPagesToLoad = 1;
+      	tilesLoaded     = false;
+      	
+      	setLoadInterval();
+      	
+      	turnInterval = setInterval("turnToMagazine();", 2000);
+      });
+    </script>
+  </body>
+</html>

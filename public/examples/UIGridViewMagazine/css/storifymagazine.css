@@ -1,0 +1,17 @@
+#controller {
+/*        width:1224px;*/
+  width: 1180px;
+  height: 626px;
+  left: -150px;
+  position: relative;
+}
+#kui-grid-view{
+  height: 626px;
+  width: 1180px;
+/*        width:1224px;*/
+}
+#kui-grid-view .turn-page{
+/*        width:612px;*/
+  width:  590px;
+  height: 626px;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Kinesis - UIGridView</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mousewheel.js"></script>
+    <script src="js/kuigridview.js"></script>
+    <script src="js/kloader.js"></script>
+    <script src="js/instagram.js"></script>
+    <link rel="stylesheet" href="css/kuigridview.css" type="text/css" />
+  </head>
+  
+  <body>
+    <!-- <h2>Kinesis - UIGridView</h2> -->
+    <div id="kui-grid-view" class="gridHolder">
+    </div>
+    <script>
+      $(document).ready(function() {	
+      	// horizontal scrolling js
+      	$("body").mousewheel(function(event, delta) {
+      		this.scrollLeft -= (delta * 30);
+      		event.preventDefault();
+      	});
+
+        items = [];
+      	needAutoScroll 	= false;
+      	newPageLoad 		= true;
+      	noOfPagesLoaded = 0
+      	noOfPagesToLoad = 1;
+      	request_url 		= "https://api.instagram.com/v1/tags/snow/media/recent?client_id=c11baf5ecd364451b15b261c3695ea20&callback=instagramCallback2Index"
+
+      	setLoadInterval();
+      });
+    </script>
+  </body>
+</html>
