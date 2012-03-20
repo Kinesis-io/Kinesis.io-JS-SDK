@@ -39,6 +39,9 @@ function turnToFlowing() {
 			width : 600,
 			height : 500
 		});
+		// find first tile and make it active
+	  var _first = $(".gridHolder .column")[0];
+	  $(_first).addClass('active');
 		contentLoaded = false;
 		clearInterval(turnInterval);
 	}

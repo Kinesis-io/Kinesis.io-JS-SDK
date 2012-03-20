@@ -80,3 +80,10 @@ body {
 	width: 48px;
 	height: 48px;
 }
+
+.gridHolder { 
+  -webkit-transition: all 0.5s ease-in; 
+  -moz-transition: all 0.5s ease-in; 
+  -o-transition: all 0.5s ease-in; 
+  -ms-transition: all 0.5s ease-in;
+}

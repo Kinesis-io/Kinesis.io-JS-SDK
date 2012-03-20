@@ -1,5 +1,8 @@
 .column *{ padding: 2px;}
-body { font-size: 16px; }
+body { 
+  font-size: 16px; 
+  background: none;
+}
 .gridHolder { 
   clear:both; 
 }
@@ -63,4 +66,11 @@ body { font-size: 16px; }
   padding: 0;
   width: 32px;
   height: 32px;
+}
+
+.gridHolder { 
+  -webkit-transition: all 0.5s ease-in; 
+  -moz-transition: all 0.5s ease-in; 
+  -o-transition: all 0.5s ease-in; 
+  -ms-transition: all 0.5s ease-in;
 }

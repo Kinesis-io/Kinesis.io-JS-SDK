@@ -6,6 +6,7 @@
   	<script src="js/jquery.columnizer.min.js"></script>
   	<script src="js/kloader.js"></script>
   	<script src="js/storify.js"></script>
+  	<link rel="stylesheet" type="text/css" href="../../lib/css/kinesis.css">
   	<link rel="stylesheet" href="css/storifyflowing.css" type="text/css" />
   </head>
   <body>
@@ -13,6 +14,7 @@
       <div id='kui-grid-view' class="gridHolder">
       </div>
     </div>
+    <script src="../../lib/js/kinesis-js-sdk.min.js"></script>
     <script>
       $(document).ready(function() {
         request_url = "http://api.storify.com/v1/stories/torontostar/ipad-3-the-reveal" + '?callback=' + 'storifyCallback2Show';
@@ -26,5 +28,6 @@
         turnInterval = setInterval("turnToFlowing();", 2000);
       });
     </script>
+    <script src="js/horizontal-scroll.js"></script>
   </body>
 </html>

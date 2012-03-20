@@ -84,3 +84,14 @@ function storifyCallback2Show(data) {
 	$("#kui-grid-view").html(html);
 	contentLoaded = true;
 };
+
+function setup() {
+	if (tilesLoaded) {
+	  console.info("voila");
+		// find first tile and make it active
+	  var _first = $("#kui-grid-view .tile")[0];
+	  $(_first).addClass('active');
+		contentLoaded = false;
+		clearInterval(turnInterval);
+	}
+}
