@@ -78,16 +78,16 @@
           moveForward();
         
         if(position.y == 0 && pov.pitch + 1 <= 45)
-          map.setPov({heading: pov.heading, pitch: pov.pitch + 1, zoom: pov.zoom});
+          map.setPov({heading: pov.heading, pitch: pov.pitch + 0.1, zoom: pov.zoom});
           
         if(position.y > Layout.pageSize.height * 0.8 && pov.pitch - 1 >= -45)
-          map.setPov({heading: pov.heading, pitch: pov.pitch - 1, zoom: pov.zoom});
+          map.setPov({heading: pov.heading, pitch: pov.pitch - 0.1, zoom: pov.zoom});
           
         if(position.x == Layout.pageSize.width)
-          map.setPov({heading: pov.heading + 1, pitch: pov.pitch, zoom: pov.zoom});
+          map.setPov({heading: pov.heading + 0.1, pitch: pov.pitch, zoom: pov.zoom});
         
         if(position.x == 0) 
-          map.setPov({heading: pov.heading - 1, pitch: pov.pitch, zoom: pov.zoom});
+          map.setPov({heading: pov.heading - 0.1, pitch: pov.pitch, zoom: pov.zoom});
       }
     
       var kinesis = new Kinesis;
