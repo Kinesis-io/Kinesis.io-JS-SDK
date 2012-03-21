@@ -7,6 +7,7 @@
     <script src="js/kuigridview.js"></script>
     <script src="js/kloader.js"></script>
     <script src="js/storify.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../lib/css/kinesis.css">
     <link rel="stylesheet" href="css/kuigridview.css" type="text/css" />
     <link rel="stylesheet" href="css/storifylarge.css" type="text/css" />
     <link rel="stylesheet" href="css/storifymagazine.css" type="text/css" />
@@ -16,6 +17,7 @@
       <div id='kui-grid-view' class="gridHolder">
       </div>
     </div>
+    <script src="../../lib/js/kinesis-js-sdk.min.js"></script>
     <script>
       $(document).ready(function() {	
         request_url = "http://api.storify.com/v1/stories/browse/popular" + '?callback=' + 'storifyCallback2Magazine';
@@ -27,7 +29,6 @@
       	tilesLoaded     = false;
       	
       	setLoadInterval();
-      	
       	turnInterval = setInterval("turnToMagazine();", 2000);
       });
     </script>

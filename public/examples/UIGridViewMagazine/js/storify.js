@@ -1,3 +1,32 @@
+var kinesis = new Kinesis; // initialize kinesis
+
+// start adding gestures from here //
+
+// create swipe left gesture
+var leftGesture         = new SwipeGestureListener("myswipeLeft");
+// call to action for swipe left
+leftGesture.toFire      = slideLeft;
+// area within which the swipe left will be recognized; values in percentage(%)
+leftGesture.bounds      = {min: {x: 80, y: 0, z: 0}};
+// allowed joints for gesture
+leftGesture.joints      = [JointTypes.JointTypeHandRight]; // right hand
+// allowed direction for gesture
+leftGesture.directions  = [GestureDirections.GestureDirectionLeft]; // left
+
+// create swipe right gesture
+var rightGesture        = new SwipeGestureListener("myswipeRight");
+// call to action for swipe left
+rightGesture.toFire     = slideRight;
+// area within which the swipe left will be recognized; values in percentage(%)
+rightGesture.joints     = [JointTypes.JointTypeHandLeft];
+// allowed joints for gesture
+rightGesture.bounds     = {max: {x: 20, y: 100, z: 100}};
+// allowed direction for gesture
+rightGesture.directions = [GestureDirections.GestureDirectionRight];
+
+kinesis.addGesture(leftGesture);  // insert leftGesture to kinesis
+kinesis.addGesture(rightGesture); // insert rightGesture to kinesis
+
 function storifyCallback2Magazine(data) {
 	var stories = [];
 	$.each(data.content.stories, function(index, story) {
@@ -85,6 +114,16 @@ function storifyCallback2Show(data) {
 	contentLoaded = true;
 };
 
+function slideLeft() {
+  console.info("left");
+  $("#kui-grid-view").turn('next');
+};
+
+function slideRight() {
+  console.info("right");
+  $("#kui-grid-view").turn('previous');
+};
+
 function turnToMagazine() {
 	if (tilesLoaded) {
 		$('#kui-grid-view').turn({shadows: true});
@@ -104,7 +143,6 @@ function turnToMagazine() {
 	}	
 };
 
-
 function turnToFlowing() {
 	if (contentLoaded) {
 		$('#kui-grid-view').columnize({
@@ -114,4 +152,4 @@ function turnToFlowing() {
 		contentLoaded = false;
 		clearInterval(turnInterval);
 	}
-}
+};
