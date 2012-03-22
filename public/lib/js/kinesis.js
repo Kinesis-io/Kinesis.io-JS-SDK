@@ -199,8 +199,9 @@ function activateCursorTimer(me){
   var incrementAngle = startingAngle;
   var endingAngle = 1.5 * Math.PI;
   var counterclockwise = false;
-
+  
   var context = canvas.getContext("2d");
+  
   context.shadowOffsetX = 3;
   context.shadowOffsetY = 3;
   context.shadowBlur    = 8;
@@ -227,7 +228,7 @@ function activateCursorTimer(me){
     context.stroke();
     context.closePath();
   }, 50);
-
+  
   return me;
 }
 
@@ -251,9 +252,15 @@ function Layout() {
 };
 
 function insertCursor() {
-  var _cursor       = document.createElement('div');
+  var _cursor       = document.createElement('canvas');
   _cursor.id        = 'cursor';
-  _cursor.innerHTML = '&nbsp;';
+  _cursor.width     = '100';
+  _cursor.height    = '100';
+  var hand = document.createElement('div');
+  hand.id = 'hand';
+  
+  _cursor.appendChild(hand);
+  
   document.body.appendChild(_cursor);
 };
 

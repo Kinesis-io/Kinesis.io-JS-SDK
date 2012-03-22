@@ -47,7 +47,7 @@ function GestureListener() {
           cursor.deactivateCursorTimer();
         }
         if (_currentElement.className.search('active') == -1)
-          _currentElement.className += " active";      
+          _currentElement.className += " active";
         activateCursorTimer(cursor);
         Kinesis.lastElement.push(_currentElement);
 
@@ -58,7 +58,16 @@ function GestureListener() {
         Kinesis.clickEventTimer = setTimeout(function(){
           _currentElement.className = _currentElement.className.replace( /(?:^|\s)active(?!\S)/ , '' );
           deactivateCursorTimer(cursor);
-          $(_currentElement).trigger('click');
+          
+          try {
+            _currentElement.click();
+          }
+          catch(e) {
+            var event = document.createEvent("MouseEvents");
+            event.initMouseEvent("click", true, true, window,0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            var _r = !_currentElement.dispatchEvent(event);
+          }
+          
           setTimeout(function() {
             Kinesis.lastElement.pop(_currentElement);
           }, Kinesis.holdEventDelay );

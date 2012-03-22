@@ -161,7 +161,7 @@ function GestureListener() {
           cursor.deactivateCursorTimer();
         }
         if (_currentElement.className.search('active') == -1)
-          _currentElement.className += " active";      
+          _currentElement.className += " active";
         activateCursorTimer(cursor);
         Kinesis.lastElement.push(_currentElement);
 
@@ -172,7 +172,16 @@ function GestureListener() {
         Kinesis.clickEventTimer = setTimeout(function(){
           _currentElement.className = _currentElement.className.replace( /(?:^|\s)active(?!\S)/ , '' );
           deactivateCursorTimer(cursor);
-          $(_currentElement).trigger('click');
+          
+          try {
+            _currentElement.click();
+          }
+          catch(e) {
+            var event = document.createEvent("MouseEvents");
+            event.initMouseEvent("click", true, true, window,0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            var _r = !_currentElement.dispatchEvent(event);
+          }
+          
           setTimeout(function() {
             Kinesis.lastElement.pop(_currentElement);
           }, Kinesis.holdEventDelay );
@@ -421,8 +430,9 @@ function activateCursorTimer(me){
   var incrementAngle = startingAngle;
   var endingAngle = 1.5 * Math.PI;
   var counterclockwise = false;
-
+  
   var context = canvas.getContext("2d");
+  
   context.shadowOffsetX = 3;
   context.shadowOffsetY = 3;
   context.shadowBlur    = 8;
@@ -449,7 +459,7 @@ function activateCursorTimer(me){
     context.stroke();
     context.closePath();
   }, 50);
-
+  
   return me;
 }
 
@@ -473,9 +483,15 @@ function Layout() {
 };
 
 function insertCursor() {
-  var _cursor       = document.createElement('div');
+  var _cursor       = document.createElement('canvas');
   _cursor.id        = 'cursor';
-  _cursor.innerHTML = '&nbsp;';
+  _cursor.width     = '100';
+  _cursor.height    = '100';
+  var hand = document.createElement('div');
+  hand.id = 'hand';
+  
+  _cursor.appendChild(hand);
+  
   document.body.appendChild(_cursor);
 };
 

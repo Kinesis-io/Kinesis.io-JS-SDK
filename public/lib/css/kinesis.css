@@ -17,14 +17,14 @@
 
 /* cursor styles starts */
 #cursor{
+  position: absolute;
+  left: -200px;
   top: -200px;
   width: 90px;
   height: 90px;
-  left: -200px;
-  z-index: 1140;
-  position: fixed;  
   pointer-events:none;
   background:url(../../lib/images/hand.png) no-repeat center center;
+  z-index: 1000;
 }
 /* cursor styles ends */
 

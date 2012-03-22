@@ -54,19 +54,20 @@ $.fn.gridfy  = function(options){
 			}
 		}
 		wrapWithTile();
-	}
+	};
 	
 	// wrap tiles
 	
 	function wrapWithTile() {
-		var lis = $('.tileItem').filter(':not(.tile .tileItem)');
-		
+	  
 		var tile_width  = $('.tileItem').outerWidth(true);
 		var tile_height = $('.tileItem').outerHeight(true);
 		
 		if(options.tileCountPerColumn == 0) {
 		  options.tileCountPerColumn = Math.floor((window_height - options.gridWidthOffset)/tile_height);
 		}
+		
+		var lis = fixDanglingTilesAndGetList();
 		
     for(var i = 0; i < lis.length; i+=options.tileCountPerColumn) {
       var list = lis.slice(i, i+options.tileCountPerColumn)
@@ -78,7 +79,24 @@ $.fn.gridfy  = function(options){
 		gridWidth = $('.tile').length * (tile_width + options.gridWidthOffset);
 		
 		main.css('width', gridWidth + 'px');
-	}
+	};
+	
+	function fixDanglingTilesAndGetList() {
+	  var list = $('.tileItem').filter(':not(.tile .tileItem)');
+	  var lastTile        = $('.tile').last();
+	  var tileItemsLength = $(lastTile).children('.tileItem').length;
+	  if (tileItemsLength < options.tileCountPerColumn) {
+	    var remainingTiles = options.tileCountPerColumn - tileItemsLength; 
+	    for (var i=0; i < remainingTiles; i++) {
+	      var item = $(list)[i];
+	      //alert(item);
+	      $(lastTile).append($(item));
+	      $(list).splice(i, 1);
+	    };
+	  }
+	  
+	  return list;
+	};
 	
 	return createGridLayout();
 };
