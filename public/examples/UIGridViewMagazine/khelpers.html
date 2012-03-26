@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <title>Canvas</title>
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/khelper.css" type="text/css" />
+  </head>
+  <body>
+    <span class="triple-arrow right"><img src="images/khelper-right.png" alt="SLIDE RIGHT"/></span>
+    <span class="triple-arrow left"><img src="images/khelper-left.png" alt="SLIDE LEFT"/></span>
+    <span class="triple-arrow up"><img src="images/khelper-up.png" alt="SLIDE UP"/></span>       
+    <span class="triple-arrow down"><img src="images/khelper-down.png" alt="SLIDE DOWN"/></span>
+    <script>
+      $(document).ready(function() {
+        displayArrow = setInterval("moveArrow()", 2000);
+        setInterval('resetArrow()', 2000);
+      });
+      
+      function moveArrow() {
+        $(".right").animate({"left": "+=500px", opacity: 0}, 2000, function() {
+          $(".right").css({"left": "-=500px", opacity: 1});
+        });
+        
+        $(".left").animate({"left": "-=500px", opacity: 0}, 2000, function() {
+          $(".left").css({"left": "+=500px", opacity: 1});
+        });
+        
+        $(".up").animate({"top": "-=500px", opacity: 0}, 2000, function() {
+          $(".up").css({"top": "+=500px", opacity: 1});
+        });
+        
+        $(".down").animate({"top": "+=500px", opacity: 0}, 2000, function() {
+          $(".down").css({"top": "-=500px", opacity: 1});
+        });
+      };
+    </script>
+  </body>
+</html>
