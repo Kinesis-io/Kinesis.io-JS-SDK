@@ -1,0 +1,96 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.khelper {
+	width: 100px;
+	height: 50px;
+	position: relative;
+}
+
+.arrow {
+	top: 0;
+	left: 0;
+  border-style: solid;
+  border-width: 40px;
+  position:absolute;
+}
+
+.arrow-border {
+	border-color: transparent transparent transparent #666666;
+  border-style: solid;
+  border-width: 40px;
+  position:absolute;
+	top: 0;
+	left: 20px;
+}
+
+.slideLeft {
+	border-color: transparent #EDEDED transparent transparent;
+}
+
+.slideRight {
+	border-color: transparent transparent transparent #ffffff;
+}
+
+.slideUp {
+	border-color: transparent transparent red transparent;
+}
+
+.slideDown {
+	border-color: red transparent transparent transparent;
+}
+
+.triple-arrow {
+	top: 0;
+	left: 0;
+	width: 300px;
+	height: 108px;
+	display: block;
+	overflow: hidden;
+	position: relative;
+}
+
+.right img {
+	width: 100px;
+	margin-top: 30px;
+	padding-left: 108px;
+}
+
+.left img {
+	width: 100px;
+	margin-top: 30px;
+}
+
+.up img {
+	height: 100px;
+}
+
+.down img {
+	height: 100px;
+	margin-left: 30px;
+}
+
+.right {
+	background: url(../images/khand.png) no-repeat center left;
+}
+
+.left {
+	left: 500px;
+	background: url(../images/khand.png) no-repeat center center;
+}
+
+.up {
+	top: 500px;
+	height: 208px;
+	padding-left: 30px;
+	background: url(../images/khand.png) no-repeat bottom left;
+}
+
+.down {
+	left: 500px;
+	height: 208px;
+	padding-top: 108px;
+	background: url(../images/khand.png) no-repeat top left;
+}

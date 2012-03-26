@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <title>Canvas</title>
+    <script src="js/jquery.min.js"></script>
+    <script type="text/Javascript" language="Javascript">
+      window.onload=drawArrow;
+      
+      function drawArrow() {
+        canvas    = document.getElementById("khelper"); 
+        context   = canvas.getContext("2d");
+
+        lineWidth = 10;
+        width     = 30;
+        height    = 50;
+        startPosition  = {x: 100, y: 100};
+        
+        position = startPosition;
+        draw(position);
+      };
+      
+      function draw(pos) {
+        context.lineWidth=lineWidth;
+        context.beginPath();
+        
+        arrowTimer=setInterval(function(){
+          canvas.width = canvas.width;
+          
+          for (var i=0; i<3; i++) {
+            context.moveTo(pos.x - width, pos.y + height/2); 
+            context.lineTo(pos.x, pos.y);
+            context.lineTo(pos.x - width, pos.y - height/2);
+            context.lineJoin = "round";
+            context.stroke();
+            position.x = pos.x + 1;
+          };
+        }, 50);
+        
+        if(arrowTimer){
+          setTimeout("clearInterval(arrowTimer)", 4000);
+        }
+        
+      };
+      
+      function resetArrow() {
+        clearInterval(arrowTimer);
+        canvas.width = canvas.width;
+        draw({x: 100, y: 100});
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="khelper" width="1000" height="200">Your browser does not have support for HTML 5 Canvas.</canvas>
+  </body>
+</html>
