@@ -67,11 +67,13 @@ $.fn.gridfy  = function(options){
 		  options.tileCountPerColumn = Math.floor((window_height - options.gridWidthOffset)/tile_item_height);
 		}
 		
-    for(var i = 0; i < lis.length; i+=options.tileCountPerColumn) {
-      var list = lis.slice(i, i+options.tileCountPerColumn)
-			lis.slice(i, i+options.tileCountPerColumn)
-      	.wrapAll("<div class='tile'></div>");
-    };
+    //for(var i = 0; i < lis.length; i+=options.tileCountPerColumn) {
+    //  var list = lis.slice(i, i+options.tileCountPerColumn)
+		//	lis.slice(i, i+options.tileCountPerColumn)
+    //  	.wrapAll("<div class='tile'></div>");
+    //};
+    
+    lis.wrap("<div class='tile'></div>");
 		
 		var tile_width  = $('.tile').outerWidth(true);
 		
