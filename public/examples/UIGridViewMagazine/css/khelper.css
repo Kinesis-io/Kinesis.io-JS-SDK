@@ -43,8 +43,6 @@
 }
 
 .triple-arrow {
-	top: 0;
-	left: 0;
 	width: 300px;
 	height: 108px;
 	display: block;
@@ -54,13 +52,14 @@
 
 .right img {
 	width: 100px;
-	margin-top: 30px;
+	padding-top: 30px;
 	padding-left: 108px;
 }
 
 .left img {
 	width: 100px;
-	margin-top: 30px;
+	padding-top: 30px;
+	padding-right: 108px;
 }
 
 .up img {
@@ -73,23 +72,29 @@
 }
 
 .right {
+  top: 0;
+	left: 0;
 	background: url(../images/khand.png) no-repeat center left;
 }
 
 .left {
-	left: 500px;
-	background: url(../images/khand.png) no-repeat center center;
+  top: 0;
+  right: 0;
+  text-align: right;
+	background: url(../images/khand.png) no-repeat top right;
 }
 
 .up {
-	top: 500px;
+  top: 0;
+  left: 0;
 	height: 208px;
 	padding-left: 30px;
 	background: url(../images/khand.png) no-repeat bottom left;
 }
 
 .down {
-	left: 500px;
+  top: 0;
+	left: 0;
 	height: 208px;
 	padding-top: 108px;
 	background: url(../images/khand.png) no-repeat top left;

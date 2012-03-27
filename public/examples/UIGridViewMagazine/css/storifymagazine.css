@@ -15,3 +15,22 @@
   width:  590px;
   height: 626px;
 }
+
+.khelpers {
+  top: -350px;
+  z-index: 2000;
+  position: relative;
+}
+
+.triple-arrow {
+  position: absolute;
+}
+
+.left {
+  right: 0;
+  display: none;
+}
+
+.right {
+  display: none;
+}

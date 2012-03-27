@@ -1,14 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Kinesis.io Booklet</title>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/turn.min.js"></script>
-    <script src="js/kuigridview-customized.js"></script>
-    <script src="js/kloader.js"></script>
     <link rel="stylesheet" type="text/css" href="http://cdn.kinesis.io/kinesis.css">
     <link rel="stylesheet" href="css/kuigridview.css" type="text/css" />
     <link rel="stylesheet" href="css/storifylarge.css" type="text/css" />
+    <link rel="stylesheet" href="css/khelper.css" type="text/css" />
     <link rel="stylesheet" href="css/storifymagazine.css" type="text/css" />
   </head>
   <body>
@@ -16,7 +13,15 @@
       <div id='kui-grid-view' class="gridHolder">
       </div>
     </div>
+    <div class="khelpers">
+      <span class="triple-arrow right"><img src="images/khelper-right.png" alt="SLIDE RIGHT"/></span>
+      <span class="triple-arrow left"><img src="images/khelper-left.png" alt="SLIDE LEFT"/></span>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/turn.min.js"></script>
     <script src="http://cdn.kinesis.io/kinesis-js-sdk.min.js"></script>
+    <script src="js/kuigridview-customized.js"></script>
+    <script src="js/kloader.js"></script>
     <script src="js/storify.js"></script>
     <script>
       $(document).ready(function() {	

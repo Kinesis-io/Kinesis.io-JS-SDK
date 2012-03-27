@@ -1,4 +1,42 @@
+position = null;
+displayArrow = null;
+
+// here we add kinesis help direction helpers
+function movement(position) {
+  if (position && position.x < (Layout.pageSize.width * 0.5)) {
+    activateHelper('.right', '500px');
+    displayArrow = setInterval("moveArrow('.right', '500px')", 500);
+  }
+  
+  if (position && position.x > (Layout.pageSize.width * 0.5)) {
+    activateHelper('.left', '-500px');
+    displayArrow = setInterval("moveArrow('.left', '-500px')", 500  );
+  }
+};
+
+// activate all the current kinesis helpers
+function deactivateRedundantHelpers() {
+  if (displayArrow) {
+    $('.khelpers .triple-arrow').removeClass('active');
+    $('.khelpers .triple-arrow').hide();
+    clearInterval(displayArrow);
+  }
+};
+
+
+// activate the current kinesis helper
+function activateHelper(selector, value) {
+  var selector = selector;
+  if (!$(selector).hasClass('active')) {
+    deactivateRedundantHelpers();
+    $(selector).addClass('active');
+    $(selector).show();
+  }
+};
+
 var kinesis = new Kinesis; // initialize kinesis
+// binding cursor to movement
+Kinesis.cursor = movement;
 
 // start adding gestures from here //
 
@@ -152,4 +190,12 @@ function turnToFlowing() {
 		contentLoaded = false;
 		clearInterval(turnInterval);
 	}
+};
+
+// kinesis helpers
+
+function moveArrow(selector, value) {
+  $(selector).animate({"left": "+="+value, opacity: 0}, 1500, function() {
+    $(selector).css({"left": "-="+value, opacity: 1});
+  });
 };
