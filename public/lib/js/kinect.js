@@ -42,6 +42,10 @@ var Kinect = function() {
           Kinesis.onStatusChange(_data.Kinect);
         };
         
+        if (_data.depthImage != undefined) {
+           Kinesis.updateDepthImage(_data.depthImage);
+        }
+        
         if (_data.cursor != undefined) {
           GestureListener.mouseMove({ x: Layout.pageSize.width * _data.cursor.x / 100, y: Layout.pageSize.height * _data.cursor.y *1.5/ 100, z:_data.cursor.z });
         }

@@ -31,6 +31,11 @@ function Kinesis() {
   Kinesis.onStatusChange = function(message) {
     console.info(message);
   };
+  
+  Kinesis.updateDepthImage = function(depthImage) {
+    var depthImage = document.getElementById('depthImage');
+    depthImage.src = "data:image/png;base64," + depthImage;
+  };
 	
 	// Responsible for binding gestures to be matched when events are recieved from Kinect.js    
 	// *Parameter is an object of the Gesture Class*    
@@ -252,10 +257,10 @@ function Layout() {
 };
 
 function insertCursor() {
-  var _cursor       = document.createElement('canvas');
-  _cursor.id        = 'cursor';
-  _cursor.width     = '100';
-  _cursor.height    = '100';
+  var _cursor     = document.createElement('canvas');
+  _cursor.id      = 'cursor';
+  _cursor.width   = '100';
+  _cursor.height  = '100';
   var hand = document.createElement('div');
   hand.id = 'hand';
   
@@ -264,12 +269,22 @@ function insertCursor() {
   document.body.appendChild(_cursor);
 };
 
+function insertDepthImage() {
+  var _depthImage     = document.createElement('img');
+  _depthImage.id      = 'depthImage';
+  _depthImage.width   = '64';
+  _depthImage.height  = '48';
+  _depthImage.src     = "lib/images/hand.png"
+  document.body.appendChild(_depthImage);
+};
+
 var originalInit = window.onload;
 
 // Initialize the Layout and Kinect Classes
 function init() {
   setTimeout(function(){
     insertCursor();
+    insertDepthImage();
     myLayout = new Layout();
     kinect = Kinect();
     Kinect.prototype.init();
