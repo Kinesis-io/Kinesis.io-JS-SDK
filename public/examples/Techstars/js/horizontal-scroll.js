@@ -10,25 +10,6 @@
   * Date: Thu Feb 23 15:53:00 2012 +0530
 */
 
-$(function(){
-	// $(".tileItem img").attr('height', window.innerHeight);
-	
-  // wrap the gridHolder in a table and all the tileItems inside td.tile
-  $("#gridHolder").wrapInner("<ul></ul>");
-	$(".banner").wrap("<li></li>");
-	$(".tileItem").wrap("<li class='tile'></li>");
-	
-	// horizontal scrolling js
-	$("body").mousewheel(function(event, delta) {
-		this.scrollLeft -= (delta * 30);
-		event.preventDefault();
-	}); 
-	
-	// find first tile and make it active
-	var _first = $("#gridHolder .tile")[0];
-	$(_first).addClass('active');
-});
-
 // activate tile
 $.fn.activate = function() {
   var me = $(this);

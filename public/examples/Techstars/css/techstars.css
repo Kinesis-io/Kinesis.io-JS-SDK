@@ -1,12 +1,38 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 body {
 	background: #192127 url(../images/bg.png) repeat;
 }
 
+#logo {
+  width: 79%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#logo a {
+  float: left;
+  width: 220px;
+}
+
+#logo span {
+  color: #fff;
+  float: right;
+  font-size: 24px;
+  line-height: 35px;
+  padding-top: 80px;
+  font-family: Helvetica,Arial,sans-serif;
+}
+
 #gridHolder {
-	width: 90%;
-	margin: 0 auto;
-	padding: 18px 15px;
-	background: #fefefe;
+	background: #252c32;
+	border: 1px solid #333;
+	margin: 1.5% auto;
+  padding: 20px 0 10px 20px;
+  width: 80%;
 }
 
 #gridHolder ul {
@@ -14,12 +40,22 @@ body {
 }
 
 #gridHolder li {
-	float: left;
-	list-style: none;
+   float: left;
+   list-style: none outside none;
+   margin: 0 auto;
+   margin: 0 10px 10px 0px;
+   width: 48.5%;
+   overflow: hidden;
+   height: 350px;
+   border: 1px solid #30383e;
+}
+
+#gridHolder li {
+  
 }
 
 #gridHolder .tileItem, #gridHolder .banner {
-	width: 200px;
+	width: 99%;
 	min-height: 200px;
 	margin: 0;
 	padding: 0;
@@ -34,14 +70,18 @@ body {
 }
 
 #gridHolder .tileItem img {
-	width: 200px;
-	height: 200px;
+}
+
+#gridHolder .row {
+   margin: 0 auto;
+    overflow: hidden;
+    width: 100%;
 }
 
 .caption {
 	left: 10px;
 	color: #fefefe;
-	bottom: 10px;
+	top: 10px;
 	font-size: 30px;
 	position: absolute;
 	text-decoration: none;
