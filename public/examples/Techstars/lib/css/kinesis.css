@@ -24,9 +24,20 @@
   height: 90px;
   pointer-events:none;
   background:url(../../lib/images/hand.png) no-repeat center center;
-  z-index: 1000;
+  z-index: 1001;
 }
 /* cursor styles ends */
+
+/* depth image styles starts */
+#depthImage{
+  position: fixed;
+  right: 5px;
+  bottom: 5px;
+  pointer-events:none;
+  z-index: 1000;
+  background-color: #000000;
+}
+/* depth image styles ends */
 
 /* background styles starts */
 body{

@@ -294,9 +294,8 @@ function insertCursor() {
 function insertDepthImage() {
   var _depthImage     = document.createElement('img');
   _depthImage.id      = 'depthImage';
-  _depthImage.width   = '64';
-  _depthImage.height  = '48';
-  _depthImage.src     = "lib/images/hand.png"
+  _depthImage.width   = '128';
+  _depthImage.height  = '96';
   document.body.appendChild(_depthImage);
 };
 
