@@ -1,0 +1,72 @@
+/*!
+  * kinesis.io Kinesis Stylesheet
+  * http://kinesis.io/
+  *
+  * Copyright 2012, Kinesis.io
+  * http://kinesis.io/license
+  *
+  * Copyright 2012, NotionQ LLP
+  *
+  * Date: Thu Feb 23 15:53:00 2012 +0530
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* cursor styles starts */
+#cursor{
+  position: absolute;
+  left: -200px;
+  top: -200px;
+  width: 90px;
+  height: 90px;
+  pointer-events:none;
+  background:url(../../lib/images/hand.png) no-repeat center center;
+  z-index: 1001;
+}
+/* cursor styles ends */
+
+/* depth image styles starts */
+#depthImage{
+  position: fixed;
+  right: 5px;
+  bottom: 5px;
+  pointer-events:none;
+  z-index: 1000;
+  background-color: #000000;
+}
+/* depth image styles ends */
+
+/* background styles starts */
+body{
+  background:url(../../lib/images/bg.png) repeat left top;
+}
+/* background styles ends */
+
+.message {
+  top: 0;
+  width: 100%;
+  padding: 10px;
+  color: #555555;
+  font-size: 14px;
+  position: fixed;
+  font-weight: bold;
+  font-family: arial;  
+  background-color: #fff389;
+  text-transform: capitalize;
+  box-shadow: 0 1px 2px #000000;
+  text-shadow: 0 2px 3px #ffffff;
+}
+
+.message .closeBtn {
+  width: 32px;
+  float: right;
+  height: 32px;
+  cursor: pointer;
+  margin: -8px 10px;
+  text-indent: -9999px;
+  background: url("../../lib/images/closeBtn.png") no-repeat scroll right top transparent;
+}
+

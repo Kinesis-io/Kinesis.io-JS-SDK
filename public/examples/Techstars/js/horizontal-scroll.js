@@ -73,7 +73,7 @@ var leftGesture         = new SwipeGestureListener("myswipeLeft");
 // call to action for swipe left
 leftGesture.toFire      = swipeControl;
 // area within which the swipe left will be recognized; values in percentage(%)
-leftGesture.bounds      = {min: {x: 80, y: 0, z: 0}};
+// leftGesture.bounds      = {min: {x: 80, y: 0, z: 0}};
 // allowed joints for gesture
 leftGesture.joints      = [JointTypes.JointTypeHandRight]; // right hand
 // allowed direction for gesture
@@ -86,7 +86,7 @@ rightGesture.toFire     = swipeControl;
 // area within which the swipe left will be recognized; values in percentage(%)
 rightGesture.joints     = [JointTypes.JointTypeHandLeft];
 // allowed joints for gesture
-rightGesture.bounds     = {max: {x: 20, y: 100, z: 100}};
+// rightGesture.bounds     = {max: {x: 20, y: 100, z: 100}};
 // allowed direction for gesture
 rightGesture.directions = [GestureDirections.GestureDirectionRight];
 
