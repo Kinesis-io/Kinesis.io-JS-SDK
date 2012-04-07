@@ -27,7 +27,7 @@ body {
 }
 
 #navigation {
-	top: 6em;
+	top: 2em;
 	left: 0;
 	list-style: none;
 	margin-left: 20px;
@@ -93,7 +93,7 @@ body {
 }
 
 table {
-   position:absolute; top:25%; height:240px; margin-top:-13px;
+   position:absolute; top:21%; height:240px; margin-top:-13px;
 }
 
 #fancybox-wrap {
