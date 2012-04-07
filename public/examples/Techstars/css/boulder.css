@@ -57,12 +57,23 @@ body {
   width: 64px;
   height: 64px;
   margin-top: 12px;
-  text-indent: -999990px;
   background: url(../images/back.png) no-repeat left top;
 }
 
+#navigation .backBttn a span {
+  text-indent: -999990px;
+  display: block;
+}
+
 #fancybox-close {
-	text-indent: -9999px;
+	
+}
+
+#fancybox-close label {
+  width: 64px;
+  height: 64px;
+  display: block;
+  text-indent: -9999px;
 }
 
 .companyModal {
