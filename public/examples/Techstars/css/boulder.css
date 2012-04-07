@@ -19,7 +19,7 @@ body {
 	float: left;
 	margin: 2px 4px 2px 0;
 	width: 250px;
-	background: #ffffff !important;
+	background:#fff url(../images/w.png) repeat left top!important;
 }
 
 #gridHolder td .tileItem a img {
@@ -27,8 +27,9 @@ body {
 }
 
 #navigation {
-	top: 0;
+	top: 2em;
 	left: 0;
+	list-style: none;
 	margin-left: 20px;
 	overflow: hidden;
 	position: fixed;
@@ -36,19 +37,28 @@ body {
 
 #navigation li {
 	float: left;
-	display: inline;
+	margin-left: 75px;
 }
 
 #navigation li a {
-	color: #cccccc;
+	color: #eee;
 	float: left;
 	padding: 20px 20px 0 20px;
 	font-size: 40px;
 	text-decoration: none;
+	font-family: Helvetica Neue Light, Helvetica, Arial;
 }
 
 #navigation li a:hover, #navigation li a.active {
-	color: #fefefe;
+	color: #10B24A;
+}
+
+#navigation .backBttn a {
+  width: 64px;
+  height: 64px;
+  margin-top: 12px;
+  text-indent: -999990px;
+  background: url(../images/back.png) no-repeat left top;
 }
 
 #fancybox-close {
@@ -60,21 +70,93 @@ body {
 }
 
 .companyModal .detail {
-	background: none repeat scroll 0 0 #EEEEEE;
 }
 
 .companyModal h3 {
-	color: #333333;
-	font-size: 24px;
-	margin-bottom: 18px;
+	color: #fff;
+	font-size: 35px;
 	font-weight: normal;
 	font-family: Helvetica Neue, Helvetica, Arial;
 }
 
 .companyModal p {
 	padding-bottom: 8px;
-	color: #6c6c6c;
+	color: #f8f8f8;
 	font-size: 16px;
-	line-height: 22px;
-	font-family: Georgia;
+	line-height: 24px;
+	font-family: lucida Grande, Arial;
+}
+
+#fancybox-close {
+  top: -50px !important;
+  right: -50px !important;
+}
+
+table {
+   position:absolute; top:21%; height:240px; margin-top:-13px;
+}
+
+#fancybox-wrap {
+  -moz-box-shadow:    0 3px 6px rgba(0, 0, 0, 1);
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 1);
+  box-shadow:         0 3px 6px rgba(0, 0, 0, 1);
+  background: url(../images/index-green.png) repeat left top;
+}
+
+#fancybox-outer {
+  background: url(../images/index-green.png) repeat left top;
+}
+
+#fancybox-content {
+  border: none !important;
+}
+
+#fancybox-content > div {
+  overflow: hidden !important;
+}
+
+#companyInfo {
+   overflow: hidden;
+  list-style: none;
+}
+
+
+#companyInfo li {
+  color: #FFFFFF;
+  font-family: Helvetica Neue,Helvetica,Arial;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 18px 0;
+  padding-left: 42px;
+  height: 32px;
+  width: 84px;
+  float: left;
+  line-height: 32px;  
+}
+
+#companyInfo li.funding {
+  background: url(../images/dollar.png) no-repeat left top;
+}
+
+
+#companyInfo li.status {
+  background: url(../images/heart.png) no-repeat left top;
+}
+
+#mic {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+   
+    background-origin: padding-box;
+   
+    background-size: 100% auto;
+    background: url(../images/say.png) no-repeat left top;
+    bottom: 20px;
+    height: 65px;
+    left: 20px;
+    position: absolute;
+    width: 262px;
+    z-index: 1;
+    text-indent: -99999px;
 }

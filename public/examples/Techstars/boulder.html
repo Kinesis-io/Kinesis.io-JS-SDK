@@ -10,13 +10,14 @@
   </head>
   <body id="boulder">
     <ul id="navigation">
-      <li><a href="index.html">Back</a></li>
+      <li class="backBttn"><a href="index.html">Back</a></li>
       <li><a href="#twentyEleven" id="2011">2011</a></li>
       <li><a href="#twentyTen" id="2010">2010</a></li>
       <li><a href="#twentyNine" id="2009">2009</a></li>
       <li><a href="#twentyEight" id="2008">2008</a></li>
       <li><a href="#twentySeven" id="2007">2007</a></li>
     </ul>
+    <div id="mic">&nbs;</div>
     <div id="gridHolder">      
       <div class="tileItem" id="twentyEleven" data-id="2011">
         <a href="#creative_brain">
@@ -25,6 +26,10 @@
         <div id="creative_brain_block" style="display: none;">
           <div id="creative_brain" class="companyModal">
             <h3>Creative Brain Studios</h3>
+            <ul id="companyInfo">
+              <li class="status">Active</li>
+              <li class="funding">$0</li>
+            </ul>
             <div class="detail">
               <p>Creative Brain Studios creates tools that enable developers to create and deploy games to all the popular smart phones, tablets and PC’s.</p>
               <p>Create Once, Deploy Everywhere!</p>
@@ -33,10 +38,6 @@
               <p>Offer true multi-platform support.</p>
               <p>A true turn-key solution.</p>
             </div>
-            <ul>
-              <li class="status">Active</li>
-              <li class="funding">$0</li>
-            </ul>
           </div>
         </div>
         <a href="flextrip.html"><img class="interactive" src="images/boulder/2011/2.jpg" /></a>
@@ -115,7 +116,7 @@
   	<script>
   	  $(function(){
         // wrap the gridHolder in a table and all the tileItems inside td.tile
-        $("#gridHolder").wrapInner("<table cellspacing='5'></table>");
+        $("#gridHolder").wrapInner("<table cellspacing='5'  vertical-align='middle'></table>");
       	$(".banner").wrap("<td align='top'></td>");
       	$(".tileItem").wrap("<td class='tile' align='top'></td>");
 
