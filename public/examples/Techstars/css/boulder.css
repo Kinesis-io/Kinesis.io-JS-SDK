@@ -144,19 +144,23 @@ table {
 }
 
 #mic {
-    background-attachment: scroll;
-    background-clip: border-box;
-    background-color: transparent;
-   
-    background-origin: padding-box;
-   
-    background-size: 100% auto;
-    background: url(../images/say.png) no-repeat left top;
-    bottom: 20px;
-    height: 65px;
-    left: 20px;
-    position: absolute;
-    width: 262px;
-    z-index: 1;
-    text-indent: -99999px;
+  background-attachment: scroll;
+  background-clip: border-box;
+  background-color: transparent;
+ 
+  background-origin: padding-box;
+ 
+  background-size: 100% auto;
+  background: url(../images/say.png) no-repeat left top;
+  bottom: 20px;
+  height: 65px;
+  left: 20px;
+  position: absolute;
+  width: 75px;
+  z-index: 1;
+  text-indent: -99999px;
+}
+
+#fancybox-close {
+	z-index: 500 !important;
 }
