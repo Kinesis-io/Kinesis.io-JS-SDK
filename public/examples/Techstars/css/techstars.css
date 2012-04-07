@@ -1,0 +1,49 @@
+body {
+	background: #192127 url(../images/bg.png) repeat;
+}
+
+#gridHolder {
+	width: 90%;
+	margin: 0 auto;
+	padding: 18px 15px;
+	background: #fefefe;
+}
+
+#gridHolder ul {
+	overflow: hidden;
+}
+
+#gridHolder li {
+	float: left;
+	list-style: none;
+}
+
+#gridHolder .tileItem, #gridHolder .banner {
+	width: 200px;
+	min-height: 200px;
+	margin: 0;
+	padding: 0;
+	opacity: 1;
+	position: relative;
+	font-size: 24px;
+	background: none;
+}
+
+#gridHolder .active .tileItem {
+	background: none;
+}
+
+#gridHolder .tileItem img {
+	width: 200px;
+	height: 200px;
+}
+
+.caption {
+	left: 10px;
+	color: #fefefe;
+	bottom: 10px;
+	font-size: 30px;
+	position: absolute;
+	text-decoration: none;
+	font-family: Helvetica;
+}
