@@ -27,7 +27,7 @@ body {
 }
 
 #navigation {
-	top: 100px;
+	top: 6em;
 	left: 0;
 	list-style: none;
 	margin-left: 20px;
@@ -75,7 +75,6 @@ body {
 .companyModal h3 {
 	color: #fff;
 	font-size: 35px;
-	margin-bottom: 18px;
 	font-weight: normal;
 	font-family: Helvetica Neue, Helvetica, Arial;
 }
@@ -94,7 +93,7 @@ body {
 }
 
 table {
-   position:absolute; top:50%; height:240px; margin-top:-245px;
+   position:absolute; top:25%; height:240px; margin-top:-13px;
 }
 
 #fancybox-wrap {
@@ -116,29 +115,31 @@ table {
   overflow: hidden !important;
 }
 
-.companyModal .detail + ul {
+#companyInfo {
+   overflow: hidden;
   list-style: none;
 }
 
 
-.companyModal .detail + ul li {
+#companyInfo li {
   color: #FFFFFF;
   font-family: Helvetica Neue,Helvetica,Arial;
   font-size: 18px;
   font-weight: bold;
   margin: 18px 0;
   padding-left: 42px;
-     height: 32px;
-    width: 32px;
-    line-height: 32px;
+  height: 32px;
+  width: 84px;
+  float: left;
+  line-height: 32px;  
 }
 
-.companyModal .detail + ul li.funding {
+#companyInfo li.funding {
   background: url(../images/dollar.png) no-repeat left top;
 }
 
 
-.companyModal .detail + ul li.status {
+#companyInfo li.status {
   background: url(../images/heart.png) no-repeat left top;
 }
 
