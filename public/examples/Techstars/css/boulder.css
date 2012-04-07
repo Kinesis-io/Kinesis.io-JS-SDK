@@ -93,7 +93,10 @@ body {
 }
 
 table {
-   position:absolute; top:21%; height:240px; margin-top:-13px;
+   position:absolute; 
+   /*top:45% !important;
+   height:240px; */
+   margin-top:50px;
 }
 
 #fancybox-wrap {
@@ -155,7 +158,7 @@ table {
   bottom: 20px;
   height: 65px;
   left: 20px;
-  position: absolute;
+  position: fixed;
   width: 75px;
   z-index: 1;
   text-indent: -99999px;
