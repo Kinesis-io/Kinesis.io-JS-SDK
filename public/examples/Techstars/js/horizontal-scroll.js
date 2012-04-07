@@ -17,6 +17,7 @@ $.fn.activate = function() {
 	var navItem = $("#navigation #" + navId);
   if(me)
     setTimeout(function() {
+			$("#navigation li a").removeClass("active");
 	    me.addClass('active');
 			navItem.addClass('active');
 	  }, 200 );
