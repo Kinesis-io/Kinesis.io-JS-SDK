@@ -30,7 +30,7 @@
 
 /* depth image styles starts */
 #depthImage{
-  position: fixed;
+  position: absolute;
   right: 5px;
   bottom: 5px;
   pointer-events:none;

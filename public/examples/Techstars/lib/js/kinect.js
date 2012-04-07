@@ -30,7 +30,6 @@ var Kinect = function() {
     ws.onmessage = function (evt) {
       try {
         var _data = JSON.parse(evt.data);
-				console.info(_data);
         if(_data.Kinect != undefined) {
           if(_data.Kinect == "Connected") {
             updateMessageBar(KinesisMessages.KinectConnected, false);
@@ -43,18 +42,15 @@ var Kinect = function() {
           Kinesis.onStatusChange(_data.Kinect);
         };
         
-        if (_data.depthImage != undefined) {
-           Kinesis.updateDepthImage(_data.depthImage);
-        }
-        
         if (_data.cursor != undefined) {
           GestureListener.mouseMove({ x: Layout.pageSize.width * _data.cursor.x / 100, y: Layout.pageSize.height * _data.cursor.y *1.5/ 100, z:_data.cursor.z });
         }
+
         kinesis.initialize(_data);
         
       } catch (error){
-        /* console.info(evt.data);
-         parsing exception*/
+         //console.info(error);
+         /*parsing exception*/
       }
 
     };

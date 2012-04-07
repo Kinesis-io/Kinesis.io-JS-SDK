@@ -24,10 +24,13 @@ function Kinesis() {
 	// This is called whenever a new instance of the class is created     
 	// *Parameter is the parsed JSON String which comes from the Kinect Class*    
   this.initialize = function(data) {
+
+    if (data.depthImage != undefined) {
+      setTimeout("Kinesis.updateDepthImage(\"" + data.depthImage + "\")", 1);
+    }
+
     if( Kinesis.gestureDetection == true && data ) {
-      console.info(data.gestures.type);
       if (data.gestures && data.gestures[0].type == GestureTypes.GestureTypeSpeech ) {
-        console.info("speech detected");
         switch (data.gestures[0].command) {
           case "boulder":
             window.location = 'boulder.html';
@@ -54,9 +57,13 @@ function Kinesis() {
     console.info(message);
   };
   
-  Kinesis.updateDepthImage = function(depthImage) {
-    var depthImage = document.getElementById('depthImage');
-    depthImage.src = "data:image/png;base64," + depthImage;
+  Kinesis.updateDepthImage = function(depthData) {
+    var canvas = document.getElementById("depthImage");
+    var ctx = canvas.getContext("2d");
+    var image = new Image();
+    image.src = "data:image/png;base64," + depthData;
+    ctx.drawImage(image, 0, 0, 128, 96);
+    return;
   };
 	
 	// Responsible for binding gestures to be matched when events are recieved from Kinect.js    
@@ -292,10 +299,14 @@ function insertCursor() {
 };
 
 function insertDepthImage() {
-  var _depthImage     = document.createElement('img');
+  var _depthImage     = document.createElement('canvas');
   _depthImage.id      = 'depthImage';
   _depthImage.width   = '128';
   _depthImage.height  = '96';
+
+  var emptyDiv = document.createElement('div');
+  _depthImage.appendChild(emptyDiv);
+
   document.body.appendChild(_depthImage);
 };
 
