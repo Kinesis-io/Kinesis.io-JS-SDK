@@ -24,8 +24,30 @@ function Kinesis() {
 	// This is called whenever a new instance of the class is created     
 	// *Parameter is the parsed JSON String which comes from the Kinect Class*    
   this.initialize = function(data) {
-    if( Kinesis.gestureDetection == true && data )
-      this.matchGestures(data);
+    if( Kinesis.gestureDetection == true && data ) {
+      console.info(data.gestures.type);
+      if (data.gestures && data.gestures[0].type == GestureTypes.GestureTypeSpeech ) {
+        console.info("speech detected");
+        switch (data.gestures[0].command) {
+          case "boulder":
+            window.location = 'boulder.html';
+            break;
+          case "next":
+            $('#gridHolder').slideLeft();
+            break;
+          case "back":
+            var activeItem = $("#gridHolder .active")[0];
+            var firstItem  = $("#gridHolder .tile")[0];
+            if (activeItem == firstItem)
+              window.location = 'index.html';
+            else
+              $('#gridHolder').slideRight();
+            break;
+        }
+      }
+      else
+        this.matchGestures(data); 
+    }
   };
   
   Kinesis.onStatusChange = function(message) {
