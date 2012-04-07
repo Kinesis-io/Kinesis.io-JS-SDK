@@ -13,9 +13,12 @@
 // activate tile
 $.fn.activate = function() {
   var me = $(this);
+	var navId = me.children('.tileItem').attr('data-id');
+	var navItem = $("#navigation #" + navId);
   if(me)
     setTimeout(function() {
 	    me.addClass('active');
+			navItem.addClass('active');
 	  }, 200 );
 };
 

@@ -11,11 +11,11 @@
   <body id="boulder">
     <ul id="navigation">
       <li><a href="index.html">Back</a></li>
-      <li><a href="#twentyEleven">2011</a></li>
-      <li><a href="#twentyTen">2010</a></li>
-      <li><a href="#twentyNine">2009</a></li>
-      <li><a href="#twentyEight">2008</a></li>
-      <li><a href="#twentySeven">2007</a></li>
+      <li><a href="#twentyEleven" id="2011">2011</a></li>
+      <li><a href="#twentyTen" id="2010">2010</a></li>
+      <li><a href="#twentyNine" id="2009">2009</a></li>
+      <li><a href="#twentyEight" id="2008">2008</a></li>
+      <li><a href="#twentySeven" id="2007">2007</a></li>
     </ul>
     <div id="gridHolder">      
       <div class="tileItem" id="twentyEleven" data-id="2011">
@@ -52,7 +52,7 @@
         <a href="#"><img src="images/boulder/2011/12.png" /></a>
       </div>
       
-      <div class="tileItem" id="twentyTen">
+      <div class="tileItem" id="twentyTen" data-id="2010">
         <a href="#"><img src="images/boulder/2010/1.png" /></a>
         <a href="#"><img src="images/boulder/2010/2.jpg" /></a>
         <a href="#"><img src="images/boulder/2010/3.jpg" /></a>
@@ -66,7 +66,7 @@
         <a href="#"><img src="images/boulder/2010/11.png" /></a>
       </div>
       
-      <div class="tileItem" id="twentyNine">
+      <div class="tileItem" id="twentyNine" data-id="2009">
         <a href="#"><img src="images/boulder/2009/1.png" /></a>
         <a href="#"><img src="images/boulder/2009/2.jpg" /></a>
         <a href="#"><img src="images/boulder/2009/3.png" /></a>
@@ -79,7 +79,7 @@
         <a href="#"><img src="images/boulder/2009/10.png" /></a>
       </div>
       
-      <div class="tileItem" id="twentyEight">
+      <div class="tileItem" id="twentyEight" data-id="2008">
         <a href="#"><img src="images/boulder/2008/1.png" /></a>
         <a href="#"><img src="images/boulder/2008/2.png" /></a>
         <a href="#"><img src="images/boulder/2008/3.png" /></a>
@@ -92,7 +92,7 @@
         <a href="#"><img src="images/boulder/2008/10.png" /></a>
       </div>
       
-      <div class="tileItem" id="twentySeven">
+      <div class="tileItem" id="twentySeven" data-id="2007">
         <a href="#"><img src="images/boulder/2007/1.png" />
         <a href="#"><img src="images/boulder/2007/2.png" />
         <a href="#"><img src="images/boulder/2007/3.png" />
@@ -126,7 +126,7 @@
 
       	// find first tile and make it active
       	var _first = $("#gridHolder .tile")[0];
-      	$(_first).addClass('active');
+      	$(_first).activate();
       	
       	$(".tileItem a").fancybox({
       		'transitionIn'	:	'elastic',
