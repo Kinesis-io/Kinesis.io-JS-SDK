@@ -30,6 +30,7 @@ var Kinect = function() {
     ws.onmessage = function (evt) {
       try {
         var _data = JSON.parse(evt.data);
+				console.info(_data);
         if(_data.Kinect != undefined) {
           if(_data.Kinect == "Connected") {
             updateMessageBar(KinesisMessages.KinectConnected, false);
