@@ -22,22 +22,28 @@ Server.configure(function(){
 });
 
 Server.get('/file', function(req, res) {
-    fs.readFile("public/tmp/message", "binary", function(error, file) {
+  res.sendfile("public/tmp/message.png");
+  
+  /*  fs.readFile("public/tmp/message.png", "binary", function(error, file) {
       if(error) {
         res.send(error)
       } else {
-        res.send("<img src=\"" + file + "\" />");
+        res.send("{\"data\":\"" + file + "\"}");
       }
-    });
+    });*/
 });
 
 Server.post('/upload', function(req, res){
-  fs.writeFile('public/tmp/message', req.body.obj, function (err) {
+  base64Data = req.body.obj.replace(/^data:image\/png;base64,/,""),
+  dataBuffer = new Buffer(base64Data, 'base64');
+
+  fs.writeFile('public/tmp/message.png', dataBuffer, function(err) {
     if (err) {
       console.log(err);
       return;
     }
   });
+
   res.send("Screenshot saved!");
 });
 
