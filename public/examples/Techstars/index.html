@@ -41,6 +41,8 @@
     <script src="lib/js/gesture-listener.js"></script>
     <script src="lib/js/kinesis.js"></script>
     <script src="lib/js/kinect.js"></script>
+	<script type="text/javascript" src="js/html2canvas.js"></script>
+	<script type="text/javascript" src="js/jquery.plugin.html2canvas.js"></script>
   	<script>
   	  $(function(){
         // wrap the gridHolder in a table and all the tileItems inside td.tile
@@ -51,5 +53,46 @@
 
       var kinesis = new Kinesis;
     </script>
+	<script>
+		//returns back the base64 string for the screenshot in a callback
+		function screenshot(callback) {
+			var date = new Date(),
+	        timer = date.getTime();
+	        options = {};
+	        options.elements = document.getElementsByTagName("body");
+	        html2canvas.logging = false;
+	        options.complete = function(images){
+	            var queue = html2canvas.Parse(this[0], images, options),
+	            $canvas = $(html2canvas.Renderer(queue, options)),
+	            finishTime = new Date();
+				if(callback != undefined && callback.call)
+					callback($canvas[0].toDataURL());
+				else
+					console.info("Callback not Specified");
+	        };
+	        html2canvas.Preload(document.body,  options);
+		}
+		
+		function testScreenShot() {
+			screenshot( function(data) {
+			  $.ajax({
+          type: 'POST',
+          url: '/upload',
+          data: {obj:data},
+          success: function(success) {
+            console.info(success);
+          }
+        });
+				 //newWindow=window.open(data, 'newDocument');
+			});
+		}
+		
+		function savefile() {
+		 	var bb = new WebKitBlobBuilder();
+			bb.append((new XMLSerializer).serializeToString(document));
+			var blob = bb.getBlob("application/xhtml+xml;charset=" + document.characterSet);
+			saveAs(blob, "document.xhtml");
+		}
+	</script>
   </body>
 </html>
