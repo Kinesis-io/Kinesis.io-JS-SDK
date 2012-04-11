@@ -22,24 +22,21 @@ Server.configure(function(){
 });
 
 Server.get('/file', function(req, res) {
-    fs.readFile("message.png", "binary", function(error, file) {
+    fs.readFile("public/tmp/message", "binary", function(error, file) {
       if(error) {
         res.send(error)
       } else {
-        //res.send(file);
-        //res.header('Content-Type', 'image/png');
         res.send("<img src=\"" + file + "\" />");
       }
     });
 });
 
 Server.post('/upload', function(req, res){
-  fs.writeFile('message.png', req.body.obj, function (err) {
+  fs.writeFile('public/tmp/message', req.body.obj, function (err) {
     if (err) {
       console.log(err);
       return;
     }
-      console.log('It\'s saved!');
   });
   res.send("Screenshot saved!");
 });
