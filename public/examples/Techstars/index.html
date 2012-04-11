@@ -47,7 +47,7 @@
   	<script>
 
       function movement(position) {
-        if (position.z < -0.5) { uploadScreenShot(); };
+        //if (position.z < -0.5) { uploadScreenShot(); };
       }
 
   	  $(function(){
@@ -59,6 +59,20 @@
 
       var kinesis = new Kinesis;
       Kinesis.cursor = movement;
+
+      function swipeDownControl(gesture) {
+        uploadScreenShot();
+      }
+
+      // create swipe down gesture
+      var downGesture         = new SwipeGestureListener("myswipeDown");
+      // call to action for swipe left
+      downGesture.toFire      = swipeDownControl;
+      // allowed joints for gesture
+      downGesture.joints      = [JointTypes.JointTypeHandLeft, JointTypes.JointTypeHandRight]; //both hands
+      // allowed direction for gesture
+      downGesture.directions  = [GestureDirections.GestureDirectionDown]; // down
+      kinesis.addGesture(downGesture);
     </script>
   </body>
 </html>

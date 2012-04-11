@@ -139,6 +139,20 @@
 
       Kinesis.cursor = movement;
 
+      function swipeDownControl(gesture) {
+        uploadScreenShot();
+      }
+
+      // create swipe down gesture
+      var downGesture         = new SwipeGestureListener("myswipeDown");
+      // call to action for swipe left
+      downGesture.toFire      = swipeDownControl;
+      // allowed joints for gesture
+      downGesture.joints      = [JointTypes.JointTypeHandLeft, JointTypes.JointTypeHandRight]; //both hands
+      // allowed direction for gesture
+      downGesture.directions  = [GestureDirections.GestureDirectionDown]; // down
+      kinesis.addGesture(downGesture);
+
   	  $(function(){
         // wrap the gridHolder in a table and all the tileItems inside td.tile
         $("#gridHolder").wrapInner("<table cellspacing='5'  vertical-align='middle'></table>");
