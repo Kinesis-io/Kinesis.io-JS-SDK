@@ -83,5 +83,23 @@
       });
     </script>
     <script src="js/horizontal-scroll.js"></script>
+    
+    <script type="text/javascript" src="js/html2canvas.js"></script>
+    <script type="text/javascript" src="js/screenshot.js"></script>
+    <script>
+      function swipeDownControl(gesture) {
+        uploadScreenShot($(".active")[0]);
+      }
+
+      // create swipe down gesture
+      var downGesture         = new SwipeGestureListener("myswipeDown");
+      // call to action for swipe left
+      downGesture.toFire      = swipeDownControl;
+      // allowed joints for gesture
+      downGesture.joints      = [JointTypes.JointTypeHandLeft, JointTypes.JointTypeHandRight]; //both hands
+      // allowed direction for gesture
+      downGesture.directions  = [GestureDirections.GestureDirectionDown]; // down
+      kinesis.addGesture(downGesture);
+    </script>
   </body>
 </html>
