@@ -1,0 +1,497 @@
+<!DOCTYPE html>  <html> <head>   <title>kinesis-js-sdk.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="constants.html">                 constants.js               </a>                                           <a class="source" href="gesture-listener.html">                 gesture-listener.js               </a>                                           <a class="source" href="jquery-1.6.4.min.html">                 jquery-1.6.4.min.js               </a>                                           <a class="source" href="kinect.html">                 kinect.js               </a>                                           <a class="source" href="kinesis-js-sdk.html">                 kinesis-js-sdk.js               </a>                                           <a class="source" href="kinesis-js-sdk.min.html">                 kinesis-js-sdk.min.js               </a>                                           <a class="source" href="kinesis.html">                 kinesis.js               </a>                                           <a class="source" href="utils.html">                 utils.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               kinesis-js-sdk.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p>CONSTANTS JS STARTS</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p><em>Version 0.1</em> <br />
+Defines all the constants which can be used   </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">InteractionEventTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;InteractionEventTypeGesture&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s1">&#39;InteractionEventTypeSpeech&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s1">&#39;InteractionEventTypeCursor&#39;</span><span class="o">:</span> <span class="mi">2</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p><strong>Gesture Types</strong> <br />
+Used to determine what type of gesture was sent from the Kinesis Server</p>
+
+<ol>
+<li>Swipe 
+<ul><li>To detect swipes with any joint in any direction    </li></ul></li>
+<li>Body <br />
+<ul><li>Tells the direction and if it was a TypeLean (lean left, lean front etc) or a turn (turn left, turn right)    </li></ul></li>
+<li>Hold <br />
+<ul><li>Direction and joint. Essentially only a few joints and be held out. Like wrist, etc.    </li></ul></li>
+<li>JointIntersection <br />
+<ul><li>Allows the 3rd party developer to select joints which when touch each other trigger a function    </li></ul></li>
+<li>SpeechGestureListener <br />
+<ul><li>Command will be sent along with the control word. the control word needs to be set.   </li></ul></li>
+</ol>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">GestureTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;GestureTypeSwipe&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s1">&#39;GestureTypeBody&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s1">&#39;GestureTypeHold&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s1">&#39;GestureTypeJointIntersection&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s1">&#39;GestureTypeSpeech&#39;</span> <span class="o">:</span> <span class="mi">4</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p><strong>Gesture Directions</strong> <br />
+Used to determine what direction the gesture happened. Not all directions are supported by all gestures.    </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">GestureDirections</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;GestureDirectionLeft&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s1">&#39;GestureDirectionRight&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p><em>Jump incase of lean gesture</em></p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="s1">&#39;GestureDirectionUp&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> 
+  <span class="s1">&#39;GestureDirectionDown&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>     </pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p><em>Crouch incase of lean gesture</em></p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="s1">&#39;GestureDirectionFront&#39;</span><span class="o">:</span> <span class="mi">4</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p><strong>JointTypes</strong>
+The 20 joints whose data will be sent out from the Kinesis Server. The developer can pick which joint to bind a gesture to</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">JointTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;JointTypeHandRight&#39;</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeWristRight&#39;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeElbowRight&#39;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeShoulderRight&#39;</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeShoulderCenter&#39;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeShoulderLeft&#39;</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeElbowLeft&#39;</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeWristLeft&#39;</span><span class="o">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeHandLeft&#39;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeHead&#39;</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeSpine&#39;</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeHipCenter&#39;</span><span class="o">:</span> <span class="mi">11</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeFootRight&#39;</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeAnkelRight&#39;</span><span class="o">:</span> <span class="mi">13</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeKneeRight&#39;</span><span class="o">:</span> <span class="mi">14</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeFootRight&#39;</span><span class="o">:</span> <span class="mi">15</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeHipRight&#39;</span><span class="o">:</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeHipLeft&#39;</span><span class="o">:</span> <span class="mi">17</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeKneeLeft&#39;</span><span class="o">:</span> <span class="mi">18</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeAnkleLeft&#39;</span><span class="o">:</span> <span class="mi">19</span><span class="p">,</span>
+  <span class="s1">&#39;JointTypeFootLeft&#39;</span><span class="o">:</span> <span class="mi">20</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p><strong>KinesisMessages</strong>
+List of messages used in the application.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">KinesisMessages</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;ServerNotConnected&#39;</span><span class="o">:</span> <span class="s1">&#39;Oops! some issue occured. Please make sure that the kinesis sdk is installed.&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;ServerConnected&#39;</span><span class="o">:</span> <span class="s1">&#39;Kinesis running fine.&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;KinectNotConnected&#39;</span><span class="o">:</span> <span class="s1">&#39;Please make sure that the Microsoft Kinect Sensor is connected and turned on.&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;KinectConnected&#39;</span><span class="o">:</span> <span class="s1">&#39;Kinect connected.&#39;</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>CONSTANTS JS ENDS</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>UTILS JS STARTS</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">addMessageBar</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">msgNode</span>   <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
+  <span class="nx">msgNode</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;kmessage&#39;</span><span class="p">);</span>
+  <span class="nx">msgNode</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span><span class="p">);</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">msgNode</span><span class="p">);</span>
+  <span class="nx">msgNode</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">updateMessageBar</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">isDisplayed</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">messageBar</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;kmessage&#39;</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">isDisplayed</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">messageBar</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">msg</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">closeNode</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">);</span>
+    <span class="nx">closeNode</span><span class="p">.</span><span class="nx">innerHTML</span>  <span class="o">=</span> <span class="s2">&quot;close&quot;</span><span class="p">;</span>
+    <span class="nx">closeNode</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;onclick&#39;</span><span class="p">,</span> <span class="s2">&quot;document.body.removeChild(document.getElementById(&#39;kmessage&#39;));&quot;</span><span class="p">);</span>
+    <span class="nx">closeNode</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;closeBtn&#39;</span><span class="p">);</span>
+    <span class="nx">messageBar</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">closeNode</span><span class="p">);</span>
+    <span class="nx">messageBar</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;block&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+    <span class="nx">messageBar</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">;</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>UTILS JS ENDS</p>             </td>             <td class="code">               <div class="highlight"><pre>  </pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>GESTURE LISTENER JS STARTS</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p><em>Version 0.1</em> <br />
+Enabling Class Inheritance in Javascript   </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">inheritsFrom</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">parentClassOrObject</span> <span class="p">){</span> 
+	<span class="k">if</span> <span class="p">(</span> <span class="nx">parentClassOrObject</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">==</span> <span class="nb">Function</span> <span class="p">)</span> 
+	<span class="p">{</span> </pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>Normal Inheritance </p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="k">this</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">parentClassOrObject</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">parent</span> <span class="o">=</span> <span class="nx">parentClassOrObject</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+	<span class="p">}</span> 
+	<span class="k">else</span> 
+	<span class="p">{</span> </pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>Pure Virtual Inheritance </p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="k">this</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">parentClassOrObject</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">parent</span> <span class="o">=</span> <span class="nx">parentClassOrObject</span><span class="p">;</span>
+	<span class="p">}</span> 
+	<span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p><strong>Gesture Listener Class</strong>
+This class is used to define what all events should Kinesis JS SDK listen to in order to fire custom events <br />
+This acts as the base class of all gesture listener classes. <br />
+Developers can easily make instance variables, customize the gesture and then start listening to them</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">GestureListener</span><span class="p">()</span> <span class="p">{</span>
+	    
+	<span class="nx">GestureListener</span><span class="p">.</span><span class="nx">poll</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">InteractionModel</span> <span class="o">!=</span> <span class="nx">InteractionModelTypes</span><span class="p">.</span><span class="nx">InteractionModelTypeKinect</span><span class="p">){</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+	
+	<span class="nx">GestureListener</span><span class="p">.</span><span class="nx">mouseMove</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">position</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">Kinesis</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span>
+			<span class="nx">Kinesis</span><span class="p">.</span><span class="nx">cursor</span><span class="p">(</span><span class="nx">position</span><span class="p">);</span>
+			
+	  <span class="nx">cursor</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;cursor&#39;</span><span class="p">);</span>
+	  
+	  <span class="nx">cursor</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="mi">45</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">;</span>
+	  <span class="nx">cursor</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="mi">45</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">_element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">elementFromPoint</span><span class="p">(</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">position</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">_element</span><span class="p">.</span><span class="nx">className</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="s1">&#39;interactive&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+      <span class="kd">var</span> <span class="nx">_currentElement</span> <span class="o">=</span> <span class="nx">_element</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">((</span><span class="nx">Kinesis</span><span class="p">.</span><span class="nx">lastElement</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="nx">Kinesis</span><span class="p">.</span><span class="nx">lastElement</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="nx">_currentElement</span><span class="p">)){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">Kinesis</span><span class="p">.</span><span class="nx">lastElement</span><span class="p">.</span><span class="nx">length</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+          <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">lastElement</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">className</span> <span class="o">=</span> <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">lastElement</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">className</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span> <span class="sr">/(?:^|\s)active(?!\S)/</span> <span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="p">);</span>
+          <span class="nx">cursor</span><span class="p">.</span><span class="nx">deactivateCursorTimer</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">_currentElement</span><span class="p">.</span><span class="nx">className</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+          <span class="nx">_currentElement</span><span class="p">.</span><span class="nx">className</span> <span class="o">+=</span> <span class="s2">&quot; active&quot;</span><span class="p">;</span>
+        <span class="nx">activateCursorTimer</span><span class="p">(</span><span class="nx">cursor</span><span class="p">);</span>
+        <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">lastElement</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">_currentElement</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">Kinesis</span><span class="p">.</span><span class="nx">clickEventTimer</span><span class="p">){</span>          
+          <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">Kinesis</span><span class="p">.</span><span class="nx">clickEventTimer</span><span class="p">);</span>
+        <span class="p">};</span>
+
+        <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">clickEventTimer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+          <span class="nx">_currentElement</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="nx">_currentElement</span><span class="p">.</span><span class="nx">className</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span> <span class="sr">/(?:^|\s)active(?!\S)/</span> <span class="p">,</span> <span class="s1">&#39;&#39;</span> <span class="p">);</span>
+          <span class="nx">deactivateCursorTimer</span><span class="p">(</span><span class="nx">cursor</span><span class="p">);</span>
+          
+          <span class="k">try</span> <span class="p">{</span>
+            <span class="nx">_currentElement</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
+          <span class="p">}</span>
+          <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createEvent</span><span class="p">(</span><span class="s2">&quot;MouseEvents&quot;</span><span class="p">);</span>
+            <span class="nx">event</span><span class="p">.</span><span class="nx">initMouseEvent</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nb">window</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">_r</span> <span class="o">=</span> <span class="o">!</span><span class="nx">_currentElement</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+          <span class="p">}</span>
+          
+          <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">lastElement</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">_currentElement</span><span class="p">);</span>
+          <span class="p">},</span> <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">holdEventDelay</span> <span class="p">);</span>
+        <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">Kinesis</span><span class="p">.</span><span class="nx">clickEventTimer</span><span class="p">){</span>
+        <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">lastElement</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">_currentElement</span><span class="p">);</span>
+        <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">Kinesis</span><span class="p">.</span><span class="nx">clickEventTimer</span><span class="p">);</span>
+        <span class="nx">deactivateCursorTimer</span><span class="p">(</span><span class="nx">cursor</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+  <span class="p">};</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">SwipeGestureListener</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">SwipeGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">gestureType</span>  <span class="o">=</span> <span class="nx">GestureTypes</span><span class="p">.</span><span class="nx">GestureTypeSwipe</span><span class="p">,</span>
+	<span class="nx">SwipeGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">joints</span>       <span class="o">=</span> <span class="p">[</span><span class="nx">JointTypes</span><span class="p">.</span><span class="nx">JointTypeHandRight</span><span class="p">,</span> <span class="nx">JointTypes</span><span class="p">.</span><span class="nx">JointTypeHandLeft</span><span class="p">],</span>
+	<span class="nx">SwipeGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">directions</span>   <span class="o">=</span> <span class="p">[</span><span class="nx">GestureDirections</span><span class="p">.</span><span class="nx">GestureDirectionLeft</span><span class="p">,</span> <span class="nx">GestureDirections</span><span class="p">.</span><span class="nx">GestureDirectionRight</span><span class="p">,</span> <span class="nx">GestureDirections</span><span class="p">.</span><span class="nx">GestureDirectionUp</span><span class="p">,</span> <span class="nx">GestureDirections</span><span class="p">.</span><span class="nx">GestureDirectionDown</span><span class="p">];</span>
+  <span class="nx">SwipeGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">eventDelay</span>   <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+  <span class="nx">SwipeGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">accuracy</span>     <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">SwipeGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">bounds</span>       <span class="o">=</span> <span class="p">{</span><span class="nx">min</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">max</span><span class="o">:</span> <span class="kc">null</span><span class="p">};</span>
+  <span class="nx">SwipeGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toFire</span>       <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">SwipeGestureListener</span><span class="p">.</span><span class="nx">inheritsFrom</span><span class="p">(</span><span class="nx">GestureListener</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">HoldGestureListener</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">HoldGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">gestureType</span>  <span class="o">=</span> <span class="nx">GestureTypes</span><span class="p">.</span><span class="nx">GestureTypeHold</span><span class="p">,</span>
+	<span class="nx">HoldGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">joints</span>       <span class="o">=</span> <span class="p">[</span><span class="nx">JointTypes</span><span class="p">.</span><span class="nx">JointTypeHandRight</span><span class="p">,</span> <span class="nx">JointTypes</span><span class="p">.</span><span class="nx">JointTypeHandLeft</span><span class="p">],</span>
+	<span class="nx">HoldGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">directions</span>   <span class="o">=</span> <span class="p">[</span><span class="nx">GestureDirections</span><span class="p">.</span><span class="nx">GestureDirectionLeft</span><span class="p">,</span> <span class="nx">GestureDirections</span><span class="p">.</span><span class="nx">GestureDirectionRight</span><span class="p">,</span> <span class="nx">GestureDirections</span><span class="p">.</span><span class="nx">GestureDirectionUp</span><span class="p">,</span> <span class="nx">GestureDirections</span><span class="p">.</span><span class="nx">GestureDirectionDown</span><span class="p">];</span>
+  <span class="nx">HoldGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">eventDelay</span>   <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+  <span class="nx">HoldGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">accuracy</span>     <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">HoldGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">bounds</span>       <span class="o">=</span> <span class="p">{</span><span class="nx">min</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">max</span><span class="o">:</span> <span class="kc">null</span><span class="p">};</span>
+  <span class="nx">HoldGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toFire</span>       <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">HoldGestureListener</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">selector</span>     <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">HoldGestureListener</span><span class="p">.</span><span class="nx">inheritsFrom</span><span class="p">(</span><span class="nx">GestureListener</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <p>GESTURE LISTENER JS ENDS</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <p>KINESIS JS STARTS</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <p><em>Version 0.1</em>    </p>
+
+<p>Kinesis.js is the base class which is managing all the added gestures and handling the events recieved from Kinect.js <br />
+Depends on the Kinect class</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">Kinesis</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <p>Where all the gestures added will be stored  </p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">kinectStatus</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">gestureDetection</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>  
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">pollInterval</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">;</span>
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">gestures</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">cursor</span>   <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">lastElement</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">holdEventDelay</span> <span class="o">=</span> <span class="mi">4000</span><span class="p">;</span>	
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">clickEventTimer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">debug</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">keyword</span>       <span class="o">=</span> <span class="s2">&quot;KINESIS WINDOW ONE&quot;</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p>When multiple gestures can work in a predefined order</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">is_series</span>     <span class="o">=</span> <span class="kc">false</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p>When multiple gestures can work simultaneously to fire an event</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">is_parallel</span>   <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">streamCounter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">canvas</span>        <span class="o">=</span> <span class="s2">&quot;#kinesis&quot;</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>This is called whenever a new instance of the class is created <br />
+<em>Parameter is the parsed JSON String which comes from the Kinect Class</em>    </p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">this</span><span class="p">.</span><span class="nx">initialize</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span> <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">gestureDetection</span> <span class="o">==</span> <span class="kc">true</span> <span class="o">&amp;&amp;</span> <span class="nx">data</span> <span class="p">)</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">matchGestures</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="p">};</span>
+  
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">onStatusChange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+  <span class="p">};</span>
+	</pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p>Responsible for binding gestures to be matched when events are recieved from Kinect.js <br />
+<em>Parameter is an object of the Gesture Class</em>    </p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">addGesture</span>	<span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gesture</span><span class="p">)</span> <span class="p">{</span>
+	  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">gestures</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">gesture</span><span class="p">);</span>
+	<span class="p">};</span>
+
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">setStream</span>		<span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    
+  <span class="p">};</span>
+
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">resetStream</span>	<span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    
+  <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-26">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-26">&#182;</a>               </div>               <p>Responsible for matching the recieved event from Kinect class with the already binded gestures <br />
+<em>Parameter contains the parsed JSON event from the Kinect Class</em></p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">matchGestures</span><span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">gestures</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">eventType</span>  <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">gestures</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">type</span><span class="p">;</span>
+      <span class="nx">joints</span>     <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">gestures</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">joints</span><span class="p">;</span>
+      <span class="nx">direction</span>  <span class="o">=</span> <span class="p">[</span><span class="nx">data</span><span class="p">.</span><span class="nx">gestures</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">direction</span><span class="p">];</span>
+      <span class="nx">accuracy</span>   <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">gestures</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">accuracy</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">gestures</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">origin</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">origin</span>  <span class="o">=</span> <span class="p">{};</span>
+        <span class="nx">origin</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">gestures</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">origin</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+        <span class="nx">origin</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">gestures</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">origin</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+        <span class="nx">origin</span><span class="p">.</span><span class="nx">z</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">gestures</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">origin</span><span class="p">.</span><span class="nx">z</span><span class="p">;</span> 
+      <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">positionX</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">cursor</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+      <span class="nx">positionY</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">cursor</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+      <span class="nx">positionZ</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">cursor</span><span class="p">.</span><span class="nx">z</span><span class="p">;</span> 
+    <span class="p">}</span>
+    
+    <span class="k">for</span><span class="p">(</span><span class="nx">index</span> <span class="k">in</span> <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">gestures</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">gesture</span> <span class="o">=</span> <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">gestures</span><span class="p">[</span><span class="nx">index</span><span class="p">];</span></pre></div>             </td>           </tr>                               <tr id="section-27">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-27">&#182;</a>               </div>               <p>Gesture Matching conditions</p>             </td>             <td class="code">               <div class="highlight"><pre>      <span class="k">if</span> <span class="p">(</span><span class="nx">checkBounds</span><span class="p">(</span><span class="nx">origin</span><span class="p">,</span> <span class="nx">gesture</span><span class="p">.</span><span class="nx">bounds</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">gesture</span><span class="p">.</span><span class="nx">gestureType</span> <span class="o">==</span> <span class="nx">eventType</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Gesture Detected&quot;</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">((</span><span class="nx">joints</span><span class="p">.</span><span class="nx">intersect</span><span class="p">(</span><span class="nx">gesture</span><span class="p">.</span><span class="nx">joints</span><span class="p">)).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Allowed Joint Detected&quot;</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">((</span><span class="nx">direction</span><span class="p">.</span><span class="nx">intersect</span><span class="p">(</span><span class="nx">gesture</span><span class="p">.</span><span class="nx">directions</span><span class="p">)).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Allowed Direction Detected&quot;</span><span class="p">);</span>
+              <span class="nx">gesture</span><span class="p">.</span><span class="nx">toFire</span><span class="p">(</span><span class="nx">gesture</span><span class="p">);</span>
+              <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+              <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Direction did not match&quot;</span><span class="p">);</span>
+              <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+          <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Joint did not match&quot;</span><span class="p">);</span>
+            <span class="k">continue</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Gesture not found&quot;</span><span class="p">);</span>
+          <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="k">continue</span><span class="p">;</span>
+      <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-28">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-28">&#182;</a>               </div>               <p>Gesture matching ends</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="p">}</span>
+    <span class="nx">setKinesisTimer</span><span class="p">();</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">checkBounds</span><span class="p">(</span><span class="nx">origin</span><span class="p">,</span> <span class="nx">bounds</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">matched</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">((</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">min</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">max</span> <span class="o">==</span> <span class="kc">null</span><span class="p">))</span>
+    <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;No bounds specified for gesture&quot;</span><span class="p">);</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">min</span> <span class="o">==</span>  <span class="kc">null</span> <span class="o">||</span> <span class="p">(</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">min</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;=</span> <span class="nx">origin</span><span class="p">.</span><span class="nx">x</span> <span class="o">&amp;&amp;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">min</span><span class="p">.</span><span class="nx">y</span> <span class="o">&lt;=</span> <span class="nx">origin</span><span class="p">.</span><span class="nx">y</span> <span class="o">&amp;&amp;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">min</span><span class="p">.</span><span class="nx">z</span> <span class="o">&lt;=</span> <span class="nx">origin</span><span class="p">.</span><span class="nx">z</span><span class="p">))</span>
+      <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Minimum bounds satisfied&quot;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Minimum bounds not satisfied&quot;</span><span class="p">);</span>
+      <span class="nx">matched</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">max</span> <span class="o">==</span>  <span class="kc">null</span> <span class="o">||</span> <span class="p">(</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">max</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;=</span> <span class="nx">origin</span><span class="p">.</span><span class="nx">x</span> <span class="o">&amp;&amp;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">max</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;=</span> <span class="nx">origin</span><span class="p">.</span><span class="nx">y</span> <span class="o">&amp;&amp;</span> <span class="nx">bounds</span><span class="p">.</span><span class="nx">max</span><span class="p">.</span><span class="nx">z</span> <span class="o">&gt;=</span> <span class="nx">origin</span><span class="p">.</span><span class="nx">z</span><span class="p">))</span>
+      <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Max bounds satisfied&quot;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Max bounds not satisfied&quot;</span><span class="p">);</span>
+      <span class="nx">matched</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">matched</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">setKinesisTimer</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Gesture Listener Timeout&quot;</span><span class="p">);</span>
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">gestureDetection</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="s2">&quot;resetKinesisTimer()&quot;</span><span class="p">,</span> <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">pollInterval</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">resetKinesisTimer</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Gesture Listener Timer Started&quot;</span><span class="p">);</span>
+  <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">gestureDetection</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-29">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-29">&#182;</a>               </div>               <p>Compute the intersection of n arrays
+<em>Parameter is an Array of N Arrays being sent to it</em> <br />
+<em>Returns back a single array which is an intersection of all arrays</em>    </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">intersect</span> <span class="o">=</span>
+  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+      <span class="k">return</span> <span class="p">[];</span>
+    <span class="kd">var</span> <span class="nx">a1</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">a2</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="nx">a2</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="nx">n</span><span class="p">];</span>
+      <span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">a1</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">l2</span> <span class="o">=</span> <span class="nx">a2</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span><span class="nx">l2</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">a1</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="nx">a2</span><span class="p">[</span><span class="nx">j</span><span class="p">])</span>
+            <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">a1</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="nx">a1</span> <span class="o">=</span> <span class="nx">a</span><span class="p">;</span>
+      <span class="nx">n</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">a</span><span class="p">.</span><span class="nx">unique</span><span class="p">();</span>
+  <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-30">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-30">&#182;</a>               </div>               <p>Return a new array with duplicate values removed <br />
+<em>Parameter is an array from which the duplicates are to be removed</em> <br />
+<em>Returns a single array with duplicates removed</em>    </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">unique</span> <span class="o">=</span>
+  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span><span class="o">=</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span><span class="nx">l</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">===</span> <span class="k">this</span><span class="p">[</span><span class="nx">j</span><span class="p">])</span>
+          <span class="nx">j</span> <span class="o">=</span> <span class="o">++</span><span class="nx">i</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">a</span><span class="p">;</span>
+  <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-31">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-31">&#182;</a>               </div>               <p>Used to keep track of the cursor hold position. Note that cursor is essentially the hand position being sent from the Kinesis Server</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">cursorTimer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-32">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-32">&#182;</a>               </div>               <p>Activates the cursor timer which happens only when the hand pointer stops over a DOM element with class "interactive". Animation is also added to give feedback to the user. <br />
+<em>Parameter is the canvas element "cursor"</em> <br />
+<em>Returns back the canvas element.</em>   </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">activateCursorTimer</span><span class="p">(</span><span class="nx">me</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">me</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">startingAngle</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">incrementAngle</span> <span class="o">=</span> <span class="nx">startingAngle</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">endingAngle</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">counterclockwise</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  
+  <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">);</span>
+  
+  <span class="nx">context</span><span class="p">.</span><span class="nx">shadowOffsetX</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="nx">context</span><span class="p">.</span><span class="nx">shadowOffsetY</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="nx">context</span><span class="p">.</span><span class="nx">shadowBlur</span>    <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+  <span class="nx">context</span><span class="p">.</span><span class="nx">shadowColor</span>   <span class="o">=</span> <span class="s1">&#39;rgba(0, 0, 0, 0.5)&#39;</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">cursorTimer</span><span class="p">){</span>
+    <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">cursorTimer</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">cursorTimer</span><span class="o">=</span><span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">incrementAngle</span> <span class="o">&gt;</span> <span class="nx">endingAngle</span><span class="p">){</span>
+      <span class="nx">incrementAngle</span> <span class="o">=</span> <span class="nx">startingAngle</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+      <span class="nx">incrementAngle</span> <span class="o">=</span> <span class="nx">incrementAngle</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.05</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span>
+    <span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-33">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-33">&#182;</a>               </div>               <p>Draw loading around the canvas element</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">centerX</span><span class="p">,</span> <span class="nx">centerY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startingAngle</span><span class="p">,</span> <span class="nx">incrementAngle</span><span class="p">,</span> <span class="nx">counterclockwise</span><span class="p">);</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">lineWidth</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">strokeStyle</span> <span class="o">=</span> <span class="s1">&#39;E5F3F9&#39;</span><span class="p">;</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
+    <span class="nx">context</span><span class="p">.</span><span class="nx">closePath</span><span class="p">();</span>
+  <span class="p">},</span> <span class="mi">50</span><span class="p">);</span>
+  
+  <span class="k">return</span> <span class="nx">me</span><span class="p">;</span>
+<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-34">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-34">&#182;</a>               </div>               <p>Deactivates the cursor timer when either the hand pointer was moved out of the "interactive" DOM element, or the event is fired. <br />
+*Parameter is the canvas element
+*Returns back the canvas element</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">deactivateCursorTimer</span><span class="p">(</span><span class="nx">me</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">cursorTimer</span><span class="p">){</span>
+    <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">cursorTimer</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">me</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&quot;2d&quot;</span><span class="p">);</span>
+  <span class="nx">context</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">me</span><span class="p">;</span>
+<span class="p">}</span>  
+  </pre></div>             </td>           </tr>                               <tr id="section-35">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-35">&#182;</a>               </div>               <p><em>Layout Class</em> <br />
+Responsible for setting the layout of the page correctly. This can easily be overridden to incorporate the views</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">Layout</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">Layout</span><span class="p">.</span><span class="nx">pageSize</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">width</span><span class="o">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">innerHeight</span> <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">insertCursor</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">_cursor</span>       <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">);</span>
+  <span class="nx">_cursor</span><span class="p">.</span><span class="nx">id</span>        <span class="o">=</span> <span class="s1">&#39;cursor&#39;</span><span class="p">;</span>
+  <span class="nx">_cursor</span><span class="p">.</span><span class="nx">width</span>     <span class="o">=</span> <span class="s1">&#39;100&#39;</span><span class="p">;</span>
+  <span class="nx">_cursor</span><span class="p">.</span><span class="nx">height</span>    <span class="o">=</span> <span class="s1">&#39;100&#39;</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">hand</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">);</span>
+  <span class="nx">hand</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s1">&#39;hand&#39;</span><span class="p">;</span>
+  
+  <span class="nx">_cursor</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">hand</span><span class="p">);</span>
+  
+  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">_cursor</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">originalInit</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-36">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-36">&#182;</a>               </div>               <p>Initialize the Layout and Kinect Classes</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">insertCursor</span><span class="p">();</span>
+    <span class="nx">myLayout</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Layout</span><span class="p">();</span>
+    <span class="nx">kinect</span> <span class="o">=</span> <span class="nx">Kinect</span><span class="p">();</span>
+    <span class="nx">Kinect</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">originalInit</span><span class="p">)</span>
+    	<span class="nx">originalInit</span><span class="p">();</span>
+  <span class="p">},</span> <span class="mi">10</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">Kinesis</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-37">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-37">&#182;</a>               </div>               <p>KINESIS JS ENDS</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-38">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-38">&#182;</a>               </div>               <p>KINECT JS STARTS</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-39">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-39">&#182;</a>               </div>               <p><em>Version 0.1</em>    </p>
+
+<p>Kinect.js is the class responsible for connecting to the Kinesis Windows service which interacts directly with the Kinect</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">Kinect</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">retryCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nx">addMessageBar</span><span class="p">();</span>
+  <span class="nx">connectionOpened</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  
+  <span class="nx">Kinect</span><span class="p">.</span><span class="nx">onConnectionError</span>   <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">updateMessageBar</span><span class="p">(</span><span class="nx">KinesisMessages</span><span class="p">.</span><span class="nx">ServerNotConnected</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="nx">Kinect</span><span class="p">.</span><span class="nx">onConnectionSuccess</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">updateMessageBar</span><span class="p">(</span><span class="nx">KinesisMessages</span><span class="p">.</span><span class="nx">ServerConnected</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+    <span class="nx">updateMessageBar</span><span class="p">(</span><span class="nx">KinesisMessages</span><span class="p">.</span><span class="nx">KinectNotConnected</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+  <span class="p">};</span>
+  
+  <span class="nx">Kinect</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">support</span> <span class="o">=</span> <span class="s2">&quot;MozWebSocket&quot;</span> <span class="k">in</span> <span class="nb">window</span> <span class="o">?</span> <span class="s1">&#39;MozWebSocket&#39;</span> <span class="o">:</span> <span class="p">(</span><span class="s2">&quot;WebSocket&quot;</span> <span class="k">in</span> <span class="nb">window</span> <span class="o">?</span> <span class="s1">&#39;WebSocket&#39;</span> <span class="o">:</span> <span class="kc">null</span><span class="p">);</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-40">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-40">&#182;</a>               </div>               <p>Only if the browser being used does not support WebSockets</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="k">if</span> <span class="p">(</span><span class="nx">support</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Your browser cannot support WebSockets!&quot;</span><span class="p">);</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-41">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-41">&#182;</a>               </div>               <p>Create a new websocket and connect</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">window</span><span class="p">[</span><span class="nx">support</span><span class="p">](</span><span class="s1">&#39;ws://127.0.0.1:2011/&#39;</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-42">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-42">&#182;</a>               </div>               <p>Called only when any data comes from </p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">_data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">_data</span><span class="p">.</span><span class="nx">Kinect</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span><span class="p">(</span><span class="nx">_data</span><span class="p">.</span><span class="nx">Kinect</span> <span class="o">==</span> <span class="s2">&quot;Connected&quot;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">updateMessageBar</span><span class="p">(</span><span class="nx">KinesisMessages</span><span class="p">.</span><span class="nx">KinectConnected</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+            <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">kinectStatus</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+          <span class="p">}</span>
+          <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">updateMessageBar</span><span class="p">(</span><span class="nx">KinesisMessages</span><span class="p">.</span><span class="nx">KinectNotConnected</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+            <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">kinectStatus</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+          <span class="p">}</span>
+          <span class="nx">Kinesis</span><span class="p">.</span><span class="nx">onStatusChange</span><span class="p">(</span><span class="nx">_data</span><span class="p">.</span><span class="nx">Kinect</span><span class="p">);</span>
+        <span class="p">};</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">_data</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">GestureListener</span><span class="p">.</span><span class="nx">mouseMove</span><span class="p">({</span> <span class="nx">x</span><span class="o">:</span> <span class="nx">Layout</span><span class="p">.</span><span class="nx">pageSize</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="nx">_data</span><span class="p">.</span><span class="nx">cursor</span><span class="p">.</span><span class="nx">x</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">Layout</span><span class="p">.</span><span class="nx">pageSize</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="nx">_data</span><span class="p">.</span><span class="nx">cursor</span><span class="p">.</span><span class="nx">y</span> <span class="o">*</span><span class="mf">1.5</span><span class="o">/</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">z</span><span class="o">:</span><span class="nx">_data</span><span class="p">.</span><span class="nx">cursor</span><span class="p">.</span><span class="nx">z</span> <span class="p">});</span>
+        <span class="p">}</span>
+        <span class="nx">kinesis</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span><span class="nx">_data</span><span class="p">);</span>
+        
+      <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+        <span class="cm">/* console.info(evt.data);</span>
+<span class="cm">         parsing exception*/</span>
+      <span class="p">}</span>
+
+    <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-43">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-43">&#182;</a>               </div>               <p>After the connection is established, the method is called</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="nx">retryCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="nx">connectionOpened</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="nx">Kinect</span><span class="p">.</span><span class="nx">onConnectionSuccess</span><span class="p">();</span>
+      <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Connection Opened&quot;</span><span class="p">);</span>
+    <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-44">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-44">&#182;</a>               </div>               <p>After the connection is closed, the method is called</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">ws</span><span class="p">.</span><span class="nx">onclose</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">connectionOpened</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">connectionOpened</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="nx">Kinect</span><span class="p">.</span><span class="nx">onConnectionError</span><span class="p">();</span>
+      <span class="p">}</span>
+      <span class="k">else</span>
+        <span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Connection Closed&quot;</span><span class="p">);</span>
+      <span class="nx">retryOpeningWebSocket</span><span class="p">();</span>
+    <span class="p">};</span>
+    
+    <span class="nb">window</span><span class="p">.</span><span class="nx">onbeforeunload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">ws</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+    <span class="p">};</span>
+  <span class="p">};</span>
+  
+  <span class="kd">var</span> <span class="nx">retryOpeningWebSocket</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">retryCount</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">retryCount</span> <span class="o">&lt;</span> <span class="mi">10</span> <span class="p">)</span>
+      <span class="nx">Kinect</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">retryCount</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="nx">updateMessageBar</span><span class="p">(</span><span class="nx">KinesisMessages</span><span class="p">.</span><span class="nx">ServerNotConnected</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-45">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-45">&#182;</a>               </div>               <p>Window Onload event to initialize everything. This method is defined in the Kinesis.js file.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nx">init</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-46">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-46">&#182;</a>               </div>               <p>KINECT JS ENDS</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
