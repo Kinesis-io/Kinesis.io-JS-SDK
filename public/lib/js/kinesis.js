@@ -274,7 +274,6 @@ function insertDepthImage() {
   _depthImage.id      = 'depthImage';
   _depthImage.width   = '64';
   _depthImage.height  = '48';
-  _depthImage.src     = "lib/images/hand.png"
   document.body.appendChild(_depthImage);
 };
 
