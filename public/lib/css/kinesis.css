@@ -59,3 +59,7 @@ body{
   background: url("../../lib/images/closeBtn.png") no-repeat scroll right top transparent;
 }
 
+#depthImage {
+	display:none;
+}
+

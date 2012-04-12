@@ -12,6 +12,23 @@ function storifyCallback2Magazine(data) {
 	});
 };
 
+function five100pxCallback2Magazine(data) {
+	console.log("hello");
+	//var content = '"' + data + '"';
+	// var pics = [];
+	// console.log(content.photos);
+	// $.each(content.photos, function(index, pic) {
+	// 	pics.push({
+	// 									caption: "", 
+	// 									content: "<img src='" + pic.image_url + "'"
+	// 							 });
+	// });
+	// $('#kui-grid-view').gridfy({
+	// 	content_json: pics,
+	// 	sizeOfGrid: {height: '590px', width: '550px'},
+	// });
+};
+
 function createContentForMagazine(story) {
 	html = "";
 	

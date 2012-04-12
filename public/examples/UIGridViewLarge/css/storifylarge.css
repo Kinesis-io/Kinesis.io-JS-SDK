@@ -87,3 +87,12 @@ body {
   -o-transition: all 0.5s ease-in; 
   -ms-transition: all 0.5s ease-in;
 }
+
+.tile {
+	overflow: hidden;
+	margin-right: 20px;
+}
+
+.tile img {
+	height: 100%;
+}

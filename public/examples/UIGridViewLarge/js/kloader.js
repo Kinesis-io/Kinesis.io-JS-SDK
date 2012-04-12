@@ -7,9 +7,9 @@ function loadPages() {
 	if (newPageLoad && noOfPagesLoaded <= noOfPagesToLoad) {
 		var head 		= document.getElementsByTagName('head')[0];
 		var script 	= document.createElement('script');
-	  script.type	= 'text/javascript';
-	  script.src	= request_url;
-	  head.appendChild(script);
+		script.type	= 'text/javascript';
+		script.src	= request_url;
+		head.appendChild(script);
 	}
 	else {
 		clearLoadInterval();
