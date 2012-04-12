@@ -1,10 +1,11 @@
 //returns back the base64 string for the screenshot in a callback
-function screenshot(callback) {
+function screenshot(htmlobj, callback) {
 	var date = new Date(),
     timer = date.getTime();
     options = {};
-    options.elements = document.getElementsByTagName("body");
+    options.elements = [htmlobj];
     html2canvas.logging = false;
+
     options.complete = function(images){
         var queue = html2canvas.Parse(this[0], images, options),
         $canvas = $(html2canvas.Renderer(queue, options)),
@@ -14,17 +15,26 @@ function screenshot(callback) {
 		else
 			console.info("Callback not Specified");
     };
-    html2canvas.Preload(document.body,  options);
+    html2canvas.Preload(htmlobj,  options);
 }
 
-function uploadScreenShot() {
-	screenshot( function(data) {
+function uploadScreenShot(htmlobj) {
+	screenshot(htmlobj, function(data) {
 	$.ajax({
 		type: 'POST',
 		url: '/upload',
 		data: {obj:data},
 		success: function(success) {
-			console.info(success);
+			var _flashDiv     = document.createElement('div');
+  			_flashDiv.id      = 'flashDiv';
+  			_flashDiv.setAttribute('style', 'opacity: 0; background-color: #ffffff; width:' + $(htmlobj).width() + 'px; height: ' + $(htmlobj).height() + 'px; z-index: 500; position: absolute');
+  			htmlobj.appendChild(_flashDiv);
+
+			$(_flashDiv).animate({ "opacity" : "1" }, 200, function() {
+				$(_flashDiv).animate({"opacity" : "0"}, 200, function() {
+					$(_flashDiv).remove();
+				});
+			});
 		}
 	});
  	//newWindow=window.open(data, 'newDocument');
