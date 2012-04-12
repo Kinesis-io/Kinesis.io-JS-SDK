@@ -24,7 +24,7 @@
   height: 90px;
   pointer-events:none;
   background:url(../../lib/images/hand.png) no-repeat center center;
-  z-index: 1001;
+  z-index: 9001;
 }
 /* cursor styles ends */
 
@@ -34,8 +34,9 @@
   right: 5px;
   bottom: 5px;
   pointer-events:none;
-  z-index: 1000;
+  z-index: 9000;
   background-color: #000000;
+  display: none;
 }
 /* depth image styles ends */
 

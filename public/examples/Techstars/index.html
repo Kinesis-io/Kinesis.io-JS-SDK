@@ -18,9 +18,9 @@
           <img src="images/boston.jpg" />
           <a class="caption" href="boston.html"><span class="interactive">Boston</span></a>
         </div>
-        <div class="tileItem">
-          <img src="images/boulder.jpg"/>
-          <a class="caption" href="boulder.html"><span class="interactive">Boulder</span></a>
+        <div class="tileItem" onclick="window.location='boulder.html'">
+          <img src="images/boulder.jpg" class="interactive"/>
+          <span class="caption">Boulder</span>
         </div>
       </div>  
       <div class="row">
@@ -41,7 +41,15 @@
     <script src="lib/js/gesture-listener.js"></script>
     <script src="lib/js/kinesis.js"></script>
     <script src="lib/js/kinect.js"></script>
+	  <script type="text/javascript" src="js/html2canvas.js"></script>
+	  <script type="text/javascript" src="js/jquery.plugin.html2canvas.js"></script>
+    <script type="text/javascript" src="js/screenshot.js"></script>
   	<script>
+
+      function movement(position) {
+        //if (position.z < -0.5) { uploadScreenShot(); };
+      }
+
   	  $(function(){
         // wrap the gridHolder in a table and all the tileItems inside td.tile
         $("#gridHolder").wrapInner("<ul></ul>");
@@ -50,6 +58,21 @@
       });
 
       var kinesis = new Kinesis;
+      Kinesis.cursor = movement;
+
+      function swipeDownControl(gesture) {
+        uploadScreenShot(document.body);
+      }
+
+      // create swipe down gesture
+      var downGesture         = new SwipeGestureListener("myswipeDown");
+      // call to action for swipe left
+      downGesture.toFire      = swipeDownControl;
+      // allowed joints for gesture
+      downGesture.joints      = [JointTypes.JointTypeHandLeft, JointTypes.JointTypeHandRight]; //both hands
+      // allowed direction for gesture
+      downGesture.directions  = [GestureDirections.GestureDirectionDown]; // down
+      kinesis.addGesture(downGesture);
     </script>
   </body>
 </html>

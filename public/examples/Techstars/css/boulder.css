@@ -57,12 +57,23 @@ body {
   width: 64px;
   height: 64px;
   margin-top: 12px;
-  text-indent: -999990px;
   background: url(../images/back.png) no-repeat left top;
 }
 
+#navigation .backBttn a span {
+  text-indent: -999990px;
+  display: block;
+}
+
 #fancybox-close {
-	text-indent: -9999px;
+	
+}
+
+#fancybox-close label {
+  width: 64px;
+  height: 64px;
+  display: block;
+  text-indent: -9999px;
 }
 
 .companyModal {
@@ -93,7 +104,10 @@ body {
 }
 
 table {
-   position:absolute; top:21%; height:240px; margin-top:-13px;
+   position:absolute; 
+   /*top:45% !important;
+   height:240px; */
+   margin-top:50px;
 }
 
 #fancybox-wrap {
@@ -153,9 +167,9 @@ table {
   background-size: 100% auto;
   background: url(../images/say.png) no-repeat left top;
   bottom: 20px;
-  height: 65px;
+  height: 67px;
   left: 20px;
-  position: absolute;
+  position: fixed;
   width: 75px;
   z-index: 1;
   text-indent: -99999px;

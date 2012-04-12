@@ -10,14 +10,14 @@
   </head>
   <body id="boulder">
     <ul id="navigation">
-      <li class="backBttn"><a href="index.html">Back</a></li>
+      <li class="backBttn"><a href="index.html"><span class="interactive">Back</a></span></li>
       <li><a href="#twentyEleven" id="2011">2011</a></li>
       <li><a href="#twentyTen" id="2010">2010</a></li>
       <li><a href="#twentyNine" id="2009">2009</a></li>
       <li><a href="#twentyEight" id="2008">2008</a></li>
       <li><a href="#twentySeven" id="2007">2007</a></li>
     </ul>
-    <div id="mic">&nbs;</div>
+    <div id="mic">&nbsp;</div>
     <div id="gridHolder">      
       <div class="tileItem" id="twentyEleven" data-id="2011">
         <a href="#creative_brain">
@@ -128,8 +128,31 @@
     <script src="lib/js/kinesis.js"></script>
     <script src="lib/js/kinect.js"></script>
   	<script src="js/horizontal-scroll.js"></script>
-  	
+  	<script type="text/javascript" src="js/html2canvas.js"></script>
+    <script type="text/javascript" src="js/jquery.plugin.html2canvas.js"></script>
+    <script type="text/javascript" src="js/screenshot.js"></script>
   	<script>
+
+      function movement(position) {
+        if (position.z < -0.5) { uploadScreenShot(); };
+      }
+
+      Kinesis.cursor = movement;
+
+      function swipeDownControl(gesture) {
+        uploadScreenShot($('td.active')[0]);
+      }
+
+      // create swipe down gesture
+      var downGesture         = new SwipeGestureListener("myswipeDown");
+      // call to action for swipe left
+      downGesture.toFire      = swipeDownControl;
+      // allowed joints for gesture
+      downGesture.joints      = [JointTypes.JointTypeHandLeft, JointTypes.JointTypeHandRight]; //both hands
+      // allowed direction for gesture
+      downGesture.directions  = [GestureDirections.GestureDirectionDown]; // down
+      kinesis.addGesture(downGesture);
+
   	  $(function(){
         // wrap the gridHolder in a table and all the tileItems inside td.tile
         $("#gridHolder").wrapInner("<table cellspacing='5'  vertical-align='middle'></table>");
