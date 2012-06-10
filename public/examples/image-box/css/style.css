@@ -1,0 +1,56 @@
+/*!
+  * kinesis.io Custom Stylesheet - Hello World
+  * http://kinesis.io/
+  *
+  * Copyright 2012, Kinesis.io
+  * http://kinesis.io/license
+  *
+  * Copyright 2012, NotionQ LLP
+  *
+  * Date: Thu Feb 23 15:53:00 2012 +0530
+*/
+
+/* beauty styles to kinesis.io starts */
+body {
+  min-height: 600px;
+  background: url("../images/bg.png") repeat 0 0 #474747;
+}
+
+#kinesis a {
+  color: #222222;
+  display: block;
+  font-size: 150px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 2px 3px #555555;
+  font-family: Tahoma,Helvetica,Arial,Sans-Serif;
+}
+
+#kinesis a:hover {
+  color: #222222;
+  text-shadow: 0 3px 8px #646464;
+}
+/* beauty styles to kinesis.io ends */
+
+/* extra cursor styles to display custom text with kinesis pointer starts */
+#cursor{
+  top: 250px;
+  left: 660px;
+  width: 110px;
+  color: #999999;
+  font-size: 27px;
+  text-align: center;
+  text-shadow: 0 3px 8px #2a2a2a;
+  font-family: Helvetica,Arial,Sans-Serif;
+}
+/* extra cursor styles to display custom text with kinesis pointer ends */
+
+#content {
+  width: 1020px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#content .grouped_elements {
+
+}
