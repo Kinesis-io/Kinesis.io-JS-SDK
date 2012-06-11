@@ -11,7 +11,7 @@
   </head>
   <body>
     <div id="content">
-      <a class="grouped_elements" rel="group1" href="images/1_b.jpg"><img src="images/1_b.jpg" alt="" class="interactive"/></a>
+      <a class="grouped_elements" rel="group1" href="images/1_b.jpg"><img src="images/1_b.jpg" alt="" class="interactive"</a>
       <a class="grouped_elements" rel="group1" href="images/2_b.jpg"><img src="images/2_b.jpg" alt="" class="interactive"/></a> 	
       <a class="grouped_elements" rel="group1" href="images/5_b.jpg"><img src="images/5_b.jpg" alt="" class="interactive"/></a> 
       <a class="grouped_elements" rel="group1" href="images/4_b.jpg"><img src="images/4_b.jpg" alt="" class="interactive"/></a>
@@ -22,7 +22,11 @@
     <script>
       var kinesis = new Kinesis; // initialize kinesis
       
-      $("a.grouped_elements").fancybox(); // initialize fancybox
+      $("a.grouped_elements").fancybox( {
+        'onComplete' : function(){
+          $("#fancybox-close").append("<label class='interactive'></label>"); // gesturize the close link by inserting a interactive child inside the close link
+        }
+      }); // initialize fancybox
     </script>
   </body>
 </html>
