@@ -23,21 +23,17 @@ Function.prototype.inheritsFrom = function( parentClassOrObject ){
 // This acts as the base class of all gesture listener classes.   
 // Developers can easily make instance variables, customize the gesture and then start listening to them
 function GestureListener() {
-	    
-	GestureListener.poll = function(){
-    if (InteractionModel != InteractionModelTypes.InteractionModelTypeKinect){
-      return;
-    }
-  };
 	
 	GestureListener.mouseMove = function(position){
 		if(Kinesis.cursor != null)
 			Kinesis.cursor(position);
-			
-	  cursor = document.getElementById('cursor');
 	  
-	  cursor.style.left = position.x - 45 + "px";
-	  cursor.style.top = position.y - 45 + "px";
+	  var x = position.x - 45;
+	  var y = position.y - 45;
+	  
+    Kinesis.pointer.style.webkitTransform = 'translate('+x+'px, '+y+'px)';
+    Kinesis.pointer.style.MozTransform = 'translate('+x+'px, '+y+'px)';
+	  
     var _element = document.elementFromPoint(position.x, position.y);
     if (_element.className.search('interactive') != -1){
       var _currentElement = _element.parentNode;

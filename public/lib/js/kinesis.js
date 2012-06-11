@@ -21,6 +21,8 @@ function Kinesis() {
   Kinesis.prototype.streamCounter = 0;
   Kinesis.prototype.canvas        = "#kinesis";
 
+  Kinesis.pointer = null;
+  
 	// This is called whenever a new instance of the class is created     
 	// *Parameter is the parsed JSON String which comes from the Kinect Class*    
   this.initialize = function(data) {
@@ -267,6 +269,7 @@ function insertCursor() {
   _cursor.appendChild(hand);
   
   document.body.appendChild(_cursor);
+  Kinesis.pointer = document.getElementById('cursor');
 };
 
 function insertDepthImage() {

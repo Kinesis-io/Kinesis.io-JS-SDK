@@ -137,21 +137,17 @@ Function.prototype.inheritsFrom = function( parentClassOrObject ){
 // This acts as the base class of all gesture listener classes.   
 // Developers can easily make instance variables, customize the gesture and then start listening to them
 function GestureListener() {
-	    
-	GestureListener.poll = function(){
-    if (InteractionModel != InteractionModelTypes.InteractionModelTypeKinect){
-      return;
-    }
-  };
 	
 	GestureListener.mouseMove = function(position){
 		if(Kinesis.cursor != null)
 			Kinesis.cursor(position);
-			
-	  cursor = document.getElementById('cursor');
 	  
-	  cursor.style.left = position.x - 45 + "px";
-	  cursor.style.top = position.y - 45 + "px";
+	  var x = position.x;
+	  var y = position.y;
+	  
+    Kinesis.pointer.style.webkitTransform = 'translate('+x+'px, '+y+'px)';
+    Kinesis.pointer.style.MozTransform = 'translate('+x+'px, '+y+'px)';
+	  
     var _element = document.elementFromPoint(position.x, position.y);
     if (_element.className.search('interactive') != -1){
       var _currentElement = _element.parentNode;
@@ -252,6 +248,8 @@ function Kinesis() {
   Kinesis.prototype.streamCounter = 0;
   Kinesis.prototype.canvas        = "#kinesis";
 
+  Kinesis.pointer = null;
+  
 	// This is called whenever a new instance of the class is created     
 	// *Parameter is the parsed JSON String which comes from the Kinect Class*    
   this.initialize = function(data) {
@@ -261,6 +259,11 @@ function Kinesis() {
   
   Kinesis.onStatusChange = function(message) {
     console.info(message);
+  };
+  
+  Kinesis.updateDepthImage = function(depthImage) {
+    var depthImage = document.getElementById('depthImage');
+    depthImage.src = "data:image/png;base64," + depthImage;
   };
 	
 	// Responsible for binding gestures to be matched when events are recieved from Kinect.js    
@@ -483,16 +486,25 @@ function Layout() {
 };
 
 function insertCursor() {
-  var _cursor       = document.createElement('canvas');
-  _cursor.id        = 'cursor';
-  _cursor.width     = '100';
-  _cursor.height    = '100';
+  var _cursor     = document.createElement('canvas');
+  _cursor.id      = 'cursor';
+  _cursor.width   = '100';
+  _cursor.height  = '100';
   var hand = document.createElement('div');
   hand.id = 'hand';
   
   _cursor.appendChild(hand);
   
   document.body.appendChild(_cursor);
+  Kinesis.pointer = document.getElementById('cursor');
+};
+
+function insertDepthImage() {
+  var _depthImage     = document.createElement('img');
+  _depthImage.id      = 'depthImage';
+  _depthImage.width   = '64';
+  _depthImage.height  = '48';
+  document.body.appendChild(_depthImage);
 };
 
 var originalInit = window.onload;
@@ -501,6 +513,7 @@ var originalInit = window.onload;
 function init() {
   setTimeout(function(){
     insertCursor();
+    //insertDepthImage();
     myLayout = new Layout();
     kinect = Kinect();
     Kinect.prototype.init();
@@ -513,7 +526,6 @@ function log(obj){
   if(Kinesis.debug)
     console.info(obj);
 }
-
 // KINESIS JS ENDS
 
 // KINECT JS STARTS
