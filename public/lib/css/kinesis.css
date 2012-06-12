@@ -18,8 +18,8 @@
 /* cursor styles starts */
 #cursor{
   position: absolute;
-  left: -200px;
-  top: -200px;
+  left: -90px;
+  top: -90px;
   width: 90px;
   height: 90px;
   pointer-events:none;
