@@ -149,16 +149,17 @@ function GestureListener() {
     Kinesis.pointer.style.MozTransform = 'translate('+x+'px, '+y+'px)';
 	  
     var _element = document.elementFromPoint(position.x, position.y);
+    
     if (_element.className.search('interactive') != -1){
       var _currentElement = _element.parentNode;
       if ((Kinesis.lastElement.length == 0) || (Kinesis.lastElement[0] != _currentElement)){
         if (Kinesis.lastElement.length != 0){
           Kinesis.lastElement[0].className = Kinesis.lastElement[0].className.replace( /(?:^|\s)active(?!\S)/ , '' );
-          cursor.deactivateCursorTimer();
+          Kinesis.pointer.deactivateCursorTimer();
         }
         if (_currentElement.className.search('active') == -1)
           _currentElement.className += " active";
-        activateCursorTimer(cursor);
+        activateCursorTimer(Kinesis.pointer);
         Kinesis.lastElement.push(_currentElement);
 
         if (Kinesis.clickEventTimer){          
@@ -167,7 +168,7 @@ function GestureListener() {
 
         Kinesis.clickEventTimer = setTimeout(function(){
           _currentElement.className = _currentElement.className.replace( /(?:^|\s)active(?!\S)/ , '' );
-          deactivateCursorTimer(cursor);
+          deactivateCursorTimer(Kinesis.pointer);
           
           try {
             _currentElement.click();
@@ -188,7 +189,7 @@ function GestureListener() {
       if (Kinesis.clickEventTimer){
         Kinesis.lastElement.pop(_currentElement);
         clearTimeout(Kinesis.clickEventTimer);
-        deactivateCursorTimer(cursor);
+        deactivateCursorTimer(Kinesis.pointer);
       }
     }
     
