@@ -185,7 +185,7 @@ function GestureListener() {
           setTimeout(function() {
             Kinesis.lastElement.pop(_currentElement);
           }, Kinesis.holdEventDelay );
-        }, 2000);
+        }, 500);
       }
     }
     else {
