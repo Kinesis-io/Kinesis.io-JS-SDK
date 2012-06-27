@@ -7,16 +7,16 @@ addMessageBar = function() {
 };
 
 updateMessageBar = function(msg, isDisplayed) {
-  var messageBar = document.getElementById('kmessage');
-  if(isDisplayed) {
-    messageBar.innerHTML = msg;
-    var closeNode = document.createElement('span');
-    closeNode.innerHTML  = "close";
-    closeNode.setAttribute('onclick', "document.body.removeChild(document.getElementById('kmessage'));");
-    closeNode.setAttribute('class', 'closeBtn');
-    messageBar.appendChild(closeNode);
-    messageBar.style.display = "block";
-  }
-  else
-    messageBar.style.display = "none";
+  // var messageBar = document.getElementById('kmessage');
+  // if(isDisplayed) {
+  //   messageBar.innerHTML = msg;
+  //   var closeNode = document.createElement('span');
+  //   closeNode.innerHTML  = "close";
+  //   closeNode.setAttribute('onclick', "document.body.removeChild(document.getElementById('kmessage'));");
+  //   closeNode.setAttribute('class', 'closeBtn');
+  //   messageBar.appendChild(closeNode);
+  //   messageBar.style.display = "block";
+  // }
+  // else
+  //   messageBar.style.display = "none";
 };

@@ -1,18 +1,23 @@
 // *Version 0.1*    
 //    
 // Kinect.js is the class responsible for connecting to the Kinesis Windows service which interacts directly with the Kinect
-var Kinect = function() {
-  lastPosX = null;
-  lastPosY = null;
-  lastPosZ = null; 
-  
-  lastDirection = null;
-  state = "";
-  
-  gestureTimer = null;
+var Kinect = function() {  
+  joints = new Array(20);
+  $(joints).each(function(i) {
+    joints[i] = {
+                  'jointId'       : i,
+                  'lastPosX'      : null,
+                  'lastPosY'      : null,
+                  'lastPosZ'      : null, 
+
+                  'state'         : "",
+                  'lastDirection' : null,
+                  'gestureTimer'  : null
+                };
+  });
   
   retryCount = 0;
-  addMessageBar();
+  // addMessageBar();
   connectionOpened = false;
   
   Kinect.onConnectionError   = function() {
@@ -23,60 +28,66 @@ var Kinect = function() {
     updateMessageBar(KinesisMessages.KinectNotConnected, true);
   };
   
-  Kinect.resetState = function() {
-    console.info(state);
-    state = "";
-    lastPosX = lastPosY = lastPosZ = null;
+  Kinect.resetState = function(i) {
+    var joint = joints[i];
+    // console.info("Joint: "+i + "  " +joint.state);
+    joint.state = "";
+    joint.lastPosX = joint.lastPosY = joint.lastPosZ = null;
   };
   
-  Kinect.outputCodes = function(currentPos) {
-    var output = "";
-    var x=currentPos.x,
-        y=currentPos.y,
-        z=currentPos.z;
+  Kinect.outputCodes = function(allData) {
+    $(allData[0]).each(function(i) {
+      currentJoint = joints[i];
+      var output = "";
+      var x=allData[0][i][0],
+          y=allData[0][i][1],
+          z=allData[0][i][2];
         
-    if (lastPosX === null) {
-      lastPosX = x;
-      lastPosY = y;
-      lastPosZ = z;
-      return this;
-    }
+      if (currentJoint.lastPosX === null) {
+        currentJoint.lastPosX = x;
+        currentJoint.lastPosY = y;
+        currentJoint.lastPosZ = z;
+        return this;
+      }
     
-    // console.info(lastPosX +" " +x);
+      // console.info(lastPosX +" " +x);
     
-    var dx = Math.abs(lastPosX - x);
-    var dy = Math.abs(lastPosY - y);
-    var dz = Math.abs(lastPosZ - z);
+      var dx = Math.abs(currentJoint.lastPosX - x);
+      var dy = Math.abs(currentJoint.lastPosY - y);
+      var dz = Math.abs(currentJoint.lastPosZ - z);
     
-    if (dx < 10 && dy < 10 && dz < 10){
-      return this;
-    }
+      if (dx < 20 && dy < 20 && dz < 20){
+        return this;
+      }
     
-    if (gestureTimer != undefined)
-      clearTimeout(gestureTimer);
+      if (currentJoint.gestureTimer != undefined)
+        clearTimeout(currentJoint.gestureTimer);
     
-    if (dx > dy && dx > dz) {
-      output += (x < lastPosX) ? "L" : "R";
-    }
+      if (dx > dy && dx > dz) {
+        output += (x < currentJoint.lastPosX) ? "L" : "R";
+      }
     
-    if (dy > dx && dy > dz) {
-      output += (y < lastPosY) ? "U" : "D";
-    }
+      if (dy > dx && dy > dz) {
+        output += (y < currentJoint.lastPosY) ? "U" : "D";
+      }
     
-    if (dz > dx && dz > dy) {
-      output += (z < lastPosZ) ? "I" : "O";
-    }
+      if (dz > dx && dz > dy) {
+        output += (z < currentJoint.lastPosZ) ? "I" : "O";
+      }
     
-    lastPosX = x;
-    lastPosY = y;
-    lastPosZ = z;
+      currentJoint.lastPosX = x;
+      currentJoint.lastPosY = y;
+      currentJoint.lastPosZ = z;
+      
+      // console.log(currentJoint.lastPosX + " " +currentJoint.lastPosY + " "+currentJoint.lastPosZ );
     
-    if (lastDirection === null || lastDirection != output) {
-      lastDirection = output;
-      state += output;
-    }
+      if (currentJoint.lastDirection === null || currentJoint.lastDirection != output) {
+        currentJoint.lastDirection = output;
+        currentJoint.state += output;
+      }
     
-    gestureTimer = setTimeout("Kinect.resetState()", 1000);
+      currentJoint.gestureTimer = setTimeout("Kinect.resetState("+i+")", 2000);
+    });
   };
   
   Kinect.prototype.init = function(){
@@ -95,29 +106,8 @@ var Kinect = function() {
     ws.onmessage = function (evt) {
       try {
         var _data = JSON.parse(evt.data);
-        redrawFigure(_data);
-        // if(_data.Kinect != undefined) {
-        //   if(_data.Kinect == "Connected") {
-        //     updateMessageBar(KinesisMessages.KinectConnected, false);
-        //     Kinesis.kinectStatus = true;
-        //   }
-        //   else {
-        //     updateMessageBar(KinesisMessages.KinectNotConnected, true);
-        //     Kinesis.kinectStatus = false;
-        //   }
-        //   Kinesis.onStatusChange(_data.Kinect);
-        // };
-        
-        // if (_data.depthImage != undefined) {
-        //    Kinesis.updateDepthImage(_data.depthImage);
-        // }
-        
-        // if (_data.cursor != undefined) {
-        //   Kinect.outputCodes(_data.cursor);
-        //   GestureListener.mouseMove({ x: Layout.pageSize.width * _data.cursor.x / 100, y: Layout.pageSize.height * _data.cursor.y *1.5/ 100, z:_data.cursor.z });
-        //   
-        // }
-        // kinesis.initialize(_data);
+         Kinect.outputCodes(_data);
+         redrawFigure(_data);        
         
       } catch (error){
         /* console.info(evt.data);
