@@ -536,8 +536,11 @@ function log(obj){
 // Kinect.js is the class responsible for connecting to the Kinesis Windows service which interacts directly with the Kinect
 var Kinect = function() {
   retryCount = 0;
-  addMessageBar();
+  commaRegex = /("[x|y|z]":\-?\d+)[,](\d+)/gi;
+  periodRegex = "$1.$2";
   connectionOpened = false;
+  
+  addMessageBar();
   
   Kinect.onConnectionError   = function() {
     updateMessageBar(KinesisMessages.ServerNotConnected, true);
@@ -562,7 +565,7 @@ var Kinect = function() {
     // Called only when any data comes from 
     ws.onmessage = function (evt) {
       try {
-        var _data = JSON.parse(evt.data);
+        var _data = JSON.parse(evt.data.replace(commaRegex, periodRegex));
         if(_data.Kinect != undefined) {
           if(_data.Kinect == "Connected") {
             updateMessageBar(KinesisMessages.KinectConnected, false);
