@@ -113,3 +113,13 @@ body {
 }
 
 /* navigation styles ends */
+
+
+.close {
+  right: 200px;
+  top: 20px;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 30px;
+  position: fixed;
+}

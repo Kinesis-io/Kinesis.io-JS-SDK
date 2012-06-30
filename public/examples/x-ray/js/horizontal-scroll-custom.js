@@ -32,24 +32,45 @@ $(function(){
 	
 	// find first tile and make it active
 	var _first = $("#gridHolder .tile")[0];
-	$(_first).addClass('active');
+	$(_first).activate();
 	
-  // $(".xray").fancybox();
+	$(".xray").click(function() {
+	  $("#gridHolder").hide();
+	  $(".photoHolder").html("<img src="+$(this).attr("data-src")+" />");
+	  $(".photoHolder").show();
+	  $(".close").show();
+	  Kinesis.cursor = movement;
+	  return false;
+	});
+	
+	$(".close").click(function() {
+	  $("#gridHolder").show();
+	  $(".photoHolder").html("");
+	  $(".photoHolder").hide();
+	  $(".close").hide();
+	  Kinesis.cursor = null;
+	});
 });
 
 // activate tile
 $.fn.activate = function() {
   var me = $(this);
-  if(me)
+  if(me) {
     setTimeout(function() {
 	    me.addClass('active');
 	  }, 200 );
+	  setTimeout(function() {
+      $('.xray img').removeClass('interactive');
+      me.find('img').addClass('interactive');
+    }, 1000);
+	}
 };
 
 // animate slide left - move a tile towards left and make it active
 $.fn.slideLeft = function() {
   var tiles = $(this);
-  var _index = tiles.find('.tile').index(tiles.find('.active')[0]);
+  var active = tiles.find('.tile.active')[0];
+  var _index = tiles.find('.tile').index(active);
   var _left = tiles.find('.tile').width() * (_index + 1);
   if(_index < tiles.find('.tile').length - 1) {
     $(this).css("-webkit-transform", "translate(-" + _left + "px, 0)");
@@ -63,7 +84,8 @@ $.fn.slideLeft = function() {
 // animate slide right - move a tile towards right and make it active
 $.fn.slideRight = function() {
   var tiles = $(this);
-  var _index = tiles.find('.tile').index(tiles.find('.active')[0]);
+  var active = tiles.find('.tile.active')[0];
+  var _index = tiles.find('.tile').index(active);
   var _left = tiles.find('.tile').width() * (_index - 1);
   if(_index > 0) {
     $(this).css("-webkit-transform", "translate(-" + _left + "px, 0)");
@@ -98,7 +120,7 @@ leftGesture.toFire      = swipeControl;
 // area within which the swipe left will be recognized; values in percentage(%)
 leftGesture.bounds      = {min: {x: 80, y: 0, z: 0}};
 // allowed joints for gesture
-leftGesture.joints      = [JointTypes.JointTypeHandRight, JointTypes.JointTypeHandLeft]; // both hands
+leftGesture.joints      = [JointTypes.JointTypeHandRight]; // both hands
 // allowed direction for gesture
 leftGesture.directions  = [GestureDirections.GestureDirectionLeft]; // left
 
@@ -107,7 +129,7 @@ var rightGesture        = new SwipeGestureListener("myswipeRight");
 // call to action for swipe left
 rightGesture.toFire     = swipeControl;
 // area within which the swipe left will be recognized; values in percentage(%)
-rightGesture.joints     = [JointTypes.JointTypeHandRight, JointTypes.JointTypeHandLeft];
+rightGesture.joints     = [JointTypes.JointTypeHandLeft];
 // allowed joints for gesture
 rightGesture.bounds     = {max: {x: 20, y: 100, z: 100}};
 // allowed direction for gesture
