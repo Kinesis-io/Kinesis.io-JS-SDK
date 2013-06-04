@@ -1,0 +1,5 @@
+Requirements to build
+
+Node.js
+
+The main code for the JS SDK can be found in /public/lib/js/
