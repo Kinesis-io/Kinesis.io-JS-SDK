@@ -6,11 +6,18 @@
   </head>
   <body>
     <!-- kinesis js sdk -->
-    <script src="http://cdn.kinesis.io/kinesis-js-sdk.min.js"></script>
+    <script src="../../lib/js/kinesis-js-sdk.min.js"></script>
     <script>
-      var kinesis = new Kinesis; // initialize kinesis
-      //Kinesis.debug = true;
-      // start adding gestures from here //
+		function movement(position)
+		{
+			console.info(position.x);
+			console.info(position.y);
+			console.info(position.z);
+		}
+		var kinesis = new Kinesis;
+		kinesis.cursor = movement;
+      
+		kinesis.debug = true;
     </script>
   </body>
 </html>
